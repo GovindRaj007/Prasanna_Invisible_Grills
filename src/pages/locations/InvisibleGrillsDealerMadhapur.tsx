@@ -1,0 +1,6 @@
+ import { ServiceLocationPage } from "./ServiceLocationPage";
+ export default function InvisibleGrillsDealerMadhapur() {
+   return (
+     <ServiceLocationPage service="Invisible Grills Dealer" serviceSlug="invisible-grills-dealer" location="Madhapur" locationSlug="madhapur" description="Become an invisible grills dealer in Madhapur tech hub. Exclusive territory for luxury apartment and gated community markets." localities={["Ayyappa Society", "Kavuri Hills", "Cyber Towers", "Hitech City", "Durgam Cheruvu", "Whitefields", "Inorbit Mall Area", "Raheja Mind Space", "Shilparamam", "Road No. 36", "Road No. 45", "Peddamma Temple Area"]} benefits={["Tech hub territory", "Luxury market access", "Wholesale pricing", "Training program", "Marketing support", "High margins"]} mapEmbedUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30452.67877648!2d78.3826!3d17.4454!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb91b4b9f60e7f%3A0x3d8b5ff16f5dc78!2sMadhapur%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1706789012345!5m2!1sen!2sin" />
+   );
+ }
