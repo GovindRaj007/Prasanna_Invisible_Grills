@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Youtube } from "lucide-react";
-import logoImage from "@/assets/logo-Prasanna-Invisible-grills.png";
+import logoImage from "@/assets/logo-Prasanna-Invisible-Grills.png";
 import {
   Accordion,
   AccordionContent,

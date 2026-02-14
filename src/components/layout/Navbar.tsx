@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, Phone, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logoImage from "@/assets/logo-Prasanna-Invisible-grills.png";
+import logoImage from "@/assets/logo-Prasanna-Invisible-Grills.png";
 import {
   Accordion,
   AccordionContent,
