@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, Phone, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ReviewVideoButton } from "@/components/common/ReviewVideoButton";
+import { ReviewVideoPreview } from "@/components/common/ReviewVideoPreview";
+import { REVIEW_VIDEO_CONFIG } from "@/config/reviewVideoConfig";
 import logoImage from "@/assets/logo-Prasanna-Invisible-Grills.png";
 import {
   Accordion,
@@ -51,7 +54,11 @@ const locationsByState = {
   ],
 };
 
-export function Navbar() {
+interface NavbarProps {
+  onOpenVideoModal: () => void;
+}
+
+export function Navbar({ onOpenVideoModal }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileAccordionValue, setMobileAccordionValue] = useState<string>("");
   const [mobileStateAccordionValue, setMobileStateAccordionValue] = useState<string>("");
@@ -75,7 +82,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-gradient-to-r from-[hsl(222,47%,11%,0.92)] via-[hsl(217,33%,17%,0.88)] to-[hsl(215,25%,22%,0.85)] backdrop-blur-xl">
-      <nav className="container flex h-16 items-center justify-between md:h-20">
+      <nav className="container flex h-[4.5rem] items-center justify-between md:h-20">
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <img src={logoImage} alt="Prasanna Invisible Grills" className="h-[4rem] w-auto md:h-[4.5rem]" />
@@ -175,6 +182,7 @@ export function Navbar() {
 
         {/* CTA Buttons */}
         <div className="hidden items-center gap-3 lg:flex">
+          <ReviewVideoButton onClick={onOpenVideoModal} />
           <div className="flex flex-col items-center">
             <a href="tel:+917339306098" className="flex items-center gap-2 rounded-md border border-white/30 bg-white/10 px-3 py-2 text-sm font-medium text-white hover:bg-white/20 transition-colors">
               <Phone className="h-4 w-4" />
@@ -187,15 +195,17 @@ export function Navbar() {
         </div>
 
         {/* Mobile Menu - Side Drawer */}
-        <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-          <SheetTrigger asChild>
-            <button
-              className="rounded-md p-2 text-white lg:hidden"
-              aria-label="Open menu"
-            >
-              <Menu className="h-6 w-6" />
-            </button>
-          </SheetTrigger>
+        <div className="flex items-center gap-2 lg:hidden">
+          <ReviewVideoButton variant="compact" onClick={onOpenVideoModal} />
+          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+            <SheetTrigger asChild>
+              <button
+                className="rounded-md p-2 text-white lg:hidden"
+                aria-label="Open menu"
+              >
+                <Menu className="h-6 w-6" />
+              </button>
+            </SheetTrigger>
           <SheetContent 
             side="right" 
             className="w-[300px] sm:w-[340px] bg-gradient-to-br from-[hsl(222,47%,11%)] via-[hsl(217,33%,17%)] to-[hsl(215,25%,22%)] border-l border-white/10 p-0 overflow-y-auto"
@@ -311,6 +321,18 @@ export function Navbar() {
                     Contact
                   </Link>
                 </SheetClose>
+
+                {/* Video Preview in Mobile Menu */}
+                <div className="mt-4 border-t border-white/10 pt-4">
+                  <ReviewVideoPreview
+                    posterImage={REVIEW_VIDEO_CONFIG.posterImage}
+                    onClick={() => {
+                      onOpenVideoModal();
+                      setMobileOpen(false);
+                    }}
+                    title={REVIEW_VIDEO_CONFIG.title}
+                  />
+                </div>
               </div>
 
               {/* Bottom CTA */}
@@ -329,7 +351,8 @@ export function Navbar() {
               </div>
             </div>
           </SheetContent>
-        </Sheet>
+          </Sheet>
+        </div>
       </nav>
     </header>
   );

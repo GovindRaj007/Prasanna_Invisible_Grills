@@ -253,9 +253,9 @@ export function HeroSlider() {
               className="border-white/30 bg-white/10 text-white hover:bg-white/20 h-11 md:h-12 text-sm md:text-base px-5 md:px-6"
               asChild
             >
-              <a href="tel:+919876543210" className="flex items-center gap-2">
+              <a href="tel:+91 7339306098" className="flex items-center gap-2">
                 <Phone className="h-4 w-4 md:h-5 md:w-5" />
-                +91 98765 43210
+                +91 7339306098
               </a>
             </Button>
           </div>

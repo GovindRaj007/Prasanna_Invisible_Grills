@@ -6,10 +6,170 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, CheckCircle } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    service: "",
+    location: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({
+    name: "",
+    phone: "",
+  });
+  const [touched, setTouched] = useState({
+    name: false,
+    phone: false,
+  });
+  const { toast } = useToast();
+
+  // Validate name - minimum 7 letters (excluding spaces)
+  const isNameValid = (name: string) => {
+    const trimmedName = name.trim();
+    const letterCount = trimmedName.replace(/\s/g, '').length;
+    return letterCount >= 7 && /^[a-zA-Z\s]+$/.test(trimmedName) && trimmedName.length > 0;
+  };
+
+  // Validate phone - exactly 10 digits
+  const isPhoneValid = (phone: string) => /^\d{10}$/.test(phone);
+
+  // Check if form is valid for submission
+  const isFormValid = 
+    isNameValid(formData.name) && 
+    isPhoneValid(formData.phone) && 
+    formData.service !== "" && 
+    formData.location !== "";
+
+  const handleNameChange = (value: string) => {
+    setFormData({...formData, name: value});
+    
+    if (touched.name) {
+      if (value.trim().length === 0) {
+        setErrors({...errors, name: ""});
+      } else if (!isNameValid(value)) {
+        setErrors({...errors, name: "Enter a valid full name"});
+      } else {
+        setErrors({...errors, name: ""});
+      }
+    }
+  };
+
+  const handleNameBlur = () => {
+    setTouched({...touched, name: true});
+    if (formData.name.trim().length > 0 && !isNameValid(formData.name)) {
+      setErrors({...errors, name: "Enter a valid full name (minimum 7 letters)"});
+    }
+  };
+
+  const handlePhoneChange = (value: string) => {
+    // Only allow digits
+    const digitsOnly = value.replace(/\D/g, "");
+    // Limit to 10 digits
+    const limitedDigits = digitsOnly.slice(0, 10);
+    
+    setFormData({...formData, phone: limitedDigits});
+    
+    if (touched.phone) {
+      if (limitedDigits.length === 0) {
+        setErrors({...errors, phone: ""});
+      } else if (!isPhoneValid(limitedDigits)) {
+        setErrors({...errors, phone: "Enter a valid 10-digit phone number"});
+      } else {
+        setErrors({...errors, phone: ""});
+      }
+    }
+  };
+
+  const handlePhoneBlur = () => {
+    setTouched({...touched, phone: true});
+    if (formData.phone.length > 0 && !isPhoneValid(formData.phone)) {
+      setErrors({...errors, phone: "Enter a valid 10-digit phone number"});
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Final validation check
+    if (!isFormValid) {
+      toast({
+        title: "Validation Error",
+        description: "Please fill all required fields correctly.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Create a hidden form and submit it
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = "https://formspree.io/f/xjgewaaq";
+      form.style.display = "none";
+
+      const fields = {
+        name: formData.name.trim(),
+        phone: formData.phone,
+        email: formData.email.trim() || "no-email@provided.com",
+        service: formData.service,
+        location: formData.location,
+        message: formData.message.trim() || "",
+      };
+
+      Object.entries(fields).forEach(([key, value]) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = value;
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+
+      // Show success message
+      toast({
+        title: "Success!",
+        description: "Your enquiry has been submitted. We'll contact you within 2 hours.",
+      });
+
+      // Reset form after submission
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        service: "",
+        location: "",
+        message: "",
+      });
+      setErrors({ name: "", phone: "" });
+      setTouched({ name: false, phone: false });
+
+      // Submit form after a short delay to ensure toast is visible
+      setTimeout(() => {
+        form.submit();
+      }, 1000);
+
+    } catch (error) {
+      console.error("Submission error:", error);
+      toast({
+        title: "Error",
+        description: "Failed to submit form. Please try again or contact us directly.",
+        variant: "destructive",
+      });
+      setLoading(false);
+    }
+  };
+
   return (
     <Layout>
       <SEOHead
@@ -36,26 +196,85 @@ export default function Contact() {
           <div className="grid gap-12 lg:grid-cols-2">
             <div className="rounded-2xl bg-gradient-to-br from-[hsl(222,47%,11%)] via-[hsl(217,33%,17%)] to-[hsl(215,25%,22%)] p-6 shadow-lg md:p-8">
               <h2 className="mb-6 font-heading text-2xl font-bold text-white">Get Free Quote</h2>
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-white/90">Full Name *</Label>
-                    <Input id="name" placeholder="Your name" required className="bg-white/10 border-white/20 text-white placeholder:text-white/50" />
+                    <Input 
+                      id="name" 
+                      placeholder="Your full name" 
+                      required 
+                      value={formData.name}
+                      onChange={(e) => handleNameChange(e.target.value)}
+                      onBlur={handleNameBlur}
+                      className={`bg-white/10 text-white placeholder:text-white/50 ${
+                        errors.name 
+                          ? "border-red-500 border-2" 
+                          : touched.name && isNameValid(formData.name)
+                          ? "border-green-500 border-2"
+                          : "border-white/20"
+                      }`}
+                    />
+                    {errors.name && (
+                      <p className="text-sm text-red-400 font-medium">{errors.name}</p>
+                    )}
+                    {!errors.name && touched.name && isNameValid(formData.name) && (
+                      <p className="text-sm text-green-400 font-medium flex items-center gap-1">
+                        <CheckCircle className="h-3 w-3" /> Valid name
+                      </p>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone" className="text-white/90">Phone Number *</Label>
-                    <Input id="phone" type="tel" placeholder="+91 73393 06098" required className="bg-white/10 border-white/20 text-white placeholder:text-white/50" />
+                    <Input 
+                      id="phone" 
+                      type="tel" 
+                      placeholder="10-digit mobile number" 
+                      required 
+                      value={formData.phone}
+                      onChange={(e) => handlePhoneChange(e.target.value)}
+                      onBlur={handlePhoneBlur}
+                      maxLength={10}
+                      className={`bg-white/10 text-white placeholder:text-white/50 ${
+                        errors.phone 
+                          ? "border-red-500 border-2" 
+                          : touched.phone && isPhoneValid(formData.phone)
+                          ? "border-green-500 border-2"
+                          : "border-white/20"
+                      }`}
+                    />
+                    {errors.phone && (
+                      <p className="text-sm text-red-400 font-medium">{errors.phone}</p>
+                    )}
+                    {!errors.phone && touched.phone && isPhoneValid(formData.phone) && (
+                      <p className="text-sm text-green-400 font-medium flex items-center gap-1">
+                        <CheckCircle className="h-3 w-3" /> Valid phone number
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-white/90">Email Address</Label>
-                  <Input id="email" type="email" placeholder="your@email.com" className="bg-white/10 border-white/20 text-white placeholder:text-white/50" />
+                  <Label htmlFor="email" className="text-white/90">Email Address (Optional)</Label>
+                  <Input 
+                    id="email" 
+                    type="email" 
+                    placeholder="your@email.com" 
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    className="bg-white/10 border-white/20 text-white placeholder:text-white/50" 
+                  />
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="service" className="text-white/90">Service Required *</Label>
-                    <Select>
-                      <SelectTrigger className="bg-white/10 border-white/20 text-white"><SelectValue placeholder="Select service" /></SelectTrigger>
+                    <Select 
+                      value={formData.service} 
+                      onValueChange={(value) => setFormData({...formData, service: value})}
+                      required
+                    >
+                      <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                        <SelectValue placeholder="Select service" />
+                      </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="invisible-grills">Invisible Grills</SelectItem>
                         <SelectItem value="invisible-grills-dealer">Invisible Grills Dealer</SelectItem>
@@ -68,8 +287,14 @@ export default function Contact() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="location" className="text-white/90">Your Location *</Label>
-                    <Select>
-                      <SelectTrigger className="bg-white/10 border-white/20 text-white"><SelectValue placeholder="Select city" /></SelectTrigger>
+                    <Select 
+                      value={formData.location} 
+                      onValueChange={(value) => setFormData({...formData, location: value})}
+                      required
+                    >
+                      <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                        <SelectValue placeholder="Select city" />
+                      </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="visakhapatnam">Visakhapatnam</SelectItem>
                         <SelectItem value="vijayawada">Vijayawada</SelectItem>
@@ -85,10 +310,29 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="message" className="text-white/90">Additional Details</Label>
-                  <Textarea id="message" placeholder="Tell us about your requirements" rows={4} className="bg-white/10 border-white/20 text-white placeholder:text-white/50" />
+                  <Label htmlFor="message" className="text-white/90">Additional Details (Optional)</Label>
+                  <Textarea 
+                    id="message" 
+                    placeholder="Tell us about your requirements" 
+                    rows={4} 
+                    value={formData.message}
+                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    className="bg-white/10 border-white/20 text-white placeholder:text-white/50" 
+                  />
                 </div>
-                <Button type="submit" size="lg" className="w-full cta-gradient text-white hover:opacity-90">Submit Enquiry</Button>
+                <Button 
+                  type="submit" 
+                  size="lg" 
+                  disabled={loading || !isFormValid}
+                  className="w-full cta-gradient text-white hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loading ? "Submitting..." : "Submit Enquiry"}
+                </Button>
+                {!isFormValid && (touched.name || touched.phone) && (
+                  <p className="text-sm text-amber-400 text-center">
+                    Please fill all required fields correctly to submit
+                  </p>
+                )}
               </form>
             </div>
 
@@ -98,21 +342,23 @@ export default function Contact() {
                 <p className="text-muted-foreground">Prefer to reach out directly? Use any of the methods below.</p>
               </div>
               <div className="space-y-4">
-                <div className="space-y-2">
-                  <a href="tel:+917339306098" className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20"><Phone className="h-6 w-6 text-primary" /></div>
-                    <div><p className="font-semibold text-white">Call Us</p><p className="text-white/70">+91 7339306098</p></div>
-                  </a>
-                  <a href="tel:+918328376098" className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20"><Phone className="h-6 w-6 text-primary" /></div>
-                    <div><p className="font-semibold text-white">Call Us</p><p className="text-white/70">+91 8328376098</p></div>
-                  </a>
-                </div>
+                <div className="space-y-3">
+                <a href="tel:+917339306098" className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20"><Phone className="h-6 w-6 text-primary" /></div>
+                  <div className="flex-1">
+                    <p className="font-semibold text-white">Call Us</p>
+                    <div className="flex flex-col gap-0.5">
+                      <p className="text-white/70">+91 7339306098</p>
+                      <p className="text-white/70">+91 8328376098</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
                 <a href="https://wa.me/917339306098" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366]/20"><WhatsAppIcon className="h-6 w-6 text-[#25D366]" /></div>
                   <div><p className="font-semibold text-white">WhatsApp</p><p className="text-white/70">Chat with us instantly</p></div>
                 </a>
-                <a href="mailto:info@prasannagrills.com" className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
+                <a href="mailto:prasannainvisible@gmail.com" className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20"><Mail className="h-6 w-6 text-primary" /></div>
                   <div><p className="font-semibold text-white">Email</p><p className="text-white/70">prasannainvisible@gmail.com</p></div>
                 </a>

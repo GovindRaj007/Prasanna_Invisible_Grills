@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Youtube } from "lucide-react";
+import { Phone, Mail, MapPin, Clock,} from "lucide-react";
 import logoImage from "@/assets/logo-Prasanna-Invisible-Grills.png";
 import {
   Accordion,
@@ -143,7 +143,7 @@ export function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-primary-foreground/10">
-        <div className="container flex flex-col items-center justify-between gap-4 py-6 md:flex-row">
+        <div className="container flex flex-col items-center justify-center gap-4 py-6 md:flex-row">
           <div className="text-center text-sm text-primary-foreground/60">
             <p>© {new Date().getFullYear()} Prasanna Invisible Grills. All rights reserved.</p>
             <p className="mt-3 inline-block rounded-full bg-white px-4 py-1.5 text-xs font-semibold text-foreground">Made with ❤️ in Hyderabad</p>
