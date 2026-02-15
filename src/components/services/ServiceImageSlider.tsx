@@ -101,7 +101,7 @@ export function ServiceImageSlider({ images }: ServiceImageSliderProps) {
             >
               {extendedImages.map((image, index) => (
                 <div key={index} className="w-full flex-shrink-0">
-                  <div className="relative aspect-[6/4] sm:aspect-[4/3] md:aspect-[16/9]">
+                  <div className="relative aspect-[5/4] sm:aspect-[4/3] md:aspect-[16/9]">
                     <img
                       src={image.src}
                       alt={image.alt}
