@@ -99,21 +99,21 @@ export function ImageShowcase() {
         {/* Desktop View - Full-width auto-sliding carousel */}
         {!isMobile ? (
           <div
-            className="relative mx-auto w-full overflow-hidden rounded-2xl shadow-lg"
+            className="relative mx-auto w-4/5 overflow-hidden rounded-2xl shadow-lg"
             {...carouselHandlers}
           >
             <div className="relative w-full h-96 md:h-[500px] lg:h-[600px]">
               {showcaseImages.map((image, index) => (
                 <div
                   key={index}
-                  className={`absolute inset-0 transition-opacity duration-500 ${
+                  className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${
                     index === activeIndex ? "opacity-100" : "opacity-0"
                   }`}
                 >
                   <img
                     src={image.src}
                     alt={image.alt}
-                    className="h-full w-full object-cover"
+                    className={`h-full ${index === showcaseImages.length - 1 ? "w-[70%]" : "w-full"}`}
                     loading="lazy"
                   />
                   {/* Label Overlay - Hide for promotional card */}

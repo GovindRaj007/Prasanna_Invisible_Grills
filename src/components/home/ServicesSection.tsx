@@ -79,9 +79,9 @@ export function ServicesSection() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {services.map((service, index) => (
             <Link
-              key={index}
+              key={service.href}
               to={service.href}
-              className="group relative overflow-hidden rounded-2xl transition-all hover:-translate-y-1 hover:shadow-xl"
+              className="group relative overflow-hidden rounded-2xl transition-all hover:-translate-y-1 hover:shadow-xl flex flex-col h-full"
             >
               {/* Service Image */}
               <div className="relative h-40 overflow-hidden">
@@ -99,7 +99,7 @@ export function ServicesSection() {
               </div>
 
               {/* Content with gradient background */}
-              <div className="bg-gradient-to-br from-[hsl(222,47%,11%)] via-[hsl(217,33%,17%)] to-[hsl(215,25%,22%)] p-5">
+              <div className="bg-gradient-to-br from-[hsl(222,47%,11%)] via-[hsl(217,33%,17%)] to-[hsl(215,25%,22%)] p-5 flex flex-col flex-1">
                 {/* Title */}
                 <h3 className="mb-2 font-heading text-lg font-semibold text-white">
                   {service.title}
@@ -117,7 +117,7 @@ export function ServicesSection() {
                 </ul>
 
                 {/* Link */}
-                <span className="inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors group-hover:text-accent">
+                <span className="inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors group-hover:text-accent mt-auto">
                   Learn More
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
