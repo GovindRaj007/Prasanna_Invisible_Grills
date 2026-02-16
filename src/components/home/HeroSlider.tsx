@@ -264,7 +264,7 @@ export function HeroSlider() {
 
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-[13%] md:bottom-32 left-1/2 z-20 flex -translate-x-1/2 gap-2 md:gap-3">
+      <div className="absolute bottom-[13%] md:bottom-[15%] left-1/2 z-20 flex -translate-x-1/2 gap-2 md:gap-3">
         {slides.map((_, index) => (
           <button
             key={index}
