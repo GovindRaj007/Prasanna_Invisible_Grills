@@ -29,9 +29,9 @@ const features = [
 ];
 
 const configurations = [
-  { title: "4-Rod Economy", size: "4 feet × 2 feet", capacity: "Up to 25 kg", ideal: "1-2 BHK apartments", price: "Starting ₹2,499" },
-  { title: "6-Rod Standard", size: "5 feet × 2.5 feet", capacity: "Up to 35 kg", ideal: "2-3 BHK apartments", price: "Starting ₹3,499" },
-  { title: "8-Rod Premium", size: "6 feet × 3 feet", capacity: "Up to 50 kg", ideal: "Large families/villas", price: "Starting ₹4,499" },
+  { title: "4-Rod Economy", size: "4 feet × 2 feet", capacity: "Up to 25 kg", ideal: "1-2 BHK apartments" },
+  { title: "6-Rod Standard", size: "5 feet × 2.5 feet", capacity: "Up to 35 kg", ideal: "2-3 BHK apartments" },
+  { title: "8-Rod Premium", size: "6 feet × 3 feet", capacity: "Up to 50 kg", ideal: "Large families/villas" },
 ];
 
 const serviceImages = [
@@ -131,9 +131,6 @@ export default function CeilingClothHanger() {
                   <div className="flex justify-between"><span className="text-white/60">Size:</span><span className="text-white">{config.size}</span></div>
                   <div className="flex justify-between"><span className="text-white/60">Capacity:</span><span className="text-white">{config.capacity}</span></div>
                   <div className="flex justify-between"><span className="text-white/60">Ideal for:</span><span className="text-white">{config.ideal}</span></div>
-                </div>
-                <div className="rounded-lg bg-accent/20 px-4 py-3 text-center">
-                  <span className="text-lg font-semibold text-accent">{config.price}</span>
                 </div>
               </div>
             ))}

@@ -19,7 +19,7 @@ export function ReviewVideoPreview({
       title={title}
     >
       {/* Poster Image */}
-      <div className="relative h-32 w-full overflow-hidden rounded-lg bg-gradient-to-br from-gray-800 to-black sm:h-40">
+      <div className="relative h-[9rem] w-full overflow-hidden rounded-lg bg-gradient-to-br from-gray-800 to-black sm:h-40">
         <img
           src={posterImage}
           alt={title}

@@ -84,7 +84,7 @@ export function ReviewVideoModal({
           </button>
 
           {/* Video Container - Responsive */}
-          <div className="relative w-full bg-black rounded-lg overflow-hidden shadow-2xl" style={{ aspectRatio: "16 / 9", maxHeight: "85vh" }}>
+          <div className="relative w-full bg-black rounded-lg overflow-hidden shadow-2xl" style={{ aspectRatio: "14 / 9", maxHeight: "85vh" }}>
             <video
               controls
               controlsList="nodownload"

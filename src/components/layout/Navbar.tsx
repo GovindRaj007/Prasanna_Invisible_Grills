@@ -18,6 +18,7 @@ import {
   SheetTrigger,
   SheetClose,
   SheetTitle,
+  SheetDescription,
 } from "@/components/ui/sheet";
 
 const services = [
@@ -211,6 +212,7 @@ export function Navbar({ onOpenVideoModal }: NavbarProps) {
             className="w-[300px] sm:w-[340px] bg-gradient-to-br from-[hsl(222,47%,11%)] via-[hsl(217,33%,17%)] to-[hsl(215,25%,22%)] border-l border-white/10 p-0 overflow-y-auto"
           >
             <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+            <SheetDescription className="sr-only">Mobile navigation menu for Prasanna Invisible Grills</SheetDescription>
             <div className="flex flex-col h-full">
               {/* Logo in drawer */}
               <img src={logoImage} alt="Prasanna Invisible Grills" className="mb-2 h-[4rem] w-[70%] ml-4 mt-2" />
