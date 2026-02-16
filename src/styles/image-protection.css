@@ -1,0 +1,120 @@
+/**
+ * Image Protection Styles
+ * Global CSS to prevent image downloading
+ * Add to your main CSS file or import separately
+ */
+
+/* Prevent all images from being saved */
+img[data-protected="true"],
+img.protected-image {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  
+  /* Prevent right-click context menu appearance */
+  pointer-events: auto; /* Keep interactions enabled */
+  cursor: default;
+  
+  /* Prevent image from being easily inspected */
+  -webkit-user-drag: none;
+}
+
+/* Disable text selection over images */
+img[data-protected="true"]::selection,
+img.protected-image::selection {
+  background: transparent;
+}
+
+/* Hide context menu items for images */
+/* Note: This doesn't work in all browsers, complemented by JS */
+img[data-protected="true"] {
+  outline: none;
+  border: none;
+}
+
+/* Watermark overlay styling for additional protection */
+.image-with-watermark {
+  position: relative;
+  display: inline-block;
+}
+
+.image-with-watermark::after {
+  content: attr(data-watermark);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: bold;
+  text-align: center;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 5;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Protection overlay for sensitive images */
+.image-protection-overlay {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.image-protection-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+/* Mobile-specific image protection */
+@media (max-width: 768px) {
+  img[data-protected="true"],
+  img.protected-image {
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+    
+    /* Prevent long-press menu on mobile */
+    touch-action: none;
+  }
+}
+
+/* Prevent drag and drop on images */
+img[data-protected="true"][draggable="false"],
+img.protected-image[draggable="false"] {
+  -webkit-user-drag: none;
+  cursor: default;
+}
+
+/* Ensure images respect protection in different contexts */
+a img[data-protected="true"],
+a img.protected-image {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Picture element protection */
+picture img[data-protected="true"],
+picture img.protected-image {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* SVG image protection */
+img[src$=".svg"][data-protected="true"],
+img[src$=".svg"].protected-image {
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: auto;
+}
