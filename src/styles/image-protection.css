@@ -1,0 +1,48 @@
+/**
+ * Image Protection Styles
+ * Multi-layer CSS-level protection against image downloads
+ * Prevents right-click context menu, drag, and tap-hold on mobile
+ */
+
+/* Prevent text selection and image selection */
+img[data-protected],
+.protected-image {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  pointer-events: auto;
+}
+
+/* Additional protection layer */
+img[data-protected]::selection,
+.protected-image::selection {
+  background: transparent;
+}
+
+/* Ensure images don't respond to long press on mobile */
+img[data-protected],
+.protected-image {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Prevent drag operations */
+img[data-protected],
+.protected-image {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+/* Mobile-specific protections */
+@supports (--webkit-appearance: none) {
+  img[data-protected],
+  .protected-image {
+    -webkit-touch-callout: none;
+  }
+}

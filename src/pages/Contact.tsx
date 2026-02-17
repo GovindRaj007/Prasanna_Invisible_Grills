@@ -114,7 +114,7 @@ export default function Contact() {
       // Create a hidden form and submit it
       const form = document.createElement("form");
       form.method = "POST";
-      form.action = "https://formspree.io/f/xjgewaaq";
+      form.action = "https://formspree.io/f/mdalzypl";
       form.style.display = "none";
 
       const fields = {
@@ -358,9 +358,9 @@ export default function Contact() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366]/20"><WhatsAppIcon className="h-6 w-6 text-[#25D366]" /></div>
                   <div><p className="font-semibold text-white">WhatsApp</p><p className="text-white/70">Chat with us instantly</p></div>
                 </a>
-                <a href="mailto:prasannainvisible@gmail.com" className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
+                <a href="mailto:info@prasannainvisible.in" className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20"><Mail className="h-6 w-6 text-primary" /></div>
-                  <div><p className="font-semibold text-white">Email</p><p className="text-white/70">prasannainvisible@gmail.com</p></div>
+                  <div><p className="font-semibold text-white">Email</p><p className="text-white/70">info@prasannainvisible.in</p></div>
                 </a>
               </div>
               <div className="rounded-xl bg-gradient-to-br from-[hsl(222,47%,11%)] via-[hsl(217,33%,17%)] to-[hsl(215,25%,22%)] p-6 shadow-lg">

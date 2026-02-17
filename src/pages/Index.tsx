@@ -16,9 +16,9 @@ const Index = () => {
     name: "Prasanna Invisible Grills",
     description:
       "Premium invisible grills and home utility solutions for residential and commercial properties in Visakhapatnam, Vijayawada, Guntur, Tirupati, and Anantapur.",
-    url: "https://prasannagrills.com",
+    url: "https://prasannainvisible.in",
     telephone: "+919876543210",
-    email: "info@prasannagrills.com",
+    email: "info@prasannainvisible.in",
     address: {
       "@type": "PostalAddress",
       streetAddress: "MVP Colony",

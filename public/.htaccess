@@ -1,0 +1,150 @@
+# =====================================================================
+# SECURITY & PERFORMANCE CONFIGURATION FOR PRASANNA INVISIBLE GRILLS
+# =====================================================================
+# Hostinger Static File Hosting - Apache Server Configuration
+# Deploy in /public_html/ root directory
+
+# Enable mod_rewrite for URL rewriting and security rules
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Force HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Remove www if present
+    RewriteCond %{HTTP_HOST} ^www\.
+    RewriteRule ^(.*)$ https://{HTTP_HOST:www.}/$1 [R=301,L]
+
+    # SPA Routing: Send all requests to index.html except for existing files/folders
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.html [QSA,L]
+</IfModule>
+
+# =====================================================================
+# SECURITY HEADERS - XSS, Clickjacking, MIME-type, and More
+# =====================================================================
+<IfModule mod_headers.c>
+    # Content Security Policy - Prevents inline scripts and external script injection
+    Header set Content-Security-Policy "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self';"
+
+    # Prevent clickjacking attacks
+    Header set X-Frame-Options "DENY"
+
+    # Prevent MIME type sniffing
+    Header set X-Content-Type-Options "nosniff"
+
+    # Enable XSS protection in older browsers
+    Header set X-XSS-Protection "1; mode=block"
+
+    # Force HTTPS for one year including subdomains
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+    # Referrer Policy - Reduce referrer information
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Permissions Policy - Restrict access to device features
+    Header set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
+</IfModule>
+
+# =====================================================================
+# IMAGE HOTLINK PROTECTION - Block Image Downloads
+# =====================================================================
+<IfModule mod_rewrite.c>
+    # Prevent direct access to images from external referers
+    # Allow empty referer (direct access, no referer header)
+    # Allow same domain referers
+    RewriteCond %{HTTP_REFERER} !^$
+    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?prasannainvisible\.in [NC]
+    RewriteCond %{REQUEST_URI} \.(jpg|jpeg|png|gif|webp|svg)$ [NC]
+    RewriteRule ^ - [F,L]
+</IfModule>
+
+# =====================================================================
+# IMAGE DOWNLOAD PREVENTION via Headers
+# =====================================================================
+<FilesMatch "\.(jpg|jpeg|png|gif|webp|svg)$">
+    <IfModule mod_headers.c>
+        # Force download as attachment instead of inline viewing
+        Header set Content-Disposition "inline; filename=\"image\""
+        # Cache-Control for browser cache
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </IfModule>
+</FilesMatch>
+
+# =====================================================================
+# BROWSER CACHING STRATEGY
+# =====================================================================
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Static assets (versioned by hash in filename) - Cache 1 year
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType application/woff "access plus 1 year"
+    ExpiresByType application/woff2 "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+
+    # HTML file (SPA entry) - No cache for index.html
+    ExpiresByType text/html "access plus 0 seconds"
+    DefaultType "text/html"
+</IfModule>
+
+# Alternative cache-control headers
+<FilesMatch "\.(?:ico|css|js|gif|jpe?g|png|svg|webp|woff2?|ttf|otf)$">
+    <IfModule mod_headers.c>
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </IfModule>
+</FilesMatch>
+
+<FilesMatch "\.html?$">
+    <IfModule mod_headers.c>
+        Header set Cache-Control "public, max-age=0, must-revalidate"
+    </IfModule>
+</FilesMatch>
+
+# =====================================================================
+# GZIP COMPRESSION - Reduce transfer size
+# =====================================================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json application/xml+rss
+</IfModule>
+
+# =====================================================================
+# ADDITIONAL SECURITY
+# =====================================================================
+
+# Disable directory listing
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>
+
+# Hide .htaccess and .htpasswd files
+<FilesMatch "^\.ht">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Block access to sensitive files
+<FilesMatch "^(package\.json|\.env|\.env\.local|README|LICENSE|\.git)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
