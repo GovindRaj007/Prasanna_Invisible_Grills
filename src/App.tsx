@@ -5,11 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { ScrollToTop } from "@/components/common/ScrollToTop";
-<<<<<<< HEAD
-import { useEffect } from "react";
-=======
 import { useImageProtection } from "@/hooks/useImageProtection";
->>>>>>> master
 
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -138,68 +134,6 @@ import CeilingClothHangerWarangal from "./pages/locations/CeilingClothHangerWara
 
 const queryClient = new QueryClient();
 
-<<<<<<< HEAD
-function App() {
-  // Initialize image protection on mount and when DOM changes
-  useEffect(() => {
-    const protectImages = () => {
-      const images = document.querySelectorAll("img[data-protected]");
-      images.forEach((img) => {
-        if (img instanceof HTMLImageElement) {
-          // Prevent right-click
-          img.addEventListener("contextmenu", (e) => {
-            e.preventDefault();
-            return false;
-          });
-
-          // Prevent drag
-          img.addEventListener("dragstart", (e) => {
-            e.preventDefault();
-            return false;
-          });
-
-          // Prevent right-click drag
-          img.addEventListener("mousedown", (e) => {
-            if (e.button === 2) {
-              e.preventDefault();
-              return false;
-            }
-          });
-
-          // Apply CSS protection
-          img.style.userSelect = "none";
-          img.style.webkitUserSelect = "none";
-          (img.style as any).webkitTouchCallout = "none";
-        }
-      });
-    };
-
-    // Protect initial images
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", protectImages);
-    } else {
-      protectImages();
-    }
-
-    // Watch for dynamically added images
-    const observer = new MutationObserver(protectImages);
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    return () => {
-      document.removeEventListener("DOMContentLoaded", protectImages);
-      observer.disconnect();
-    };
-  }, []);
-
-  return (
-  <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <ScrollToTop />
-          <Routes>
-=======
 const App = () => {
   const { protectAllImages, observeNewImages } = useImageProtection();
 
@@ -218,7 +152,6 @@ const App = () => {
           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <ScrollToTop />
             <Routes>
->>>>>>> master
             <Route path="/" element={<Index />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
@@ -344,15 +277,6 @@ const App = () => {
             <Route path="/ceiling-cloth-hanger-warangal" element={<CeilingClothHangerWarangal />} />
 
             <Route path="*" element={<NotFound />} />
-<<<<<<< HEAD
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </HelmetProvider>
-  );
-}
-=======
             </Routes>
           </BrowserRouter>
         </TooltipProvider>
@@ -360,6 +284,5 @@ const App = () => {
     </HelmetProvider>
   );
 };
->>>>>>> master
 
 export default App;

@@ -18,7 +18,6 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-<<<<<<< HEAD
     // Production build optimization
     outDir: "dist",
     assetsDir: "assets",
@@ -34,9 +33,8 @@ export default defineConfig(({ mode }) => ({
       output: {
         // Optimize chunk splitting for better caching and LCP
         manualChunks: {
-          vendor: ["react", "react-dom", "react-router-dom"],
-          ui: ["@radix-ui/react-accordion", "@radix-ui/react-dialog", "@radix-ui/react-sheet"],
-          queryClient: ["@tanstack/react-query"],
+          vendor: ["react", "react-dom", "react-router-dom", "@tanstack/react-query", "react-helmet-async"],
+          ui: ["@radix-ui/react-accordion", "@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu", "@radix-ui/react-label", "@radix-ui/react-popover", "@radix-ui/react-select", "@radix-ui/react-slot", "@radix-ui/react-tabs", "@radix-ui/react-toast", "sonner", "cmdk"],
         },
       },
     },
@@ -59,42 +57,5 @@ export default defineConfig(({ mode }) => ({
   // Enable gzip compression metadata (for server configuration)
   define: {
     "process.env.NODE_ENV": JSON.stringify(mode),
-=======
-    target: "ES2020",
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
-    sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: [
-            "react",
-            "react-dom",
-            "react-router-dom",
-            "@tanstack/react-query",
-            "react-helmet-async",
-          ],
-          ui: [
-            "@radix-ui/react-accordion",
-            "@radix-ui/react-dialog",
-            "@radix-ui/react-dropdown-menu",
-            "@radix-ui/react-label",
-            "@radix-ui/react-popover",
-            "@radix-ui/react-select",
-            "@radix-ui/react-slot",
-            "@radix-ui/react-tabs",
-            "@radix-ui/react-toast",
-            "sonner",
-            "cmdk",
-          ],
-        },
-      },
-    },
->>>>>>> master
   },
 }));
