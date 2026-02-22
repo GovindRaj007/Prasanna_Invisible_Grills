@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, Phone, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -65,6 +65,26 @@ export function Navbar({ onOpenVideoModal }: NavbarProps) {
   const [mobileStateAccordionValue, setMobileStateAccordionValue] = useState<string>("");
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Handle browser back button when mobile menu is open
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      // If menu is open, close it instead of navigating back
+      if (mobileOpen) {
+        setMobileOpen(false);
+      }
+    };
+
+    // Push a history state when menu opens to intercept the back button
+    if (mobileOpen) {
+      window.history.pushState({ mobileMenuOpen: true }, "");
+      window.addEventListener("popstate", handlePopState);
+      
+      return () => {
+        window.removeEventListener("popstate", handlePopState);
+      };
+    }
+  }, [mobileOpen]);
 
   const isActive = (path: string) => location.pathname === path;
 

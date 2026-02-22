@@ -218,8 +218,13 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+<<<<<<< HEAD
                 <a href="mailto:prasannainvisible@gmail.com" className="text-sm hover:text-primary">
                   prasannainvisible@gmail.com
+=======
+                <a href="mailto:info@prasannainvisible.in" className="text-sm hover:text-primary">
+                  info@prasannainvisible.in
+>>>>>>> master
                 </a>
               </li>
               <li className="flex items-start gap-3">

@@ -1,4 +1,5 @@
 /**
+<<<<<<< HEAD
  * Protected Image Component
  * Wraps images with protection against downloading/saving
  * Prevents right-click, drag, and other download attempts
@@ -82,10 +83,35 @@ export function ImageProtected({
     cursor: "default",
   };
 
+=======
+ * ImageProtected Component
+ * Drop-in replacement for <img> with built-in download protection
+ *
+ * Usage:
+ * <ImageProtected src="/path/to/image.jpg" alt="Description" />
+ */
+
+import React from "react";
+
+interface ImageProtectedProps
+  extends React.ImgHTMLAttributes<HTMLImageElement> {
+  src: string;
+  alt: string;
+  [key: string]: any;
+}
+
+export const ImageProtected: React.FC<ImageProtectedProps> = ({
+  src,
+  alt,
+  className = "",
+  ...props
+}) => {
+>>>>>>> master
   return (
     <img
       src={src}
       alt={alt}
+<<<<<<< HEAD
       className={className}
       style={imageStyle}
       data-protected="true"
@@ -97,3 +123,18 @@ export function ImageProtected({
     />
   );
 }
+=======
+      data-protected="true"
+      className={`protected-image ${className}`}
+      onContextMenu={(e) => e.preventDefault()}
+      onDragStart={(e) => e.preventDefault()}
+      style={{
+        userSelect: "none",
+        WebkitUserSelect: "none",
+        ...props.style,
+      }}
+      {...props}
+    />
+  );
+};
+>>>>>>> master
