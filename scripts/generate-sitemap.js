@@ -14,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Base URL - update this for different environments
-const BASE_URL = process.env.SITE_URL || 'https://prasannagrills.com';
+const BASE_URL = process.env.SITE_URL || 'https://prasannainvisible.in';
 
 // Define all routes with their metadata
 // Following Google Search Console best practices:

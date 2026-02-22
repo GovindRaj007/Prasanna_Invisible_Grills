@@ -39,7 +39,6 @@ export default defineConfig(({ mode }) => ({
       },
     },
     // Core Web Vitals optimization
-    cssMinify: "lightningcss", // Use Lightning CSS for faster minification
     reportCompressedSize: false, // Speed up build
     // Optimize images in the bundle
     assetsInlineLimit: 4096, // Inline assets smaller than 4kb
