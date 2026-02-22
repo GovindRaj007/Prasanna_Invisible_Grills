@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ReviewVideoButton } from "@/components/common/ReviewVideoButton";
 import { ReviewVideoPreview } from "@/components/common/ReviewVideoPreview";
 import { REVIEW_VIDEO_CONFIG } from "@/config/reviewVideoConfig";
-import logoImage from "@/assets/logo-Prasanna-Invisible-Grills.png";
+import logoImage from "@/assets/logo-Prasanna-invisible-grills.png";
 import {
   Accordion,
   AccordionContent,
@@ -68,26 +68,24 @@ export function Navbar({ onOpenVideoModal }: NavbarProps) {
 
   const isActive = (path: string) => location.pathname === path;
 
-  const handleServicesClick = (e: React.MouseEvent) => {
+  const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    setMobileOpen(false);
-    if (location.pathname === "/") {
-      const servicesSection = document.getElementById("services");
-      if (servicesSection) {
-        servicesSection.scrollIntoView({ behavior: "smooth" });
-      }
-    } else {
-      navigate("/#services");
-    }
+    navigate("/");
+    // Scroll to top of page
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-gradient-to-r from-[hsl(222,47%,11%,0.92)] via-[hsl(217,33%,17%,0.88)] to-[hsl(215,25%,22%,0.85)] backdrop-blur-xl">
       <nav className="container flex h-[4.5rem] items-center justify-between md:h-20">
         {/* Logo */}
-        <Link to="/" className="flex items-center">
+        <button 
+          onClick={handleLogoClick}
+          className="flex items-center cursor-pointer transition-transform hover:scale-105 focus:outline-none"
+          aria-label="Prasanna Invisible Grills - Go to Home"
+        >
           <img src={logoImage} alt="Prasanna Invisible Grills" className="h-[4rem] w-auto md:h-[4.5rem]" />
-        </Link>
+        </button>
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-1 lg:flex">

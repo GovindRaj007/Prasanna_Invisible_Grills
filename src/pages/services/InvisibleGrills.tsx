@@ -82,13 +82,56 @@ const serviceImages = [
 ];
 
 export default function InvisibleGrills() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Invisible Grill Installation",
+    name: "Premium Invisible Grills Installation",
+    description: "Professional invisible grill installation using 316 marine-grade stainless steel cables. Provides maximum safety for balconies and windows while maintaining unobstructed views. 10-year warranty and professional installation included.",
+    provider: {
+      "@type": "HomeAndConstructionBusiness",
+      name: "Prasanna Invisible Grills",
+      telephone: "+917339306098",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Visakhapatnam",
+        addressRegion: "Andhra Pradesh",
+        addressCountry: "IN"
+      }
+    },
+    areaServed: [
+      { "@type": "City", "name": "Visakhapatnam" },
+      { "@type": "City", "name": "Vijayawada" },
+      { "@type": "City", "name": "Guntur" },
+      { "@type": "City", "name": "Tirupati" },
+      { "@type": "City", "name": "Anantapur" },
+      { "@type": "City", "name": "Hyderabad" },
+      { "@type": "City", "name": "Mahbubnagar" },
+      { "@type": "City", "name": "Warangal" },
+      { "@type": "City", "name": "Telangana" }
+    ],
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      priceCurrency: "INR",
+      description: "Professional installation with 10-year warranty"
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "150"
+    }
+  };
+
   return (
     <Layout>
       <SEOHead
-        title="Invisible Grills Installation"
-        description="Premium invisible grill installation services using 316 marine-grade stainless steel. Safe, aesthetic, and durable solutions for balconies, windows, and staircases. 10-year warranty."
-        keywords="invisible grills, invisible grill installation, balcony grills, stainless steel grills, window safety grills, modern balcony safety"
+        title="Invisible Grills Installation | Safety Grills"
+        description="Premium invisible grills with 316 stainless steel. Balconies, windows & railings. 4.9★ rated. 10-year warranty. Free quote & installation in 4-8 hours."
+        keywords="invisible grills, invisible grill installation, balcony grills, window grills, safety grills, stainless steel grills,SS316 invisible grills"
+        ogImage="/images/invisible-grills-hero.jpg"
         canonicalUrl="/invisible-grills"
+        structuredData={structuredData}
       />
 
       {/* Hero Section */}

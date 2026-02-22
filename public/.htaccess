@@ -1,4 +1,32 @@
 # ============================================
+# 301 REDIRECTS - Phase 2 SEO URL Structure
+# ============================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # Redirect old service URLs to new clean structure
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^service/invisible-grills/?$ /invisible-grills [R=301,L]
+  RewriteRule ^service/invisible-grills-balcony/?$ /invisible-grills-balcony [R=301,L]
+  RewriteRule ^service/invisible-grills-windows/?$ /invisible-grills-windows [R=301,L]
+  RewriteRule ^service/invisible-grills-dealer/?$ /invisible-grills-dealer [R=301,L]
+  RewriteRule ^service/ceiling-cloth-hanger/?$ /ceiling-cloth-hanger [R=301,L]
+  RewriteRule ^services/invisible-grills/?$ /invisible-grills [R=301,L]
+  RewriteRule ^services/invisible-grills-balcony/?$ /invisible-grills-balcony [R=301,L]
+  RewriteRule ^services/invisible-grills-windows/?$ /invisible-grills-windows [R=301,L]
+  RewriteRule ^services/invisible-grills-dealer/?$ /invisible-grills-dealer [R=301,L]
+  RewriteRule ^services/ceiling-cloth-hanger/?$ /ceiling-cloth-hanger [R=301,L]
+  
+  # Redirect location pages to clean URLs
+  RewriteRule ^locations/invisible-grills-(.+)/?$ /invisible-grills-$1 [R=301,L]
+  RewriteRule ^location/invisible-grills-(.+)/?$ /invisible-grills-$1 [R=301,L]
+  RewriteRule ^service-location/(.+)/?$ /$1 [R=301,L]
+</IfModule>
+
+# ============================================
 # SECURITY HEADERS & CONFIGURATION
 # ============================================
 
@@ -7,7 +35,7 @@
   RewriteEngine On
   RewriteBase /
 
-  # Remove .html extension from URLs
+  # Remove .html extension from URLs (SPA routing)
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^(.*)$ index.html?url=$1 [QSA,L]
@@ -16,7 +44,7 @@
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-  # Remove www prefix
+  # Remove www prefix (redirect to non-www)
   RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
   RewriteRule ^(.*)$ https://%1%{REQUEST_URI} [L,R=301]
 </IfModule>

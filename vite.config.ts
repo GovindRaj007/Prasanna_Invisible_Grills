@@ -31,12 +31,32 @@ export default defineConfig(({ mode }) => ({
     },
     rollupOptions: {
       output: {
-        // Optimize chunk splitting
+        // Optimize chunk splitting for better caching and LCP
         manualChunks: {
           vendor: ["react", "react-dom", "react-router-dom"],
           ui: ["@radix-ui/react-accordion", "@radix-ui/react-dialog", "@radix-ui/react-sheet"],
+          queryClient: ["@tanstack/react-query"],
         },
       },
     },
+    // Core Web Vitals optimization
+    cssMinify: "lightningcss", // Use Lightning CSS for faster minification
+    reportCompressedSize: false, // Speed up build
+    // Optimize images in the bundle
+    assetsInlineLimit: 4096, // Inline assets smaller than 4kb
+    chunkSizeWarningLimit: 1000,
+  },
+  
+  // Optimize CSS
+  css: {
+    preprocessorOptions: {
+      // Pre-processor options for CSS optimization
+    },
+    postcss: "./postcss.config.js",
+  },
+  
+  // Enable gzip compression metadata (for server configuration)
+  define: {
+    "process.env.NODE_ENV": JSON.stringify(mode),
   },
 }));

@@ -20,7 +20,7 @@ export function SEOHead({
   structuredData,
 }: SEOHeadProps) {
   const fullTitle = `${title} | Prasanna Invisible Grills and Nets`;
-  const siteUrl = "https://prasannagrills.com";
+  const siteUrl = "https://prasannainvisible.in";
 
   return (
     <Helmet>

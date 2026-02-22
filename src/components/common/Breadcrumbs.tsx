@@ -28,7 +28,7 @@ export function Breadcrumbs({ items, darkMode = false }: BreadcrumbsProps) {
       "@type": "ListItem",
       position: index + 1,
       name: item.label,
-      item: item.href ? `https://prasannagrills.com${item.href}` : undefined,
+      item: item.href ? `https://prasannainvisible.in${item.href}` : undefined,
     })),
   };
 

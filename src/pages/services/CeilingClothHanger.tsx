@@ -41,19 +41,54 @@ const serviceImages = [
 
 export default function CeilingClothHanger() {
   const structuredData = {
-    "@context": "https://schema.org", "@type": "Product",
-    name: "Ceiling Cloth Hanger",
-    description: "Premium ceiling-mounted cloth drying system with pulley mechanism.",
-    brand: { "@type": "Brand", name: "Prasanna" },
-    offers: { "@type": "AggregateOffer", priceCurrency: "INR", lowPrice: "2499", availability: "https://schema.org/InStock" },
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Motorized Ceiling Cloth Hanger Installation",
+    name: "Ceiling Cloth Hanger Installation",
+    description: "Professional installation of motorized and manual ceiling cloth hanger systems. Perfect for small apartments and balconies. Space-saving solution with efficient pulley systems. Easy installation and maintenance.",
+    provider: {
+      "@type": "HomeAndConstructionBusiness",
+      name: "Prasanna Invisible Grills",
+      telephone: "+917339306098",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Visakhapatnam",
+        addressRegion: "Andhra Pradesh",
+        addressCountry: "IN"
+      }
+    },
+    areaServed: [
+      { "@type": "City", "name": "Visakhapatnam" },
+      { "@type": "City", "name": "Vijayawada" },
+      { "@type": "City", "name": "Guntur" },
+      { "@type": "City", "name": "Tirupati" },
+      { "@type": "City", "name": "Anantapur" },
+      { "@type": "City", "name": "Hyderabad" },
+      { "@type": "City", "name": "Mahbubnagar" },
+      { "@type": "City", "name": "Warangal" },
+      { "@type": "City", "name": "Telangana" }
+    ],
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      priceCurrency: "INR",
+      price: "2499",
+      description: "Motorized and manual ceiling cloth hanger installation"
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "150"
+    }
   };
 
   return (
     <Layout>
       <SEOHead
-        title="Ceiling Cloth Hanger | Pulley Cloth Drying System"
-        description="Premium ceiling cloth hanger with pulley system. Space-saving cloth drying solution for apartments. Rust-proof, 40+ kg capacity, 5-year warranty."
-        keywords="ceiling cloth hanger, pulley cloth hanger, ceiling cloth dryer, balcony cloth hanger"
+        title="Ceiling Cloth Hanger | Pulley Drying System"
+        description="Space-saving cloth hanger with motorized pulley system. Rust-proof aluminum. 40+ kg capacity. Professional installation. 5-year warranty."
+        keywords="ceiling cloth hanger, pulley cloth hanger, motorized cloth hanger, space-saving hanger, balcony solution"
+        ogImage="/images/ceiling-hanger-hero.jpg"
         canonicalUrl="/ceiling-cloth-hanger"
         structuredData={structuredData}
       />

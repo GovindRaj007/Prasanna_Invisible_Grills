@@ -44,19 +44,53 @@ const serviceImages = [
 
 export default function InvisibleGrillsBalcony() {
   const structuredData = {
-    "@context": "https://schema.org", "@type": "Product",
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Balcony Invisible Grill Installation",
     name: "Invisible Grills for Balcony",
-    description: "Premium invisible grill installation for balconies with 316 marine-grade stainless steel.",
-    brand: { "@type": "Brand", name: "Prasanna Invisible Grills" },
-    offers: { "@type": "AggregateOffer", priceCurrency: "INR", availability: "https://schema.org/InStock" },
+    description: "Premium invisible grill installation for balconies. Provides child and pet safety with crystal clear unobstructed views. 316 marine-grade stainless steel cables, weather-resistant design, 10-year warranty.",
+    provider: {
+      "@type": "HomeAndConstructionBusiness",
+      name: "Prasanna Invisible Grills",
+      telephone: "+917339306098",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Visakhapatnam",
+        addressRegion: "Andhra Pradesh",
+        addressCountry: "IN"
+      }
+    },
+    areaServed: [
+      { "@type": "City", "name": "Visakhapatnam" },
+      { "@type": "City", "name": "Vijayawada" },
+      { "@type": "City", "name": "Guntur" },
+      { "@type": "City", "name": "Tirupati" },
+      { "@type": "City", "name": "Anantapur" },
+      { "@type": "City", "name": "Hyderabad" },
+      { "@type": "City", "name": "Mahbubnagar" },
+      { "@type": "City", "name": "Warangal" },
+      { "@type": "City", "name": "Telangana" }
+    ],
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      priceCurrency: "INR",
+      description: "Professional balcony grill installation with 10-year warranty"
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "150"
+    }
   };
 
   return (
     <Layout>
       <SEOHead
-        title="Invisible Grills for Balcony | Premium Balcony Safety"
-        description="Premium invisible grill installation for balconies. 316 marine-grade stainless steel, child-safe design, unobstructed views, 10-year warranty."
-        keywords="invisible grills for balcony, balcony invisible grill, balcony safety grill, balcony child safety"
+        title="Balcony Grills | Invisible Safety Railings"
+        description="Child-safe balcony grills with unobstructed views. Marine-grade stainless steel. Professional installation. 10-year warranty. 4.9★ rated."
+        keywords="balcony grills, invisible balcony grills, balcony safety grills, child safety railings, balcony protection"
+        ogImage="/images/balcony-grill-hero.jpg"
         canonicalUrl="/invisible-grills-balcony"
         structuredData={structuredData}
       />

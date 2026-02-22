@@ -48,19 +48,47 @@ const serviceImages = [
 export default function InvisibleGrillsDealer() {
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Product",
-    name: "Invisible Grills Dealership",
-    description: "Become an authorized invisible grills dealer.",
-    brand: { "@type": "Brand", name: "Prasanna Invisible Grills" },
-    offers: { "@type": "AggregateOffer", priceCurrency: "INR", availability: "https://schema.org/InStock" },
+    "@type": "Service",
+    serviceType: "Dealership & Wholesale Opportunity",
+    name: "Invisible Grills Dealership & Wholesale",
+    description: "Become an authorized invisible grills dealer with exclusive territory rights. Access wholesale pricing, professional training, marketing support, and bulk order benefits. Perfect for hardware stores, contractors, and distributors.",
+    provider: {
+      "@type": "HomeAndConstructionBusiness",
+      name: "Prasanna Invisible Grills",
+      telephone: "+917339306098",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Visakhapatnam",
+        addressRegion: "Andhra Pradesh",
+        addressCountry: "IN"
+      }
+    },
+    areaServed: [
+      { "@type": "City", "name": "Visakhapatnam" },
+      { "@type": "City", "name": "Vijayawada" },
+      { "@type": "City", "name": "Guntur" },
+      { "@type": "City", "name": "Tirupati" },
+      { "@type": "City", "name": "Anantapur" },
+      { "@type": "City", "name": "Hyderabad" },
+      { "@type": "City", "name": "Mahbubnagar" },
+      { "@type": "City", "name": "Warangal" },
+      { "@type": "City", "name": "Telangana" }
+    ],
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      priceCurrency: "INR",
+      description: "Wholesale pricing with exclusive territory rights"
+    }
   };
 
   return (
     <Layout>
       <SEOHead
-        title="Invisible Grills Dealer | Authorized Dealership & Wholesale"
-        description="Become an authorized invisible grills dealer. Wholesale pricing, bulk discounts, installation training, and exclusive territory rights."
-        keywords="invisible grills dealer, invisible grills wholesale, invisible grills distributor, balcony grill dealership"
+        title="Invisible Grills Dealership | Wholesale Program"
+        description="Authorized dealer program with wholesale pricing, training & territory rights. Bulk discounts. Exclusive dealership opportunities available."
+        keywords="invisible grills dealer, invisible grills wholesale, dealership opportunities, contractor partnership, wholesale pricing"
+        ogImage="/images/dealer-program-hero.jpg"
         canonicalUrl="/invisible-grills-dealer"
         structuredData={structuredData}
       />

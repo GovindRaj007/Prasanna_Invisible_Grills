@@ -44,34 +44,79 @@ export function ServiceLocationPage({
 }: ServiceLocationProps) {
   const pageTitle = `${service} in ${location}`;
   const pageUrl = `/${serviceSlug}-${locationSlug}`;
+  
+  // SEO-optimized title (under 60 chars) and description (under 155 chars)
+  const seoTitle = location.length > 15 
+    ? `${service} | ${location}`
+    : `${service} in ${location}`;
+  
+  const seoDescription = `Expert ${service.toLowerCase()} in ${location}. Professional installation, 10-year warranty & free quotes. Serving ${localities[0]}, ${localities[1] || location} & nearby areas. Call today!`;
+  
+  const seoKeywords = `${service.toLowerCase()} ${location.toLowerCase()}, ${service.toLowerCase()} ${localities[0]?.toLowerCase() || location.toLowerCase()}, ${service.toLowerCase()} near me, trusted ${service.toLowerCase()} expert`;
 
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: pageTitle,
-    description: description,
-    provider: {
-      "@type": "LocalBusiness",
-      name: "Prasanna Invisible Grills",
-      telephone: "+917339306098",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: location,
-        addressCountry: "IN",
-      },
+    "@type": "LocalBusiness",
+    name: `Prasanna Invisible Grills - ${location}`,
+    image: "https://prasannainvisible.in/og-image.jpg",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: location,
+      addressRegion: "Andhra Pradesh",
+      addressCountry: "IN",
     },
-    areaServed: {
-      "@type": "City",
-      name: location,
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: "17.7231",
+      longitude: "83.0512"
     },
+    telephone: "+917339306098",
+    email: "info@prasannainvisible.in",
+    url: "https://prasannainvisible.in",
+    sameAs: ["https://facebook.com", "https://instagram.com"],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `Services in ${location}`,
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Invisible Grill Installation"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Balcony Invisible Grills"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Window Invisible Grills"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Ceiling Cloth Hanger"
+          }
+        }
+      ]
+    }
   };
 
   return (
     <Layout>
       <SEOHead
-        title={pageTitle}
-        description={`Professional ${service.toLowerCase()} installation in ${location}. Expert installation, 10-year warranty, and free site visit. Serving ${localities.slice(0, 3).join(", ")} and more areas.`}
-        keywords={`${service.toLowerCase()} ${location.toLowerCase()}, ${serviceSlug} ${locationSlug}, ${service.toLowerCase()} installation ${location.toLowerCase()}, ${service.toLowerCase()} near me`}
+        title={seoTitle}
+        description={seoDescription}
+        keywords={seoKeywords}
+        ogImage={`/images/service-location-${locationSlug}.jpg`}
         canonicalUrl={pageUrl}
         structuredData={structuredData}
       />
@@ -93,7 +138,7 @@ export function ServiceLocationPage({
               <span>Serving {location} & surrounding areas</span>
             </div>
             <h1 className="mb-6 font-heading text-4xl font-bold text-white md:text-5xl lg:text-6xl">
-              {service} in {location}
+              {pageTitle}
             </h1>
             <p className="mb-8 text-xl text-white/80">{description}</p>
             <div className="flex flex-col gap-4 sm:flex-row">

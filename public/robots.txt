@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+# Sitemap location for search engines
+Sitemap: https://prasannainvisible.in/sitemap.xml

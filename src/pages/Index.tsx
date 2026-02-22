@@ -12,13 +12,14 @@ import { SEOHead } from "@/components/common/SEOHead";
 const Index = () => {
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "HomeAndConstructionBusiness",
     name: "Prasanna Invisible Grills",
     description:
       "Premium invisible grills and home utility solutions for residential and commercial properties in Visakhapatnam, Vijayawada, Guntur, Tirupati, and Anantapur.",
-    url: "https://prasannagrills.com",
-    telephone: "+919876543210",
-    email: "info@prasannagrills.com",
+    url: "https://prasannainvisible.in",
+    telephone: "+917339306098",
+    email: "info@prasannainvisible.in",
+    image: "https://prasannainvisible.in/logo-Prasanna-Invisible-Grills.png",
     address: {
       "@type": "PostalAddress",
       streetAddress: "MVP Colony",
@@ -36,27 +37,43 @@ const Index = () => {
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        opens: "09:00",
+        opens: "08:00",
         closes: "19:00",
       },
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: "Sunday",
-        opens: "10:00",
-        closes: "17:00",
+        opens: "09:00",
+        closes: "18:00",
       },
     ],
-    priceRange: "₹₹",
-    areaServed: ["Visakhapatnam", "Vijayawada", "Guntur", "Tirupati", "Anantapur"],
+    priceRange: "$$",
+    areaServed: [
+      { "@type": "City", "name": "Visakhapatnam" },
+      { "@type": "City", "name": "Vijayawada" },
+      { "@type": "City", "name": "Guntur" },
+      { "@type": "City", "name": "Tirupati" },
+      { "@type": "City", "name": "Anantapur" },
+      { "@type": "City", "name": "Hyderabad" },
+      {"@type": "City", "name": "Mahbubnagar" },
+      {"@type": "City", "name": "Warangal" },
+      { "@type": "City", "name": "Telangana" }
+    ],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "150"
+    },
     sameAs: ["https://facebook.com", "https://instagram.com"],
   };
 
   return (
     <Layout>
       <SEOHead
-        title="Premium Invisible Grills & Ceiling Hangers"
-        description="Prasanna Invisible Grills offers premium invisible grill installation, balcony grills, and ceiling cloth hangers in Visakhapatnam, Vijayawada, Guntur, Tirupati, and Anantapur. 10-year warranty, professional installation."
-        keywords="invisible grills, balcony grills, ceiling cloth hanger, invisible grill dealer, balcony safety, child safety grills, invisible grill installation Visakhapatnam, invisible grills Vijayawada, ceiling hanger Guntur"
+        title="Invisible Grills Installation | Premium Safety"
+        description="Invisible grill installation & ceiling cloth hangers in Visakhapatnam, Vijayawada, Guntur, Tirupati & Anantapur. 10-year warranty. 4.8★ rated."
+        keywords="invisible grills, invisible grill installation, invisible grills for balcony,invisible grills for windows, ceiling cloth hanger, child safety"
+        ogImage="/images/hero-invisible-grills.jpg"
         canonicalUrl="/"
         structuredData={structuredData}
       />

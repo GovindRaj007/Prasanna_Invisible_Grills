@@ -58,19 +58,53 @@ const serviceImages = [
 
 export default function InvisibleGrillsWindows() {
   const structuredData = {
-    "@context": "https://schema.org", "@type": "Product",
-    name: "Invisible Grill for Windows",
-    description: "Premium invisible grill installation for windows with 316 marine-grade stainless steel.",
-    brand: { "@type": "Brand", name: "Prasanna Invisible Grills" },
-    offers: { "@type": "AggregateOffer", priceCurrency: "INR", availability: "https://schema.org/InStock" },
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Window Invisible Grill Installation",
+    name: "Invisible Grills for Windows",
+    description: "Professional invisible grill installation for windows. Provides child safety, burglar prevention, and pet containment while maintaining crystal clear views. 316 marine-grade stainless steel, easy maintenance, 10-year warranty.",
+    provider: {
+      "@type": "HomeAndConstructionBusiness",
+      name: "Prasanna Invisible Grills",
+      telephone: "+917339306098",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Visakhapatnam",
+        addressRegion: "Andhra Pradesh",
+        addressCountry: "IN"
+      }
+    },
+    areaServed: [
+      { "@type": "City", "name": "Visakhapatnam" },
+      { "@type": "City", "name": "Vijayawada" },
+      { "@type": "City", "name": "Guntur" },
+      { "@type": "City", "name": "Tirupati" },
+      { "@type": "City", "name": "Anantapur" },
+      { "@type": "City", "name": "Hyderabad" },
+      { "@type": "City", "name": "Mahbubnagar" },
+      { "@type": "City", "name": "Warangal" },
+      { "@type": "City", "name": "Telangana" }
+    ],
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      priceCurrency: "INR",
+      description: "Professional window grill installation with 10-year warranty"
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "150"
+    }
   };
 
   return (
     <Layout>
       <SEOHead
-        title="Invisible Grill for Windows | Window Safety Solutions"
-        description="Premium invisible grill installation for windows. 316 marine-grade stainless steel, child-safe design, full ventilation, 10-year warranty."
-        keywords="invisible grill for windows, window invisible grill, window safety grill, child safety window grill"
+        title="Window Grills | Invisible Safety Grilles"
+        description="Window safety grills with invisible design. Burglar prevention, child safety & pet containment. Expert installation. 10-year warranty."
+        keywords="window grills, invisible window grills, window safety, burglar prevention grills, child safety windows"
+        ogImage="/images/window-grill-hero.jpg"
         canonicalUrl="/invisible-grills-windows"
         structuredData={structuredData}
       />

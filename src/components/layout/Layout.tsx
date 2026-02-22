@@ -3,6 +3,7 @@ import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { FloatingCTA } from "@/components/common/FloatingCTA";
 import { ReviewVideoModal } from "@/components/common/ReviewVideoModal";
+import { ScrollToTop } from "@/components/common/ScrollToTop";
 import { REVIEW_VIDEO_CONFIG } from "@/config/reviewVideoConfig";
 
 interface LayoutProps {
@@ -46,6 +47,7 @@ export function Layout({ children }: LayoutProps) {
       <main className="flex-1">{children}</main>
       <Footer />
       <FloatingCTA />
+      <ScrollToTop />
       <ReviewVideoModal
         isOpen={isVideoModalOpen}
         onClose={() => setIsVideoModalOpen(false)}

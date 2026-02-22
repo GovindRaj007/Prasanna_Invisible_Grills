@@ -375,6 +375,32 @@ export default function Contact() {
                     <div className="text-white/70"><p>Mon - Sat: 9:00 AM - 7:00 PM</p><p>Sunday: 10:00 AM - 5:00 PM</p></div>
                   </div>
                 </div>
+                <div className="mt-4 flex flex-col gap-2 border-t border-white/10 pt-4">
+                  <a 
+                    href="https://www.google.com/maps/dir/?api=1&destination=21-34/1,+Viman+Nagar,+Kakani+Nagar,+Visakhapatnam,+530009"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-primary hover:underline"
+                  >
+                    📍 Get Directions
+                  </a>
+                  <a 
+                    href="https://g.page/r/CU35q4qYY1cSEAI/review"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-primary hover:underline"
+                  >
+                    ⭐ Leave a Google Review
+                  </a>
+                  <a 
+                    href="https://g.page/CU35q4qYY1cSEAI"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-primary hover:underline"
+                  >
+                    View on Google Maps
+                  </a>
+                </div>
               </div>
             </div>
           </div>

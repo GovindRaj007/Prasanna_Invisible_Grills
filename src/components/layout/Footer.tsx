@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Clock,} from "lucide-react";
-import logoImage from "@/assets/logo-Prasanna-Invisible-Grills.png";
+import { useNavigate } from "react-router-dom";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Helmet } from "react-helmet-async";
+import logoImage from "@/assets/logo-Prasanna-invisible-grills.png";
 import {
   Accordion,
   AccordionContent,
@@ -43,13 +45,111 @@ const locationsByState = {
 };
 
 export function Footer() {
+  const navigate = useNavigate();
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate("/");
+    // Scroll to top of page
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer className="border-t bg-foreground text-primary-foreground">
+      <Helmet>
+        {/* NAP Consistency & Organization Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Prasanna Invisible Grills",
+            "url": "https://prasannainvisible.in",
+            "email": "info@prasannainvisible.in",
+            "logo": "https://prasannainvisible.in/images/logo-prasanna.png",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+91-7339306098",
+              "contactType": "customer service",
+              "areaServed": ["AP", "TS"],
+              "availableLanguage": ["en", "te", "hi"]
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "MVP Colony",
+              "addressLocality": "Visakhapatnam",
+              "addressRegion": "Andhra Pradesh",
+              "postalCode": "530017",
+              "addressCountry": "IN"
+            }
+          })}
+        </script>
+
+        {/* Opening Hours Specification */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Prasanna Invisible Grills",
+            "url": "https://prasannainvisible.in",
+            "email": "info@prasannainvisible.in",
+            "telephone": "+91-7339306098",
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": "17.7231",
+              "longitude": "83.0512"
+            },
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "08:00",
+                "closes": "19:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Sunday",
+                "opens": "09:00",
+                "closes": "18:00"
+              }
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "MVP Colony",
+              "addressLocality": "Visakhapatnam",
+              "addressRegion": "Andhra Pradesh",
+              "postalCode": "530017",
+              "addressCountry": "IN"
+            },
+            "areaServed": [
+              { "@type": "City", "name": "Visakhapatnam" },
+              { "@type": "City", "name": "Vijayawada" },
+              { "@type": "City", "name": "Guntur" },
+              { "@type": "City", "name": "Tirupati" },
+              { "@type": "City", "name": "Anantapur" },
+              { "@type": "City", "name": "Hyderabad" },
+              { "@type": "City", "name": "Mahbubnagar" },
+              { "@type": "City", "name": "Warangal" },
+              { "@type": "City", "name": "Telangana" }
+            ],
+            "sameAs": [
+              "https://www.facebook.com/prasannainvisiblegrills",
+              "https://www.instagram.com/prasannainvisiblegrills",
+              "https://g.page/CU35q4qYY1cSEAI"
+            ]
+          })}
+        </script>
+      </Helmet>
       <div className="container py-12 md:py-16">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Company Info */}
           <div className="space-y-4">
-            <img src={logoImage} alt="Prasanna Invisible Grills" className="h-[4rem] w-auto" />
+            <button 
+              onClick={handleLogoClick}
+              className="flex items-center cursor-pointer transition-transform hover:scale-105 focus:outline-none"
+              aria-label="Prasanna Invisible Grills - Go to Home"
+            >
+              <img src={logoImage} alt="Prasanna Invisible Grills" className="h-[4rem] w-auto" />
+            </button>
             <p className="text-sm text-primary-foreground/80">
               Your trusted partner for premium invisible grills and home utility solutions. 
               Protecting families across Andhra Pradesh & Telangana since 2015.
@@ -101,7 +201,7 @@ export function Footer() {
             </Accordion>
           </div>
 
-          {/* Contact Info */}
+          {/* Contact Info with NAP Consistency */}
           <div>
             <h3 className="mb-4 font-heading text-lg font-semibold">Contact Us</h3>
             <ul className="space-y-3">
@@ -118,7 +218,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <a href="mailto:info@prasannagrills.com" className="text-sm hover:text-primary">
+                <a href="mailto:prasannainvisible@gmail.com" className="text-sm hover:text-primary">
                   prasannainvisible@gmail.com
                 </a>
               </li>
@@ -132,9 +232,29 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <Clock className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                 <span className="text-sm text-primary-foreground/80">
-                  Mon - Sat: 8:00 AM - 7:00 PM<br />
-                  Sunday: 9:00 AM - 6:00 PM
+                  Mon - Sat: 9:00 AM - 7:00 PM<br />
+                  Sunday: 10:00 AM - 5:00 PM
                 </span>
+              </li>
+              <li className="flex items-center gap-3 mt-4 pt-3 border-t border-primary-foreground/10">
+                <a 
+                  href="https://g.page/r/CU35q4qYY1cSEAI/review" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-sm text-primary hover:underline flex items-center gap-1"
+                >
+                  ⭐ Leave a Google Review
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <a 
+                  href="https://g.page/CU35q4qYY1cSEAI" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-sm text-primary hover:underline"
+                >
+                  View on Google Maps
+                </a>
               </li>
             </ul>
           </div>
