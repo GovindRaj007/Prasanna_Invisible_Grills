@@ -4,7 +4,9 @@
 # Hostinger Static File Hosting - Apache Server Configuration
 # Deploy in /public_html/ root directory
 
-# Enable mod_rewrite for URL rewriting and security rules
+# =====================================================================
+# CORE URL REWRITING - SPA ROUTING
+# =====================================================================
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
@@ -15,7 +17,24 @@
 
     # Remove www if present
     RewriteCond %{HTTP_HOST} ^www\.
-    RewriteRule ^(.*)$ https://{HTTP_HOST:www.}/$1 [R=301,L]
+    RewriteRule ^(.*)$ https://%{HTTP_HOST:www.}/$1 [R=301,L]
+
+    # Redirect old service URLs to new clean structure
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^service/invisible-grills/?$ /invisible-grills [R=301,L]
+    RewriteRule ^service/invisible-grills-balcony/?$ /invisible-grills-balcony [R=301,L]
+    RewriteRule ^service/invisible-grills-windows/?$ /invisible-grills-windows [R=301,L]
+    RewriteRule ^service/invisible-grills-dealer/?$ /invisible-grills-dealer [R=301,L]
+    RewriteRule ^service/ceiling-cloth-hanger/?$ /ceiling-cloth-hanger [R=301,L]
+    RewriteRule ^services/invisible-grills/?$ /invisible-grills [R=301,L]
+    RewriteRule ^services/invisible-grills-balcony/?$ /invisible-grills-balcony [R=301,L]
+    RewriteRule ^services/invisible-grills-windows/?$ /invisible-grills-windows [R=301,L]
+    RewriteRule ^services/invisible-grills-dealer/?$ /invisible-grills-dealer [R=301,L]
+    RewriteRule ^services/ceiling-cloth-hanger/?$ /ceiling-cloth-hanger [R=301,L]
+    RewriteRule ^locations/invisible-grills-(.+)/?$ /invisible-grills-$1 [R=301,L]
+    RewriteRule ^location/invisible-grills-(.+)/?$ /invisible-grills-$1 [R=301,L]
+    RewriteRule ^service-location/(.+)/?$ /$1 [R=301,L]
 
     # SPA Routing: Send all requests to index.html except for existing files/folders
     RewriteCond %{REQUEST_FILENAME} !-f
@@ -24,10 +43,10 @@
 </IfModule>
 
 # =====================================================================
-# SECURITY HEADERS - XSS, Clickjacking, MIME-type, and More
+# SECURITY HEADERS
 # =====================================================================
 <IfModule mod_headers.c>
-    # Content Security Policy - Prevents inline scripts and external script injection
+    # Content Security Policy - Allow images from self and HTTPS sources
     Header set Content-Security-Policy "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self';"
 
     # Prevent clickjacking attacks
@@ -47,15 +66,19 @@
 
     # Permissions Policy - Restrict access to device features
     Header set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
+
+    # Remove sensitive headers
+    Header unset Server
+    Header unset X-Powered-By
+    Header unset X-AspNet-Version
+    Header set X-Permitted-Cross-Domain-Policies "none"
 </IfModule>
 
 # =====================================================================
-# IMAGE HOTLINK PROTECTION - Block Image Downloads
+# IMAGE SECURITY - HOTLINK PROTECTION ONLY
 # =====================================================================
 <IfModule mod_rewrite.c>
-    # Prevent direct access to images from external referers
-    # Allow empty referer (direct access, no referer header)
-    # Allow same domain referers
+    # Block external hotlinks but allow same-domain and direct access
     RewriteCond %{HTTP_REFERER} !^$
     RewriteCond %{HTTP_REFERER} !^https?://(www\.)?prasannainvisible\.in [NC]
     RewriteCond %{REQUEST_URI} \.(jpg|jpeg|png|gif|webp|svg)$ [NC]
@@ -63,63 +86,17 @@
 </IfModule>
 
 # =====================================================================
-# IMAGE DOWNLOAD PREVENTION via Headers
+# PROPER IMAGE CACHING (NO ATTACHMENT HEADERS - ALLOW DISPLAY)
 # =====================================================================
-<FilesMatch "\.(jpg|jpeg|png|gif|webp|svg)$">
+<FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico)$">
     <IfModule mod_headers.c>
-        # Force download as attachment instead of inline viewing
-        Header set Content-Disposition "inline; filename=\"image\""
-        # Cache-Control for browser cache
+        # IMPORTANT: Allow images to display inline (NOT as attachments)
         Header set Cache-Control "public, max-age=31536000, immutable"
     </IfModule>
 </FilesMatch>
 
 # =====================================================================
-# BROWSER CACHING STRATEGY
-# =====================================================================
-<IfModule mod_expires.c>
-    ExpiresActive On
-
-    # Static assets (versioned by hash in filename) - Cache 1 year
-    ExpiresByType text/css "access plus 1 year"
-    ExpiresByType application/javascript "access plus 1 year"
-    ExpiresByType image/jpeg "access plus 1 year"
-    ExpiresByType image/png "access plus 1 year"
-    ExpiresByType image/gif "access plus 1 year"
-    ExpiresByType image/webp "access plus 1 year"
-    ExpiresByType image/svg+xml "access plus 1 year"
-    ExpiresByType application/woff "access plus 1 year"
-    ExpiresByType application/woff2 "access plus 1 year"
-    ExpiresByType font/ttf "access plus 1 year"
-    ExpiresByType font/otf "access plus 1 year"
-
-    # HTML file (SPA entry) - No cache for index.html
-    ExpiresByType text/html "access plus 0 seconds"
-    DefaultType "text/html"
-</IfModule>
-
-# Alternative cache-control headers
-<FilesMatch "\.(?:ico|css|js|gif|jpe?g|png|svg|webp|woff2?|ttf|otf)$">
-    <IfModule mod_headers.c>
-        Header set Cache-Control "public, max-age=31536000, immutable"
-    </IfModule>
-</FilesMatch>
-
-<FilesMatch "\.html?$">
-    <IfModule mod_headers.c>
-        Header set Cache-Control "public, max-age=0, must-revalidate"
-    </IfModule>
-</FilesMatch>
-
-# =====================================================================
-# GZIP COMPRESSION - Reduce transfer size
-# =====================================================================
-<IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json application/xml+rss
-</IfModule>
-
-# =====================================================================
-# ADDITIONAL SECURITY
+# FILE PROTECTION & SECURITY
 # =====================================================================
 
 # Disable directory listing
@@ -127,7 +104,7 @@
     Options -Indexes
 </IfModule>
 
-# Hide .htaccess and .htpasswd files
+# Hide .htaccess and configuration files
 <FilesMatch "^\.ht">
     <IfModule mod_authz_core.c>
         Require all denied
@@ -138,8 +115,19 @@
     </IfModule>
 </FilesMatch>
 
-# Block access to sensitive files
-<FilesMatch "^(package\.json|\.env|\.env\.local|README|LICENSE|\.git)">
+# Block access to environment files
+<Files ~ "\.env.*$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</Files>
+
+# Prevent access to sensitive files
+<FilesMatch "(^#.*#|\.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist)$)">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>
@@ -149,305 +137,52 @@
     </IfModule>
 </FilesMatch>
 
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-  
-  # Redirect old service URLs to new clean structure
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^service/invisible-grills/?$ /invisible-grills [R=301,L]
-  RewriteRule ^service/invisible-grills-balcony/?$ /invisible-grills-balcony [R=301,L]
-  RewriteRule ^service/invisible-grills-windows/?$ /invisible-grills-windows [R=301,L]
-  RewriteRule ^service/invisible-grills-dealer/?$ /invisible-grills-dealer [R=301,L]
-  RewriteRule ^service/ceiling-cloth-hanger/?$ /ceiling-cloth-hanger [R=301,L]
-  RewriteRule ^services/invisible-grills/?$ /invisible-grills [R=301,L]
-  RewriteRule ^services/invisible-grills-balcony/?$ /invisible-grills-balcony [R=301,L]
-  RewriteRule ^services/invisible-grills-windows/?$ /invisible-grills-windows [R=301,L]
-  RewriteRule ^services/invisible-grills-dealer/?$ /invisible-grills-dealer [R=301,L]
-  RewriteRule ^services/ceiling-cloth-hanger/?$ /ceiling-cloth-hanger [R=301,L]
-  
-  # Redirect location pages to clean URLs
-  RewriteRule ^locations/invisible-grills-(.+)/?$ /invisible-grills-$1 [R=301,L]
-  RewriteRule ^location/invisible-grills-(.+)/?$ /invisible-grills-$1 [R=301,L]
-  RewriteRule ^service-location/(.+)/?$ /$1 [R=301,L]
-</IfModule>
-
-# ============================================
-# SECURITY HEADERS & CONFIGURATION
-# ============================================
-
-# Enable mod_rewrite
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-
-  # Remove .html extension from URLs (SPA routing)
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^(.*)$ index.html?url=$1 [QSA,L]
-
-  # Redirect HTTP to HTTPS
-  RewriteCond %{HTTPS} off
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-  # Remove www prefix (redirect to non-www)
-  RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-  RewriteRule ^(.*)$ https://%1%{REQUEST_URI} [L,R=301]
-</IfModule>
-
-# ============================================
-# SECURITY HEADERS
-# ============================================
-
-<IfModule mod_headers.c>
-  # Content Security Policy (CSP)
-  # Prevents XSS attacks, clickjacking, and other injection attacks
-  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https:; frame-ancestors 'none'"
-
-  # X-Frame-Options prevents clickjacking
-  Header set X-Frame-Options "DENY"
-
-  # X-Content-Type-Options prevents MIME type sniffing
-  Header set X-Content-Type-Options "nosniff"
-
-  # X-XSS-Protection enables browser XSS protection
-  Header set X-XSS-Protection "1; mode=block"
-
-  # Referrer Policy controls how much referrer info is shared
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
-
-  # Permissions Policy (formerly Feature Policy)
-  Header set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
-
-  # HSTS (HTTP Strict Transport Security)
-  # Enforce HTTPS for 1 year including subdomains
-  Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-
-  # Remove Server header for security
-  Header unset Server
-  Header unset X-Powered-By
-  Header unset X-AspNet-Version
-
-  # Additional security headers
-  Header set X-Permitted-Cross-Domain-Policies "none"
-</IfModule>
-
-# ============================================
-# FILE TYPE PROTECTION
-# ============================================
-
-# Prevent access to sensitive files
-<FilesMatch "(^#.*#|\.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|json)$)">
-  <IfModule mod_authz_core.c>
-    Require all denied
-  </IfModule>
-  <IfModule !mod_authz_core.c>
-    Order allow,deny
-    Deny from all
-  </IfModule>
-</FilesMatch>
-
-# Block access to htaccess files
-<Files .htaccess>
-  <IfModule mod_authz_core.c>
-    Require all denied
-  </IfModule>
-  <IfModule !mod_authz_core.c>
-    Order allow,deny
-    Deny from all
-  </IfModule>
-</Files>
-
-# Block access to environment files
-<Files ~ "\.env.*$">
-  <IfModule mod_authz_core.c>
-    Require all denied
-  </IfModule>
-  <IfModule !mod_authz_core.c>
-    Order allow,deny
-    Deny from all
-  </IfModule>
-</Files>
-
-# ============================================
-# CACHING STRATEGIES
-# ============================================
-
+# =====================================================================
+# BROWSER CACHING STRATEGY
+# =====================================================================
 <IfModule mod_expires.c>
-  ExpiresActive On
-  
-  # Cache images for 1 year
-  ExpiresByType image/jpeg "access plus 1 year"
-  ExpiresByType image/gif "access plus 1 year"
-  ExpiresByType image/png "access plus 1 year"
-  ExpiresByType image/webp "access plus 1 year"
-  ExpiresByType image/svg+xml "access plus 1 year"
-  ExpiresByType image/x-icon "access plus 1 year"
-  
-  # Cache CSS and JS for 6 months
-  ExpiresByType text/css "access plus 6 months"
-  ExpiresByType application/javascript "access plus 6 months"
-  ExpiresByType text/javascript "access plus 6 months"
-  
-  # Cache fonts for 1 year
-  ExpiresByType font/ttf "access plus 1 year"
-  ExpiresByType font/otf "access plus 1 year"
-  ExpiresByType font/woff "access plus 1 year"
-  ExpiresByType font/woff2 "access plus 1 year"
-  
-  # HTML should not be cached
-  ExpiresByType text/html "access plus 0 seconds"
+    ExpiresActive On
+
+    # Static assets - Cache 1 year
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType application/woff "access plus 1 year"
+    ExpiresByType application/woff2 "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+
+    # HTML should not be cached (SPA entry point)
+    ExpiresByType text/html "access plus 0 seconds"
 </IfModule>
 
-<IfModule mod_headers.c>
-  # Use ETag for cache validation
-  <FilesMatch "\\.(jpg|jpeg|png|gif|webp|svg)$">
-    Header set Cache-Control "max-age=31536000, immutable"
-  </FilesMatch>
-
-  <FilesMatch "\\.(css|js)$">
-    Header set Cache-Control "max-age=15778800, immutable"
-  </FilesMatch>
-
-  <FilesMatch "\\.html$">
-    Header set Cache-Control "max-age=0, must-revalidate"
-  </FilesMatch>
-</IfModule>
-
-# ============================================
-# COMPRESSION
-# ============================================
-
+# =====================================================================
+# GZIP COMPRESSION
+# =====================================================================
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/plain
-  AddOutputFilterByType DEFLATE text/html
-  AddOutputFilterByType DEFLATE text/xml
-  AddOutputFilterByType DEFLATE text/css
-  AddOutputFilterByType DEFLATE text/javascript
-  AddOutputFilterByType DEFLATE application/xml
-  AddOutputFilterByType DEFLATE application/xhtml+xml
-  AddOutputFilterByType DEFLATE application/rss+xml
-  AddOutputFilterByType DEFLATE application/javascript
-  AddOutputFilterByType DEFLATE application/x-javascript
-  AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
 </IfModule>
 
-# ============================================
-# IMAGE DOWNLOAD PROTECTION
-# ============================================
-
-# Prevent direct image viewing and downloading
-<FilesMatch "\.(jpg|jpeg|png|gif|webp|bmp|svg|ico)$">
-  <IfModule mod_headers.c>
-    # Prevent image from being saved/downloaded
-    Header set Content-Disposition "attachment; filename=image"
-    
-    # Add anti-right-click header (works with client-side JS)
-    Header set X-Content-Type-Options "nosniff"
-  </IfModule>
-</FilesMatch>
-
-# ============================================
-# DENY HOTLINKING
-# ============================================
-
-<IfModule mod_rewrite.c>
-  RewriteCond %{HTTP_REFERER} !^$
-  RewriteCond %{HTTP_REFERER} !^https?://prasannagrills\.com [NC]
-  RewriteCond %{HTTP_REFERER} !^https?://www\.prasannagrills\.com [NC]
-  RewriteRule \.(jpg|jpeg|png|gif|webp|svg)$ - [F,NC]
-</IfModule>
-
-# ============================================
-# DEFAULT DIRECTORY PAGES
-# ============================================
-
+# =====================================================================
+# DEFAULT DIRECTORY
+# =====================================================================
 DirectoryIndex index.html index.htm
-
-# ============================================
-# PERFORMANCE OPTIMIZATIONS
-# ============================================
-
-# Enable GZIP compression
-<IfModule mod_gzip.c>
-  mod_gzip_on Yes
-  mod_gzip_dechunk Yes
-  mod_gzip_item_include file \.(html?|txt|css|js|json)$
-  mod_gzip_item_include handler ^cgi-script$
-  mod_gzip_item_include mime ^text/.*
-  mod_gzip_item_include mime ^application/json$
-  mod_gzip_minimum_file_size 500
-</IfModule>
-=======
-# =====================================================================
-# SECURITY & PERFORMANCE CONFIGURATION FOR PRASANNA INVISIBLE GRILLS
-# =====================================================================
-# Hostinger Static File Hosting - Apache Server Configuration
-# Deploy in /public_html/ root directory
-
-# Enable mod_rewrite for URL rewriting and security rules
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
-
-    # Force HTTPS
-    RewriteCond %{HTTPS} off
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-    # Remove www if present
-    RewriteCond %{HTTP_HOST} ^www\.
-    RewriteRule ^(.*)$ https://{HTTP_HOST:www.}/$1 [R=301,L]
-
-    # SPA Routing: Send all requests to index.html except for existing files/folders
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^ index.html [QSA,L]
-</IfModule>
-
-# =====================================================================
-# SECURITY HEADERS - XSS, Clickjacking, MIME-type, and More
-# =====================================================================
-<IfModule mod_headers.c>
-    # Content Security Policy - Prevents inline scripts and external script injection
-    Header set Content-Security-Policy "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self';"
-
-    # Prevent clickjacking attacks
-    Header set X-Frame-Options "DENY"
-
-    # Prevent MIME type sniffing
-    Header set X-Content-Type-Options "nosniff"
-
-    # Enable XSS protection in older browsers
-    Header set X-XSS-Protection "1; mode=block"
-
-    # Force HTTPS for one year including subdomains
-    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-
-    # Referrer Policy - Reduce referrer information
-    Header set Referrer-Policy "strict-origin-when-cross-origin"
-
-    # Permissions Policy - Restrict access to device features
-    Header set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
-</IfModule>
-
-# =====================================================================
-# IMAGE HOTLINK PROTECTION - Block Image Downloads
-# =====================================================================
-<IfModule mod_rewrite.c>
-    # Prevent direct access to images from external referers
-    # Allow empty referer (direct access, no referer header)
-    # Allow same domain referers
-    RewriteCond %{HTTP_REFERER} !^$
-    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?prasannainvisible\.in [NC]
-    RewriteCond %{REQUEST_URI} \.(jpg|jpeg|png|gif|webp|svg)$ [NC]
-    RewriteRule ^ - [F,L]
-</IfModule>
-
-# =====================================================================
-# IMAGE DOWNLOAD PREVENTION via Headers
-# =====================================================================
-<FilesMatch "\.(jpg|jpeg|png|gif|webp|svg)$">
     <IfModule mod_headers.c>
         # Force download as attachment instead of inline viewing
         Header set Content-Disposition "inline; filename=\"image\""

@@ -1,12 +1,10 @@
-import { useEffect } from "react";
+
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { ScrollToTop } from "@/components/common/ScrollToTop";
-import { useImageProtection } from "@/hooks/useImageProtection";
-
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Contact from "./pages/Contact";
@@ -135,15 +133,6 @@ import CeilingClothHangerWarangal from "./pages/locations/CeilingClothHangerWara
 const queryClient = new QueryClient();
 
 const App = () => {
-  const { protectAllImages, observeNewImages } = useImageProtection();
-
-  useEffect(() => {
-    // Protect all images marked with data-protected attribute
-    protectAllImages();
-    // Watch for dynamically added protected images
-    observeNewImages();
-  }, []);
-
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
