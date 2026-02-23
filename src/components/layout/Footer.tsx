@@ -248,7 +248,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <a 
-                  href="https://g.page/CU35q4qYY1cSEAI" 
+                  href="https://www.google.com/maps/place/Prasanna+Invisible+Grills/@17.7384594,83.2258118,17z/data=!3m1!4b1!4m6!3m5!1s0x858f2b0d6606a653:0x125763988aabf94d!8m2!3d17.7384594!4d83.2258118!16s%2Fg%2F11y_zxc_5h?entry=ttu&g_ep=EgoyMDI2MDIxOC4wIKXMDSoASAFQAw%3D%3D" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-sm text-primary hover:underline"
