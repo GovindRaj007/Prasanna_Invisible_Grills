@@ -63,6 +63,7 @@ const specifications = [
 
 const locations = [
   { name: "Visakhapatnam", slug: "visakhapatnam" },
+  { name: "Rajahmundry", slug: "rajahmundry" },
   { name: "Vijayawada", slug: "vijayawada" },
   { name: "Guntur", slug: "guntur" },
   { name: "Tirupati", slug: "tirupati" },
@@ -101,6 +102,7 @@ export default function InvisibleGrills() {
     },
     areaServed: [
       { "@type": "City", "name": "Visakhapatnam" },
+      { "@type": "City", "name": "Rajahmundry" },
       { "@type": "City", "name": "Vijayawada" },
       { "@type": "City", "name": "Guntur" },
       { "@type": "City", "name": "Tirupati" },
@@ -114,12 +116,15 @@ export default function InvisibleGrills() {
       "@type": "Offer",
       availability: "https://schema.org/InStock",
       priceCurrency: "INR",
+      price: "On Request",
       description: "Professional installation with 10-year warranty"
     },
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "150"
+      ratingValue: 4.9,
+      reviewCount: 150,
+      bestRating: 5,
+      worstRating: 1
     }
   };
 

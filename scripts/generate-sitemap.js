@@ -93,6 +93,7 @@ function generateLocationRoutes() {
 
   const locations = [
     'visakhapatnam',
+    'rajahmundry',
     'vijayawada',
     'guntur',
     'tirupati',

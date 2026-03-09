@@ -40,7 +40,7 @@ const faqs = [
   {
     question: "Do you provide services in my area?",
     answer:
-      "We currently serve all major areas in Visakhapatnam, Vijayawada, Guntur, Tirupati, and Anantapur. For locations outside these cities, please contact us for availability. We're constantly expanding our service areas across Andhra Pradesh.",
+      "We currently serve all major areas in Visakhapatnam, Rajahmundry, Vijayawada, Guntur, Tirupati, and Anantapur. For locations outside these cities, please contact us for availability. We're constantly expanding our service areas across Andhra Pradesh.",
   },
   {
     question: "What is the cost of invisible grill installation?",

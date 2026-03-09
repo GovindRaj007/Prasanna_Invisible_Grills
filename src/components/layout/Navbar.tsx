@@ -32,6 +32,7 @@ const services = [
 const locationsByState = {
   "Andhra Pradesh": [
     { name: "Visakhapatnam", slug: "visakhapatnam" },
+    { name: "Rajahmundry", slug: "rajahmundry" },
     { name: "Vijayawada", slug: "vijayawada" },
     { name: "Guntur", slug: "guntur" },
     { name: "Tirupati", slug: "tirupati" },

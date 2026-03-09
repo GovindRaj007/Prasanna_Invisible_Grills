@@ -15,7 +15,7 @@ const Index = () => {
     "@type": "HomeAndConstructionBusiness",
     name: "Prasanna Invisible Grills",
     description:
-      "Premium invisible grills and home utility solutions for residential and commercial properties in Visakhapatnam, Vijayawada, Guntur, Tirupati, and Anantapur.",
+      "Premium invisible grills and home utility solutions for residential and commercial properties in Visakhapatnam, Rajahmundry, Vijayawada, Guntur, Tirupati, and Anantapur.",
     url: "https://prasannainvisible.in",
     telephone: "+917339306098",
     email: "info@prasannainvisible.in",
@@ -50,6 +50,7 @@ const Index = () => {
     priceRange: "$$",
     areaServed: [
       { "@type": "City", "name": "Visakhapatnam" },
+      { "@type": "City", "name": "Rajahmundry" },
       { "@type": "City", "name": "Vijayawada" },
       { "@type": "City", "name": "Guntur" },
       { "@type": "City", "name": "Tirupati" },
@@ -61,8 +62,10 @@ const Index = () => {
     ],
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "150"
+      ratingValue: 4.9,
+      reviewCount: 150,
+      bestRating: 5,
+      worstRating: 1
     },
     sameAs: ["https://facebook.com", "https://instagram.com"],
   };
@@ -71,7 +74,7 @@ const Index = () => {
     <Layout>
       <SEOHead
         title="Invisible Grills Installation | Premium Safety"
-        description="Invisible grill installation & ceiling cloth hangers in Visakhapatnam, Vijayawada, Guntur, Tirupati & Anantapur. 10-year warranty. 4.8★ rated."
+        description="Invisible grill installation & ceiling cloth hangers in Visakhapatnam, Rajahmundry, Vijayawada, Guntur, Tirupati & Anantapur. 10-year warranty. 4.8★ rated."
         keywords="invisible grills, invisible grill installation, invisible grills for balcony,invisible grills for windows, ceiling cloth hanger, child safety"
         ogImage="/images/hero-invisible-grills.jpg"
         canonicalUrl="/"

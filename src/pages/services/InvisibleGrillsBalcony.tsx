@@ -62,6 +62,7 @@ export default function InvisibleGrillsBalcony() {
     },
     areaServed: [
       { "@type": "City", "name": "Visakhapatnam" },
+      { "@type": "City", "name": "Rajahmundry" },
       { "@type": "City", "name": "Vijayawada" },
       { "@type": "City", "name": "Guntur" },
       { "@type": "City", "name": "Tirupati" },
@@ -75,12 +76,15 @@ export default function InvisibleGrillsBalcony() {
       "@type": "Offer",
       availability: "https://schema.org/InStock",
       priceCurrency: "INR",
+      price: "On Request",
       description: "Professional balcony grill installation with 10-year warranty"
     },
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "150"
+      ratingValue: 4.9,
+      reviewCount: 150,
+      bestRating: 5,
+      worstRating: 1
     }
   };
 
@@ -178,6 +182,7 @@ export default function InvisibleGrillsBalcony() {
           <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-4">
             {[
               { name: "Visakhapatnam", slug: "visakhapatnam" },
+              { name: "Rajahmundry", slug: "rajahmundry" },
               { name: "Vijayawada", slug: "vijayawada" },
               { name: "Guntur", slug: "guntur" },
               { name: "Tirupati", slug: "tirupati" },

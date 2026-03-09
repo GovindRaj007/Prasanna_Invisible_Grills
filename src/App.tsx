@@ -22,6 +22,12 @@ import InvisibleGrillsBalconyVisakhapatnam from "./pages/locations/InvisibleGril
 import InvisibleGrillsWindowsVisakhapatnam from "./pages/locations/InvisibleGrillsWindowsVisakhapatnam";
 import CeilingClothHangerVisakhapatnam from "./pages/locations/CeilingClothHangerVisakhapatnam";
 
+import InvisibleGrillsRajahmundry from "./pages/locations/InvisibleGrillsRajahmundry";
+import InvisibleGrillsDealerRajahmundry from "./pages/locations/InvisibleGrillsDealerRajahmundry";
+import InvisibleGrillsBalconyRajahmundry from "./pages/locations/InvisibleGrillsBalconyRajahmundry";
+import InvisibleGrillsWindowsRajahmundry from "./pages/locations/InvisibleGrillsWindowsRajahmundry";
+import CeilingClothHangerRajahmundry from "./pages/locations/CeilingClothHangerRajahmundry";
+
 import InvisibleGrillsVijayawada from "./pages/locations/InvisibleGrillsVijayawada";
 import InvisibleGrillsDealerVijayawada from "./pages/locations/InvisibleGrillsDealerVijayawada";
 import InvisibleGrillsBalconyVijayawada from "./pages/locations/InvisibleGrillsBalconyVijayawada";
@@ -156,6 +162,12 @@ const App = () => {
             <Route path="/invisible-grills-balcony-visakhapatnam" element={<InvisibleGrillsBalconyVisakhapatnam />} />
             <Route path="/invisible-grills-windows-visakhapatnam" element={<InvisibleGrillsWindowsVisakhapatnam />} />
             <Route path="/ceiling-cloth-hanger-visakhapatnam" element={<CeilingClothHangerVisakhapatnam />} />
+
+            <Route path="/invisible-grills-rajahmundry" element={<InvisibleGrillsRajahmundry />} />
+            <Route path="/invisible-grills-dealer-rajahmundry" element={<InvisibleGrillsDealerRajahmundry />} />
+            <Route path="/invisible-grills-balcony-rajahmundry" element={<InvisibleGrillsBalconyRajahmundry />} />
+            <Route path="/invisible-grills-windows-rajahmundry" element={<InvisibleGrillsWindowsRajahmundry />} />
+            <Route path="/ceiling-cloth-hanger-rajahmundry" element={<CeilingClothHangerRajahmundry />} />
 
             <Route path="/invisible-grills-vijayawada" element={<InvisibleGrillsVijayawada />} />
             <Route path="/invisible-grills-dealer-vijayawada" element={<InvisibleGrillsDealerVijayawada />} />

@@ -37,7 +37,7 @@ export default function About() {
     <Layout>
       <SEOHead
         title="About Us"
-        description="Learn about Prasanna Invisible Grills - 8+ years of experience providing premium invisible grills and home utility solutions in Visakhapatnam, Vijayawada, Guntur, Tirupati, and Anantapur. 10,000+ satisfied customers."
+        description="Learn about Prasanna Invisible Grills - 8+ years of experience providing premium invisible grills and home utility solutions in Visakhapatnam, Rajahmundry, Vijayawada, Guntur, Tirupati, and Anantapur. 10,000+ satisfied customers."
         keywords="about Prasanna Grills, invisible grills company, invisible grills Andhra Pradesh, Visakhapatnam grills company"
         canonicalUrl="/about"
       />

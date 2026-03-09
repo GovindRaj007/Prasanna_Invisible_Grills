@@ -19,6 +19,11 @@ const areasByState = {
       localities: ["Beach Road", "MVP Colony", "Siripuram", "Madhurawada", "Gajuwaka"],
     },
     {
+      city: "Rajahmundry",
+      slug: "rajahmundry",
+      localities: ["City Centre", "Desai Nagar", "Vinayak Nagar", "Gopal Nagar", "Indira Nagar"],
+    },
+    {
       city: "Vijayawada",
       slug: "vijayawada",
       localities: ["Benz Circle", "MG Road", "Labbipet", "Gurunanak Colony", "Auto Nagar"],

@@ -24,10 +24,12 @@ export default function Contact() {
   const [errors, setErrors] = useState({
     name: "",
     phone: "",
+    email: "",
   });
   const [touched, setTouched] = useState({
     name: false,
     phone: false,
+    email: false,
   });
   const { toast } = useToast();
 
@@ -41,10 +43,18 @@ export default function Contact() {
   // Validate phone - exactly 10 digits
   const isPhoneValid = (phone: string) => /^\d{10}$/.test(phone);
 
+  // Validate email - proper email format (optional, but must be valid if provided)
+  const isEmailValid = (email: string) => {
+    if (email.trim() === "") return true; // Email is optional
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email.trim());
+  };
+
   // Check if form is valid for submission
   const isFormValid = 
     isNameValid(formData.name) && 
     isPhoneValid(formData.phone) && 
+    isEmailValid(formData.email) &&
     formData.service !== "" && 
     formData.location !== "";
 
@@ -92,6 +102,29 @@ export default function Contact() {
     setTouched({...touched, phone: true});
     if (formData.phone.length > 0 && !isPhoneValid(formData.phone)) {
       setErrors({...errors, phone: "Enter a valid 10-digit phone number"});
+    }
+  };
+
+  const handleEmailChange = (value: string) => {
+    setFormData({...formData, email: value});
+    
+    if (touched.email) {
+      if (value.trim().length === 0) {
+        setErrors({...errors, email: ""});
+      } else if (!isEmailValid(value)) {
+        setErrors({...errors, email: "Enter a valid email address"});
+      } else {
+        setErrors({...errors, email: ""});
+      }
+    }
+  };
+
+  const handleEmailBlur = () => {
+    setTouched({...touched, email: true});
+    if (formData.email.trim().length > 0 && !isEmailValid(formData.email)) {
+      setErrors({...errors, email: "Enter a valid email address"});
+    } else {
+      setErrors({...errors, email: ""});
     }
   };
 
@@ -151,8 +184,8 @@ export default function Contact() {
         location: "",
         message: "",
       });
-      setErrors({ name: "", phone: "" });
-      setTouched({ name: false, phone: false });
+      setErrors({ name: "", phone: "", email: "" });
+      setTouched({ name: false, phone: false, email: false });
 
       // Submit form after a short delay to ensure toast is visible
       setTimeout(() => {
@@ -260,9 +293,24 @@ export default function Contact() {
                     type="email" 
                     placeholder="your@email.com" 
                     value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    className="bg-white/10 border-white/20 text-white placeholder:text-white/50" 
+                    onChange={(e) => handleEmailChange(e.target.value)}
+                    onBlur={handleEmailBlur}
+                    className={`bg-white/10 text-white placeholder:text-white/50 ${
+                      errors.email 
+                        ? "border-red-500 border-2" 
+                        : touched.email && formData.email.trim().length > 0 && isEmailValid(formData.email)
+                        ? "border-green-500 border-2"
+                        : "border-white/20"
+                    }`}
                   />
+                  {errors.email && (
+                    <p className="text-sm text-red-400 font-medium">{errors.email}</p>
+                  )}
+                  {!errors.email && touched.email && formData.email.trim().length > 0 && isEmailValid(formData.email) && (
+                    <p className="text-sm text-green-400 font-medium flex items-center gap-1">
+                      <CheckCircle className="h-3 w-3" /> Valid email
+                    </p>
+                  )}
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-2">
@@ -328,7 +376,7 @@ export default function Contact() {
                 >
                   {loading ? "Submitting..." : "Submit Enquiry"}
                 </Button>
-                {!isFormValid && (touched.name || touched.phone) && (
+                {!isFormValid && (touched.name || touched.phone || touched.email) && (
                   <p className="text-sm text-amber-400 text-center">
                     Please fill all required fields correctly to submit
                   </p>
@@ -383,22 +431,6 @@ export default function Contact() {
                     className="text-sm text-primary hover:underline"
                   >
                     📍 Get Directions
-                  </a>
-                  <a 
-                    href="https://g.page/r/CU35q4qYY1cSEAI/review"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-primary hover:underline"
-                  >
-                    ⭐ Leave a Google Review
-                  </a>
-                  <a 
-                    href="https://g.page/CU35q4qYY1cSEAI"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-primary hover:underline"
-                  >
-                    View on Google Maps
                   </a>
                 </div>
               </div>

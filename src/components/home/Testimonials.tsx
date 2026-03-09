@@ -119,12 +119,17 @@ export function Testimonials() {
   // Generate Review/AggregateRating Schema
   const aggregateReviewSchema = {
     "@context": "https://schema.org",
-    "@type": "AggregateRating",
-    "@id": "https://prasannainvisible.in/#aggregate-rating",
-    ratingValue: "4.9",
-    reviewCount: "150",
-    bestRating: "5",
-    worstRating: "1"
+    "@type": "Organization",
+    "@id": "https://prasannainvisible.in/#organization",
+    "name": "Prasanna Invisible Grills",
+    "url": "https://prasannainvisible.in",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": 4.9,
+      "reviewCount": 150,
+      "bestRating": 5,
+      "worstRating": 1
+    }
   };
 
   const reviewSchemas = testimonials.map((testimonial) => ({
@@ -132,9 +137,9 @@ export function Testimonials() {
     "@type": "Review",
     reviewRating: {
       "@type": "Rating",
-      ratingValue: testimonial.rating.toString(),
-      bestRating: "5",
-      worstRating: "1"
+      ratingValue: parseFloat(testimonial.rating.toString()),
+      bestRating: 5,
+      worstRating: 1
     },
     reviewBody: testimonial.text,
     author: {

@@ -1,0 +1,33 @@
+{
+  "name": "Prasanna Invisible Grills",
+  "short_name": "Prasanna Grills",
+  "description": "Premium invisible grills installation and ceiling cloth hangers. Professional service with 10-year warranty.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.jpg",
+      "sizes": "540x720",
+      "type": "image/jpeg"
+    }
+  ],
+  "categories": ["business", "home-improvement"],
+  "screenshots_large": [
+    {
+      "src": "/og-image.jpg",
+      "sizes": "1080x1440",
+      "type": "image/jpeg"
+    }
+  ]
+}

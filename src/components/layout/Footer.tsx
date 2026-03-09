@@ -21,6 +21,7 @@ const services = [
 const locationsByState = {
   "Andhra Pradesh": [
     { name: "Visakhapatnam", href: "/invisible-grills-visakhapatnam" },
+    { name: "Rajahmundry", href: "/invisible-grills-rajahmundry" },
     { name: "Vijayawada", href: "/invisible-grills-vijayawada" },
     { name: "Guntur", href: "/invisible-grills-guntur" },
     { name: "Tirupati", href: "/invisible-grills-tirupati" },
@@ -122,6 +123,7 @@ export function Footer() {
             },
             "areaServed": [
               { "@type": "City", "name": "Visakhapatnam" },
+              { "@type": "City", "name": "Rajahmundry" },
               { "@type": "City", "name": "Vijayawada" },
               { "@type": "City", "name": "Guntur" },
               { "@type": "City", "name": "Tirupati" },

@@ -65,6 +65,7 @@ export default function InvisibleGrillsDealer() {
     },
     areaServed: [
       { "@type": "City", "name": "Visakhapatnam" },
+      { "@type": "City", "name": "Rajahmundry" },
       { "@type": "City", "name": "Vijayawada" },
       { "@type": "City", "name": "Guntur" },
       { "@type": "City", "name": "Tirupati" },
@@ -182,6 +183,7 @@ export default function InvisibleGrillsDealer() {
           <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-4">
             {[
               { name: "Visakhapatnam", slug: "visakhapatnam" },
+              { name: "Rajahmundry", slug: "rajahmundry" },
               { name: "Vijayawada", slug: "vijayawada" },
               { name: "Guntur", slug: "guntur" },
               { name: "Tirupati", slug: "tirupati" },

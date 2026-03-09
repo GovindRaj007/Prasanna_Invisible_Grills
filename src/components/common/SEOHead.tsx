@@ -30,6 +30,14 @@ export function SEOHead({
       <meta name="description" content={description} />
       {keywords && <meta name="keywords" content={keywords} />}
       
+      {/* Robots Meta Tag - Ensure all pages are indexable */}
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      
+      {/* Language and Alternate URLs */}
+      <meta httpEquiv="content-language" content="en-IN" />
+      <link rel="alternate" hrefLang="en-IN" href={`${siteUrl}${canonicalUrl || '/'}`} />
+      
       {/* Canonical URL */}
       {canonicalUrl && <link rel="canonical" href={`${siteUrl}${canonicalUrl}`} />}
 
@@ -46,6 +54,13 @@ export function SEOHead({
       <meta property="twitter:title" content={fullTitle} />
       <meta property="twitter:description" content={description} />
       <meta property="twitter:image" content={`${siteUrl}${ogImage}`} />
+
+      {/* Mobile & Viewport optimization */}
+      <meta name="format-detection" content="telephone=yes" />
+      <meta name="theme-color" content="#000000" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
       {/* Structured Data */}
       {structuredData && (
