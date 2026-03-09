@@ -7,10 +7,10 @@ import { CTASection } from "@/components/home/CTASection";
 import heroAbout from "@/assets/hero-about.jpg";
 
 const stats = [
-  { icon: Users, value: "10,000+", label: "Happy Customers" },
+  { icon: Users, value: "6,000+", label: "Happy Customers" },
   { icon: Clock, value: "8+", label: "Years Experience" },
   { icon: Award, value: "100%", label: "Satisfaction Rate" },
-  { icon: Target, value: "19", label: "Cities Covered" },
+  { icon: Target, value: "9", label: "Cities Covered" },
 ];
 
 const values = [
