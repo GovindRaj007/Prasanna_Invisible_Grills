@@ -8,8 +8,8 @@ import { InvisibleGrillsBalconyFAQ } from "@/components/faq/InvisibleGrillsBalco
 import { ServiceImageSlider } from "@/components/services/ServiceImageSlider";
 
 import heroBalconyGrill from "@/assets/hero-balcony-grill.jpg";
-import heroInvisibleGrills from "@/assets/hero-invisible-grills.jpg";
 import balconyGrill from "@/assets/balcony-invisible-grills.jpg";
+import balconyGrill1 from "@/assets/balcony-invisible-grills-1.jpg";
 
 const benefits = [
   "Unobstructed panoramic views from your balcony",
@@ -37,9 +37,10 @@ const applications = [
 ];
 
 const serviceImages = [
-  { src: heroBalconyGrill, alt: "Invisible Grills for Balcony" },
-  { src: heroInvisibleGrills, alt: "Premium Balcony Safety" },
-  { src: balconyGrill, alt: "Modern Grill Solutions" },
+    { src: balconyGrill, alt: "Modern Grill Solutions" },
+    { src: heroBalconyGrill, alt: "Invisible Grills for Balcony" },
+    { src: balconyGrill1, alt: "Premium Balcony Safety" },
+  
 ];
 
 export default function InvisibleGrillsBalcony() {
@@ -120,7 +121,7 @@ export default function InvisibleGrillsBalcony() {
                 <Link to="/contact" className="flex items-center gap-2">Get Free Quote <ArrowRight className="h-5 w-5" /></Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 bg-white/10 text-white hover:bg-white/20" asChild>
-                <a href="tel:+917339306098" className="flex items-center gap-2"><Phone className="h-5 w-5" /> Call: +91 73393 06098</a>
+                <a href="tel:+917339306098" data-track="call" className="flex items-center gap-2"><Phone className="h-5 w-5" /> Call: +91 73393 06098</a>
               </Button>
             </div>
           </div>
@@ -213,7 +214,7 @@ export default function InvisibleGrillsBalcony() {
                 <Link to="/contact" className="flex items-center gap-2">Book Free Site Visit <ArrowRight className="h-5 w-5" /></Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 bg-white/10 text-white hover:bg-white/20" asChild>
-                <a href="tel:+917339306098">Call: +91 73393 06098</a>
+                <a href="tel:+917339306098" data-track="call">Call: +91 73393 06098</a>
               </Button>
             </div>
           </div>

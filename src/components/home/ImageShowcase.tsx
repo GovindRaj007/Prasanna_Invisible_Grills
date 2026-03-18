@@ -5,14 +5,14 @@ import heroInvisibleGrills from "@/assets/hero-invisible-grills.jpg";
 import balconyGrills from "@/assets/balcony-invisible-grills.jpg";
 import heroDealer from "@/assets/hero-dealer.jpg";
 import heroCeilingHanger from "@/assets/hero-ceiling-hanger.jpg";
-import heroBalconyGrill from "@/assets/invisible-grill-close-view.jpg";
-import heroWindowGrill from "@/assets/window-invisible-grill.jpg";
+import balconyGrill from "@/assets/balcony-invisible-grills-1.jpg";
+import heroWindowGrill from "@/assets/service-invisible-grills-3.jpg";
 import promoSlide from "@/assets/promo-prasanna-invisible-grills.jpg";
 
 const showcaseImages = [
   { src: heroInvisibleGrills, alt: "Invisible Grills Installation", label: "SS316 Invisible Grills" },
   {src: balconyGrills, alt: "Balcony Invisible Grills", label: "Balcony Invisible Grills" },
-  { src: heroBalconyGrill, alt: "Balcony Invisible Grills", label: "Balcony Invisible Grills" },
+  { src: balconyGrill, alt: "Balcony Invisible Grills", label: "Balcony Invisible Grills" },
   { src: heroWindowGrill, alt: "Window Invisible Grills", label: "Window Invisible Grills" },
   { src: heroDealer, alt: "Invisible Grills Dealer", label: "Dealer Network" },
   { src: heroCeilingHanger, alt: "Ceiling Cloth Hanger", label: "Ceiling Cloth Hangers" },

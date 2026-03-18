@@ -204,7 +204,7 @@ export function Navbar({ onOpenVideoModal }: NavbarProps) {
         <div className="hidden items-center gap-3 lg:flex">
           <ReviewVideoButton onClick={onOpenVideoModal} />
           <div className="flex flex-col items-center">
-            <a href="tel:+917339306098" className="flex items-center gap-2 rounded-md border border-white/30 bg-white/10 px-3 py-2 text-sm font-medium text-white hover:bg-white/20 transition-colors">
+            <a href="tel:+917339306098" data-track="call" className="flex items-center gap-2 rounded-md border border-white/30 bg-white/10 px-3 py-2 text-sm font-medium text-white hover:bg-white/20 transition-colors">
               <Phone className="h-4 w-4" />
               <span>Call Now</span>
             </a>
@@ -359,7 +359,7 @@ export function Navbar({ onOpenVideoModal }: NavbarProps) {
               {/* Bottom CTA */}
               <div className="px-4 pb-6 pt-2 border-t border-white/10 space-y-3">
                 <div className="flex flex-col space-y-2">
-                  <a href="tel:+917339306098" className="flex items-center justify-center gap-2 rounded-md border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-medium text-white hover:bg-white/20 transition-colors">
+                  <a href="tel:+917339306098" data-track="call" className="flex items-center justify-center gap-2 rounded-md border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-medium text-white hover:bg-white/20 transition-colors">
                     <Phone className="h-4 w-4" />
                     Call: +91 73393 06098
                   </a>

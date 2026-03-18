@@ -391,7 +391,7 @@ export default function Contact() {
               </div>
               <div className="space-y-4">
                 <div className="space-y-3">
-                <a href="tel:+917339306098" className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
+                <a href="tel:+917339306098" data-track="call" className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20"><Phone className="h-6 w-6 text-primary" /></div>
                   <div className="flex-1">
                     <p className="font-semibold text-white">Call Us</p>
@@ -402,7 +402,7 @@ export default function Contact() {
                   </div>
                 </a>
               </div>
-                <a href="https://wa.me/917339306098" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
+                <a href="https://wa.me/917339306098" data-track="whatsapp" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366]/20"><WhatsAppIcon className="h-6 w-6 text-[#25D366]" /></div>
                   <div><p className="font-semibold text-white">WhatsApp</p><p className="text-white/70">Chat with us instantly</p></div>
                 </a>

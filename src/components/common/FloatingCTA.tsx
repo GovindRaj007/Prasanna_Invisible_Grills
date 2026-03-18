@@ -22,6 +22,7 @@ export function FloatingCTA() {
     <div className="fixed bottom-6 right-6 z-50">
       <a
         href={href}
+        data-track={showWhatsApp ? "whatsapp" : "call"}
         target={showWhatsApp ? "_blank" : undefined}
         rel={showWhatsApp ? "noopener noreferrer" : undefined}
         className="relative flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition-all hover:scale-110 hover:shadow-xl overflow-hidden"

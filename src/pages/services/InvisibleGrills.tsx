@@ -17,8 +17,9 @@ import { CTASection } from "@/components/home/CTASection";
 import { ServiceImageSlider } from "@/components/services/ServiceImageSlider";
 
 import heroInvisibleGrills from "@/assets/hero-invisible-grills.jpg";
-import heroBalconyGrill from "@/assets/hero-balcony-grill.jpg";
-import heroWindowGrill from "@/assets/hero-window-grill.jpg";
+import serviceInvisibleGrills1 from "@/assets/service-invisible-grills-1.jpg";
+import serviceInvisibleGrills2 from "@/assets/service-invisible-grills-2.jpg";
+import serviceInvisibleGrills3 from "@/assets/service-invisible-grills-3.jpg";
 
 const features = [
   {
@@ -77,9 +78,9 @@ const locations = [
 ];
 
 const serviceImages = [
-  { src: heroInvisibleGrills, alt: "Invisible Grills Installation" },
-  { src: heroBalconyGrill, alt: "Balcony Invisible Grills" },
-  { src: heroWindowGrill, alt: "Window Invisible Grills" },
+  { src: serviceInvisibleGrills1, alt: "Invisible Grills Installation" },
+  { src: serviceInvisibleGrills2, alt: "Balcony Invisible Grills" },
+  { src: serviceInvisibleGrills3, alt: "Window Invisible Grills" },
 ];
 
 export default function InvisibleGrills() {
@@ -163,7 +164,7 @@ export default function InvisibleGrills() {
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 bg-white/10 text-white hover:bg-white/20" asChild>
-                <a href="tel:+917339306098" className="flex items-center gap-2">
+                <a href="tel:+917339306098" data-track="call" className="flex items-center gap-2">
                   <Phone className="h-5 w-5" /> Call Now
                 </a>
               </Button>

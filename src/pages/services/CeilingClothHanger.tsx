@@ -117,7 +117,7 @@ export default function CeilingClothHanger() {
                 <Link to="/contact" className="flex items-center gap-2">Get Free Quote <ArrowRight className="h-5 w-5" /></Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 bg-white/10 text-white hover:bg-white/20" asChild>
-                <a href="tel:+917339306098" className="flex items-center gap-2"><Phone className="h-5 w-5" /> Call: +91 73393 06098</a>
+                <a href="tel:+917339306098" data-track="call" className="flex items-center gap-2"><Phone className="h-5 w-5" /> Call: +91 73393 06098</a>
               </Button>
             </div>
           </div>
@@ -213,7 +213,7 @@ export default function CeilingClothHanger() {
                 <Link to="/contact" className="flex items-center gap-2">Book Installation <ArrowRight className="h-5 w-5" /></Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 bg-white/10 text-white hover:bg-white/20" asChild>
-                <a href="tel:+917339306098">Call: +91 73393 06098</a>
+                <a href="tel:+917339306098" data-track="call">Call: +91 73393 06098</a>
               </Button>
             </div>
           </div>

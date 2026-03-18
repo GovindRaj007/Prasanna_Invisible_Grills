@@ -35,7 +35,7 @@ export function CTASection() {
               className="w-full border-white/30 bg-white/10 text-white hover:bg-white/20 sm:w-auto"
               asChild
             >
-              <a href="tel:+917339306098" className="flex items-center gap-2">
+              <a href="tel:+917339306098" data-track="call" className="flex items-center gap-2">
                 <Phone className="h-5 w-5" />
                 Call: +91 73393 06098
               </a>
@@ -48,6 +48,7 @@ export function CTASection() {
             >
               <a
                 href="https://wa.me/917339306098"
+                data-track="whatsapp"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2"

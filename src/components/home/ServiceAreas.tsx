@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, TouchEvent } from "react";
+import { useState, useRef,  TouchEvent } from "react";
 import { Link } from "react-router-dom";
 import { MapPin, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";

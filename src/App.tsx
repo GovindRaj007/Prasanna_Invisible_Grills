@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { ScrollToTop } from "@/components/common/ScrollToTop";
+import { useGTMTracking } from "@/hooks/useGTMTracking";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Contact from "./pages/Contact";
@@ -139,6 +140,7 @@ import CeilingClothHangerWarangal from "./pages/locations/CeilingClothHangerWara
 const queryClient = new QueryClient();
 
 const App = () => {
+  useGTMTracking();
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>

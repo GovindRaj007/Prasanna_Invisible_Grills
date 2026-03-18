@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import heroInvisibleGrills from "@/assets/hero-invisible-grills.jpg";
 import heroDealer from "@/assets/hero-dealer.jpg";
 import heroCeilingHanger from "@/assets/hero-ceiling-hanger.jpg";
-import heroBalconyGrill from "@/assets/hero-balcony-grill.jpg";
-import heroWindowGrill from "@/assets/hero-window-grill.jpg";
+import heroBalconyGrill from "@/assets/balcony-invisible-grills.jpg";
+import heroWindowGrill from "@/assets/service-invisible-grills-3.jpg";
 
 const services = [
   {
@@ -76,8 +76,9 @@ export function ServicesSection() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="flex flex-wrap gap-6 justify-center justify-center animate-fade-in">
           {services.map((service, index) => (
+            <div className="w-full sm:w-[18rem] md:w-76 lg:w-80 min-w-[18rem] max-w-[470px]">
             <Link
               key={service.href}
               to={service.href}
@@ -123,6 +124,7 @@ export function ServicesSection() {
                 </span>
               </div>
             </Link>
+            </div>
           ))}
         </div>
 
