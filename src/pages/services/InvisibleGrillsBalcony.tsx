@@ -92,10 +92,10 @@ export default function InvisibleGrillsBalcony() {
   return (
     <Layout>
       <SEOHead
-        title="Balcony Grills | Invisible Safety Railings"
-        description="Child-safe balcony grills with unobstructed views. Marine-grade stainless steel. Professional installation. 10-year warranty. 4.9★ rated."
-        keywords="balcony grills, invisible balcony grills, balcony safety grills, child safety railings, balcony protection"
-        ogImage="/images/balcony-grill-hero.jpg"
+        title="Invisible Balcony Grills | Prasanna"
+        description="Invisible balcony grills for child safety & unobstructed views. 316 stainless steel, weather-resistant. Expert installation, 10-year warranty, 4.9★ rated."
+        keywords="invisible balcony grills, invisible grills for balcony, invisible grills near me, best balcony grills, child-safe railings, balcony protection"
+        ogImage="/og-images/balcony-invisible-grills.jpg"
         canonicalUrl="/invisible-grills-balcony"
         structuredData={structuredData}
       />

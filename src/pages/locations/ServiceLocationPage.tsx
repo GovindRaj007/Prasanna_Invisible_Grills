@@ -45,20 +45,36 @@ export function ServiceLocationPage({
   const pageTitle = `${service} in ${location}`;
   const pageUrl = `/${serviceSlug}-${locationSlug}`;
   
-  // SEO-optimized title (under 60 chars) and description (under 155 chars)
-  const seoTitle = location.length > 15 
-    ? `${service} | ${location}`
-    : `${service} in ${location}`;
+  // SEO-optimized title (50-60 chars) and description (150-160 chars) following Yoast guidelines
+  const seoTitle = `${service} in ${location} | Prasanna`;
   
-  const seoDescription = `Expert ${service.toLowerCase()} in ${location}. Professional installation, 10-year warranty & free quotes. Serving ${localities[0]}, ${localities[1] || location} & nearby areas. Call today!`;
+  const seoDescription = `${service} in ${location}. Expert installation with 316 stainless steel materials. Serving ${localities[0]}, ${localities[1] || location} & nearby areas. 10-year warranty. Free quotes.`;
   
-  const seoKeywords = `${service.toLowerCase()} ${location.toLowerCase()}, ${service.toLowerCase()} ${localities[0]?.toLowerCase() || location.toLowerCase()}, ${service.toLowerCase()} near me, trusted ${service.toLowerCase()} expert`;
+  const seoKeywords = `${service.toLowerCase()} ${location.toLowerCase()}, best ${service.toLowerCase()} in ${location}, ${service.toLowerCase()} near me, professional ${service.toLowerCase()}, ${service.toLowerCase()} installation, affordable ${service.toLowerCase()}, expert ${service.toLowerCase()}`;
+
+  // Determine OG image based on service slug
+  const getOgImage = (slug: string): string => {
+    switch (slug) {
+      case "invisible-grills":
+        return "/og-images/invisible-grills.jpg";
+      case "invisible-grills-dealer":
+        return "/og-images/invisible-grills-dealer.jpg";
+      case "invisible-grills-balcony":
+        return "/og-images/balcony-invisible-grills.jpg";
+      case "invisible-grills-windows":
+        return "/og-images/window-invisible-grills.jpg";
+      case "ceiling-cloth-hanger":
+        return "/og-images/ceiling-cloth-hanger.jpg";
+      default:
+        return "/og-images/invisible-grills.jpg";
+    }
+  };
 
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: `Prasanna Invisible Grills - ${location}`,
-    image: "https://prasannainvisible.in/og-image.jpg",
+    image: `https://prasannainvisible.in${getOgImage(serviceSlug)}`,
     address: {
       "@type": "PostalAddress",
       addressLocality: location,
@@ -116,7 +132,7 @@ export function ServiceLocationPage({
         title={seoTitle}
         description={seoDescription}
         keywords={seoKeywords}
-        ogImage={`/images/service-location-${locationSlug}.jpg`}
+        ogImage={getOgImage(serviceSlug)}
         canonicalUrl={pageUrl}
         structuredData={structuredData}
       />

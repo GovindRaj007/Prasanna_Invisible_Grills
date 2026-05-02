@@ -206,10 +206,30 @@ export default function Contact() {
   return (
     <Layout>
       <SEOHead
-        title="Contact Us"
-        description="Get in touch with Prasanna Invisible Grills for a free quote. Call us, WhatsApp, or fill out our contact form."
-        keywords="contact invisible grills, get quote invisible grills, invisible grills enquiry"
+        title="Contact Prasanna Invisible Grills | Free Quote & Visit"
+        description="Contact Prasanna Invisible Grills for free quote & home visit. Call, WhatsApp, email. Expert consultants ready across Andhra Pradesh & Telangana."
+        keywords="contact Prasanna, invisible grills quote, free consultation, invisible grills near me, best invisible grills, expert advice"
         canonicalUrl="/contact"
+        ogImage="/og-images/prasanna-invisible-grills-og.jpg"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          "name": "Contact Prasanna Invisible Grills",
+          "description": "Contact Prasanna Invisible Grills for free consultation and quote",
+          "url": "https://prasannainvisible.in/contact",
+          "organization": {
+            "@type": "LocalBusiness",
+            "name": "Prasanna Invisible Grills",
+            "telephone": "+917339306098",
+            "email": "info@prasannainvisible.in",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Visakhapatnam",
+              "addressRegion": "Andhra Pradesh",
+              "addressCountry": "IN"
+            }
+          }
+        }}
       />
 
       <section className="section-bg-2 relative py-12 md:py-16">

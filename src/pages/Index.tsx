@@ -73,10 +73,10 @@ const Index = () => {
   return (
     <Layout>
       <SEOHead
-        title="Invisible Grills Installation | Premium Safety"
-        description="Invisible grill installation & ceiling cloth hangers in Visakhapatnam, Rajahmundry, Vijayawada, Guntur, Tirupati & Anantapur. 10-year warranty. 4.8★ rated."
-        keywords="invisible grills, invisible grill installation, invisible grills for balcony,invisible grills for windows, ceiling cloth hanger, child safety"
-        ogImage="/images/hero-invisible-grills.jpg"
+        title="Invisible Grills Across Andhra & Telangana | Prasanna"
+        description="Expert invisible grills installation across Andhra Pradesh & Telangana. 8+ years, 6000+ homes. Premium safety solutions with 10-year warranty. Free quotes."
+        keywords="invisible grills, invisible grills installation, invisible grills near me, best invisible grills, balcony grills, ceiling cloth hanger, Andhra Pradesh, Telangana"
+        ogImage="/og-images/prasanna-invisible-grills-og.jpg"
         canonicalUrl="/"
         structuredData={structuredData}
       />

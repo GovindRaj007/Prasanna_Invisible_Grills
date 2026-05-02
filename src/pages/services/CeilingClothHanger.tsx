@@ -88,10 +88,10 @@ export default function CeilingClothHanger() {
   return (
     <Layout>
       <SEOHead
-        title="Ceiling Cloth Hanger | Pulley Drying System"
-        description="Space-saving cloth hanger with motorized pulley system. Rust-proof aluminum. 40+ kg capacity. Professional installation. 5-year warranty."
-        keywords="ceiling cloth hanger, pulley cloth hanger, motorized cloth hanger, space-saving hanger, balcony solution"
-        ogImage="/images/ceiling-hanger-hero.jpg"
+        title="Ceiling Cloth Hanger | Prasanna"
+        description="Space-saving ceiling cloth hanger with motorized pulley system. Rust-proof aluminum, 40+ kg capacity. Expert installation. 5-year warranty."
+        keywords="ceiling cloth hanger, motorized hanger, best ceiling cloth hanger, pulley drying system, space-saving solution, rust-proof hanger"
+        ogImage="/og-images/ceiling-cloth-hanger.jpg"
         canonicalUrl="/ceiling-cloth-hanger"
         structuredData={structuredData}
       />

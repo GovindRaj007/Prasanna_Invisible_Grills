@@ -132,10 +132,10 @@ export default function InvisibleGrills() {
   return (
     <Layout>
       <SEOHead
-        title="Invisible Grills Installation | Safety Grills"
-        description="Premium invisible grills with 316 stainless steel. Balconies, windows & railings. 4.9★ rated. 10-year warranty. Free quote & installation in 4-8 hours."
-        keywords="invisible grills, invisible grill installation, balcony grills, window grills, safety grills, stainless steel grills,SS316 invisible grills"
-        ogImage="/images/invisible-grills-hero.jpg"
+        title="Invisible Grills Installation | Prasanna"
+        description="Premium invisible grill installation with 316 stainless steel. Balconies, windows, railings. Expert team, 4.9★ rated, 10-year warranty. Free quote & 4-8 hour install."
+        keywords="invisible grills, invisible grill installation, invisible grills near me, best invisible grills, balcony grills, window grills, 316 stainless steel"
+        ogImage="/og-images/invisible-grills.jpg"
         canonicalUrl="/invisible-grills"
         structuredData={structuredData}
       />

@@ -36,10 +36,11 @@ export default function About() {
   return (
     <Layout>
       <SEOHead
-        title="About Us"
-        description="Learn about Prasanna Invisible Grills - 8+ years of experience providing premium invisible grills and home utility solutions in Visakhapatnam, Rajahmundry, Vijayawada, Guntur, Tirupati, and Anantapur. 10,000+ satisfied customers."
-        keywords="about Prasanna Grills, invisible grills company, invisible grills Andhra Pradesh, Visakhapatnam grills company"
+        title="About Prasanna Invisible Grills | Expert Installation"
+        description="Prasanna Invisible Grills: 8+ years serving 6000+ customers across Andhra & Telangana. Expert installation, quality materials, 10-year warranty. Trusted safety partner."
+        keywords="Prasanna Invisible Grills, invisible grills company, expert installation, invisible grills near me, best invisible grills, Andhra Pradesh, trusted installer"
         canonicalUrl="/about"
+        ogImage="/og-images/prasanna-invisible-grills-og.jpg"
       />
 
       {/* Hero with Background Image */}

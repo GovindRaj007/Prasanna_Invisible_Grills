@@ -106,10 +106,10 @@ export default function InvisibleGrillsWindows() {
   return (
     <Layout>
       <SEOHead
-        title="Window Grills | Invisible Safety Grilles"
-        description="Window safety grills with invisible design. Burglar prevention, child safety & pet containment. Expert installation. 10-year warranty."
-        keywords="window grills, invisible window grills, window safety, burglar prevention grills, child safety windows"
-        ogImage="/images/window-grill-hero.jpg"
+        title="Invisible Window Grills | Prasanna"
+        description="Invisible window grills for burglar prevention & child safety. 316 stainless steel, invisible design. Expert installation, 10-year warranty across Andhra."
+        keywords="invisible window grills, invisible grills for windows, invisible grills near me, best window grills, burglar prevention, window protection"
+        ogImage="/og-images/window-invisible-grills.jpg"
         canonicalUrl="/invisible-grills-windows"
         structuredData={structuredData}
       />

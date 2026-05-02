@@ -86,10 +86,10 @@ export default function InvisibleGrillsDealer() {
   return (
     <Layout>
       <SEOHead
-        title="Invisible Grills Dealership | Wholesale Program"
-        description="Authorized dealer program with wholesale pricing, training & territory rights. Bulk discounts. Exclusive dealership opportunities available."
-        keywords="invisible grills dealer, invisible grills wholesale, dealership opportunities, contractor partnership, wholesale pricing"
-        ogImage="/images/dealer-program-hero.jpg"
+        title="Invisible Grills Dealership | Prasanna"
+        description="Authorized Prasanna dealer program with wholesale pricing, training & exclusive territory rights. Bulk discounts. Business opportunity available now."
+        keywords="invisible grills dealer, invisible grills dealership, wholesale pricing, dealership program, business opportunity, bulk discounts"
+        ogImage="/og-images/invisible-grills-dealer.jpg"
         canonicalUrl="/invisible-grills-dealer"
         structuredData={structuredData}
       />
