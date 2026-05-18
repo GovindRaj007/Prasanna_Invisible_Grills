@@ -135,7 +135,7 @@ export default function InvisibleGrills() {
         title="Invisible Grills Installation | Prasanna"
         description="Premium invisible grill installation with 316 stainless steel. Balconies, windows, railings. Expert team, 4.9★ rated, 10-year warranty. Free quote & 4-8 hour install."
         keywords="invisible grills, invisible grill installation, invisible grills near me, best invisible grills, balcony grills, window grills, 316 stainless steel"
-        ogImage="/og-images/invisible-grills.jpg"
+        ogImage="/og-images/invisible-grills-og.jpg"
         canonicalUrl="/invisible-grills"
         structuredData={structuredData}
       />

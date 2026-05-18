@@ -109,7 +109,7 @@ export default function InvisibleGrillsWindows() {
         title="Invisible Window Grills | Prasanna"
         description="Invisible window grills for burglar prevention & child safety. 316 stainless steel, invisible design. Expert installation, 10-year warranty across Andhra."
         keywords="invisible window grills, invisible grills for windows, invisible grills near me, best window grills, burglar prevention, window protection"
-        ogImage="/og-images/window-invisible-grills.jpg"
+        ogImage="/og-images/window-invisible-grills-og.jpg"
         canonicalUrl="/invisible-grills-windows"
         structuredData={structuredData}
       />

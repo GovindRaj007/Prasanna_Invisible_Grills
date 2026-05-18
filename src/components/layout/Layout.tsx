@@ -21,7 +21,7 @@ export function Layout({ children }: LayoutProps) {
       "@type": "VideoObject",
       "name": "Customer Review - Prasanna Invisible Grills",
       "description": "Watch our satisfied customers share their experience with Prasanna Invisible Grills. Premium invisible grills for windows, balconies, and more.",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=800&h=450&fit=crop",
+      "thumbnailUrl": "https://prasannainvisible.in/og-images/invisible-grills-og.jpg",
       "uploadDate": new Date().toISOString(),
       "duration": "PT2M30S",
       "contentUrl": "https://prasannainvisible.in/videos/customer-reviews.mp4",

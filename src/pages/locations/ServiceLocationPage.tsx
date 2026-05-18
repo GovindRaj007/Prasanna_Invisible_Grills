@@ -52,21 +52,21 @@ export function ServiceLocationPage({
   
   const seoKeywords = `${service.toLowerCase()} ${location.toLowerCase()}, best ${service.toLowerCase()} in ${location}, ${service.toLowerCase()} near me, professional ${service.toLowerCase()}, ${service.toLowerCase()} installation, affordable ${service.toLowerCase()}, expert ${service.toLowerCase()}`;
 
-  // Determine OG image based on service slug
+  // Determine OG image based on service slug - use service-specific images
   const getOgImage = (slug: string): string => {
     switch (slug) {
       case "invisible-grills":
-        return "/og-images/invisible-grills.jpg";
+        return "/og-images/invisible-grills-og.jpg";
       case "invisible-grills-dealer":
-        return "/og-images/invisible-grills-dealer.jpg";
+        return "/og-images/invisible-grills-dealer-og.jpg";
       case "invisible-grills-balcony":
-        return "/og-images/balcony-invisible-grills.jpg";
+        return "/og-images/balcony-invisible-grills-og.jpg";
       case "invisible-grills-windows":
-        return "/og-images/window-invisible-grills.jpg";
+        return "/og-images/window-invisible-grills-og.jpg";
       case "ceiling-cloth-hanger":
-        return "/og-images/ceiling-cloth-hanger.jpg";
+        return "/og-images/ceiling-cloth-hanger-og.jpg";
       default:
-        return "/og-images/invisible-grills.jpg";
+        return "/og-images/prasanna-invisible-grills-og.jpg";
     }
   };
 

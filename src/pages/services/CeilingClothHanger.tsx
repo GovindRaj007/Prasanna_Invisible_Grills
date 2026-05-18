@@ -91,7 +91,7 @@ export default function CeilingClothHanger() {
         title="Ceiling Cloth Hanger | Prasanna"
         description="Space-saving ceiling cloth hanger with motorized pulley system. Rust-proof aluminum, 40+ kg capacity. Expert installation. 5-year warranty."
         keywords="ceiling cloth hanger, motorized hanger, best ceiling cloth hanger, pulley drying system, space-saving solution, rust-proof hanger"
-        ogImage="/og-images/ceiling-cloth-hanger.jpg"
+        ogImage="/og-images/ceiling-cloth-hanger-og.jpg"
         canonicalUrl="/ceiling-cloth-hanger"
         structuredData={structuredData}
       />

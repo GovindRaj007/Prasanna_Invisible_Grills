@@ -140,7 +140,27 @@ function generateLocationRoutes() {
 }
 
 /**
- * Generate XML sitemap content
+ * Get og-image URL for a given route
+ */
+function getOgImageForRoute(path) {
+  // Map routes to their og-images
+  if (path === '/') return `${BASE_URL}/og-images/prasanna-invisible-grills-og.jpg`;
+  if (path === '/about') return `${BASE_URL}/og-images/prasanna-invisible-grills-og.jpg`;
+  if (path === '/contact') return `${BASE_URL}/og-images/prasanna-invisible-grills-og.jpg`;
+  if (path === '/invisible-grills' || path.includes('invisible-grills-')) {
+    if (path.includes('-dealer')) return `${BASE_URL}/og-images/invisible-grills-dealer-og.jpg`;
+    if (path.includes('-balcony')) return `${BASE_URL}/og-images/balcony-invisible-grills-og.jpg`;
+    if (path.includes('-windows')) return `${BASE_URL}/og-images/window-invisible-grills-og.jpg`;
+    return `${BASE_URL}/og-images/invisible-grills-og.jpg`;
+  }
+  if (path === '/ceiling-cloth-hanger' || path.includes('ceiling-cloth-hanger')) {
+    return `${BASE_URL}/og-images/ceiling-cloth-hanger-og.jpg`;
+  }
+  return `${BASE_URL}/og-images/prasanna-invisible-grills-og.jpg`;
+}
+
+/**
+ * Generate XML sitemap content with image entries
  */
 function generateSitemapXML(routes) {
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -151,11 +171,21 @@ function generateSitemapXML(routes) {
 
   routes.forEach((route) => {
     const url = `${BASE_URL}${route.path}`;
+    const ogImage = getOgImageForRoute(route.path);
+    
     xml += '  <url>\n';
     xml += `    <loc>${escapeXml(url)}</loc>\n`;
     xml += `    <lastmod>${route.lastmod}</lastmod>\n`;
     xml += `    <changefreq>${route.changefreq}</changefreq>\n`;
     xml += `    <priority>${route.priority}</priority>\n`;
+    
+    // Add image sitemap entry for og-image
+    xml += '    <image:image>\n';
+    xml += `      <image:loc>${escapeXml(ogImage)}</image:loc>\n`;
+    xml += `      <image:title>${escapeXml('Prasanna Invisible Grills Preview Image')}</image:title>\n`;
+    xml += `      <image:caption>${escapeXml('Premium invisible grills and safety solutions')}</image:caption>\n`;
+    xml += '    </image:image>\n';
+    
     xml += '  </url>\n';
   });
 
@@ -205,6 +235,8 @@ function writeSitemap() {
   console.log('   ✓ Changefreq hints for Google crawler scheduling');
   console.log('   ✓ All public-facing pages included');
   console.log('   ✓ XML special characters properly escaped');
+  console.log('   ✓ Image sitemap entries for og-images (6 service-specific images)');
+  console.log('   ✓ Social media preview optimization via image sitemap');
   console.log('');
 }
 

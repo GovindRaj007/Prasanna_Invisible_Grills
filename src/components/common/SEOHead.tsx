@@ -15,7 +15,7 @@ export function SEOHead({
   description,
   keywords,
   canonicalUrl,
-  ogImage = "/og-image.jpg",
+  ogImage = "/og-images/prasanna-invisible-grills-og.jpg",
   ogType = "website",
   structuredData,
 }: SEOHeadProps) {

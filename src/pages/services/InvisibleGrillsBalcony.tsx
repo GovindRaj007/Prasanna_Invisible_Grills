@@ -95,7 +95,7 @@ export default function InvisibleGrillsBalcony() {
         title="Invisible Balcony Grills | Prasanna"
         description="Invisible balcony grills for child safety & unobstructed views. 316 stainless steel, weather-resistant. Expert installation, 10-year warranty, 4.9★ rated."
         keywords="invisible balcony grills, invisible grills for balcony, invisible grills near me, best balcony grills, child-safe railings, balcony protection"
-        ogImage="/og-images/balcony-invisible-grills.jpg"
+        ogImage="/og-images/balcony-invisible-grills-og.jpg"
         canonicalUrl="/invisible-grills-balcony"
         structuredData={structuredData}
       />

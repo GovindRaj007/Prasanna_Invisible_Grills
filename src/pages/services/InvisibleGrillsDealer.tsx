@@ -89,7 +89,7 @@ export default function InvisibleGrillsDealer() {
         title="Invisible Grills Dealership | Prasanna"
         description="Authorized Prasanna dealer program with wholesale pricing, training & exclusive territory rights. Bulk discounts. Business opportunity available now."
         keywords="invisible grills dealer, invisible grills dealership, wholesale pricing, dealership program, business opportunity, bulk discounts"
-        ogImage="/og-images/invisible-grills-dealer.jpg"
+        ogImage="/og-images/invisible-grills-dealer-og.jpg"
         canonicalUrl="/invisible-grills-dealer"
         structuredData={structuredData}
       />
