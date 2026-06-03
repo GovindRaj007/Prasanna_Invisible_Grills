@@ -10,9 +10,18 @@ Allow: *.svg
 Allow: *.webp
 Disallow: /admin/
 Disallow: /private/
+Disallow: /.git/
+Disallow: /node_modules/
 Crawl-delay: 0
 
+User-agent: Googlebot-Image
+Allow: /
+
 User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
 Allow: /
 Crawl-delay: 1
 
@@ -22,12 +31,41 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+User-agent: LinkedInBot
+Allow: /
+
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /private/
+Disallow: /.git/
+Disallow: /node_modules/
 Crawl-delay: 2
 
-# Sitemap location for search engines
-Sitemap: https://prasannainvisible.in/sitemap.xml
+# Sitemaps for search engines (relative paths work across all domains and Vercel deployments)
+Sitemap: /sitemap.xml
+Sitemap: /sitemap-index.xml
+Sitemap: /sitemap-static.xml
+Sitemap: /sitemap-services-locations.xml
+Sitemap: /sitemap-images.xml
 
+# Crawler hints for important resources
+User-agent: *
+Allow: /assets/
+Allow: /og-images/
+Allow: /images/
+Allow: /optimized-images/
+
+# Rate limiting for responsiveness
+User-agent: googlebot
+Request-rate: 30/1s
+
+User-agent: bingbot
+Request-rate: 30/1s
+
+# Performance - Don't crawl duplicate or temporary pages
+Disallow: /search
+Disallow: /404
+Disallow: /?*
+Disallow: /*?*sort
+Disallow: /*?*filter

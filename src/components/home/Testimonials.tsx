@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback, TouchEvent } from "react";
 import { Star, Quote } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import { getSiteUrl } from "@/lib/getSiteUrl";
 
 const testimonials = [
   {
@@ -47,6 +48,7 @@ export function Testimonials() {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+  const siteUrl = getSiteUrl();
 
   // Use doubled array for seamless infinite loop
   const extendedTestimonials = [...testimonials, ...testimonials];
@@ -120,9 +122,9 @@ export function Testimonials() {
   const aggregateReviewSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": "https://prasannainvisible.in/#organization",
+    "@id": `${siteUrl}/#organization`,
     "name": "Prasanna Invisible Grills",
-    "url": "https://prasannainvisible.in",
+    "url": siteUrl,
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": 4.9,

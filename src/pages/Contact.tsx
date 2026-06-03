@@ -10,6 +10,7 @@ import { Phone, Mail, MapPin, Clock, CheckCircle } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { getSiteUrl } from "@/lib/getSiteUrl";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -32,6 +33,7 @@ export default function Contact() {
     email: false,
   });
   const { toast } = useToast();
+  const siteUrl = getSiteUrl();
 
   // Validate name - minimum 7 letters (excluding spaces)
   const isNameValid = (name: string) => {
@@ -216,7 +218,7 @@ export default function Contact() {
           "@type": "ContactPage",
           "name": "Contact Prasanna Invisible Grills",
           "description": "Contact Prasanna Invisible Grills for free consultation and quote",
-          "url": "https://prasannainvisible.in/contact",
+          "url": `${siteUrl}/contact`,
           "organization": {
             "@type": "LocalBusiness",
             "name": "Prasanna Invisible Grills",

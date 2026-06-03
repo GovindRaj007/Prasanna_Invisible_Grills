@@ -1,0 +1,264 @@
+{
+  "balcony-invisible-grills-og": {
+    "original": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\og-images\\balcony-invisible-grills-og.jpg",
+    "originalWidth": 1280,
+    "srcset": {
+      "webp": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\balcony-invisible-grills-og-320w.webp 320w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\balcony-invisible-grills-og-640w.webp 640w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\balcony-invisible-grills-og-960w.webp 960w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\balcony-invisible-grills-og-1280w.webp 1280w",
+      "jpeg": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\balcony-invisible-grills-og-640w.jpg 640w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\balcony-invisible-grills-og-1280w.jpg 1280w"
+    },
+    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 1200px",
+    "variants": [
+      {
+        "format": "webp",
+        "size": 320,
+        "path": "optimized-images\\balcony-invisible-grills-og-320w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 640,
+        "path": "optimized-images\\balcony-invisible-grills-og-640w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 960,
+        "path": "optimized-images\\balcony-invisible-grills-og-960w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 1280,
+        "path": "optimized-images\\balcony-invisible-grills-og-1280w.webp"
+      },
+      {
+        "format": "jpeg",
+        "size": 640,
+        "path": "optimized-images\\balcony-invisible-grills-og-640w.jpg"
+      },
+      {
+        "format": "jpeg",
+        "size": 1280,
+        "path": "optimized-images\\balcony-invisible-grills-og-1280w.jpg"
+      }
+    ]
+  },
+  "ceiling-cloth-hanger-og": {
+    "original": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\og-images\\ceiling-cloth-hanger-og.jpg",
+    "originalWidth": 667,
+    "srcset": {
+      "webp": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\ceiling-cloth-hanger-og-320w.webp 320w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\ceiling-cloth-hanger-og-640w.webp 640w",
+      "jpeg": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\ceiling-cloth-hanger-og-640w.jpg 640w"
+    },
+    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 1200px",
+    "variants": [
+      {
+        "format": "webp",
+        "size": 320,
+        "path": "optimized-images\\ceiling-cloth-hanger-og-320w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 640,
+        "path": "optimized-images\\ceiling-cloth-hanger-og-640w.webp"
+      },
+      {
+        "format": "jpeg",
+        "size": 640,
+        "path": "optimized-images\\ceiling-cloth-hanger-og-640w.jpg"
+      }
+    ]
+  },
+  "invisible-grills-dealer-og": {
+    "original": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\og-images\\invisible-grills-dealer-og.jpg",
+    "originalWidth": 1920,
+    "srcset": {
+      "webp": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\invisible-grills-dealer-og-320w.webp 320w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\invisible-grills-dealer-og-640w.webp 640w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\invisible-grills-dealer-og-960w.webp 960w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\invisible-grills-dealer-og-1280w.webp 1280w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\invisible-grills-dealer-og-1920w.webp 1920w",
+      "jpeg": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\invisible-grills-dealer-og-640w.jpg 640w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\invisible-grills-dealer-og-1280w.jpg 1280w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\invisible-grills-dealer-og-1920w.jpg 1920w"
+    },
+    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 1200px",
+    "variants": [
+      {
+        "format": "webp",
+        "size": 320,
+        "path": "optimized-images\\invisible-grills-dealer-og-320w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 640,
+        "path": "optimized-images\\invisible-grills-dealer-og-640w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 960,
+        "path": "optimized-images\\invisible-grills-dealer-og-960w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 1280,
+        "path": "optimized-images\\invisible-grills-dealer-og-1280w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 1920,
+        "path": "optimized-images\\invisible-grills-dealer-og-1920w.webp"
+      },
+      {
+        "format": "jpeg",
+        "size": 640,
+        "path": "optimized-images\\invisible-grills-dealer-og-640w.jpg"
+      },
+      {
+        "format": "jpeg",
+        "size": 1280,
+        "path": "optimized-images\\invisible-grills-dealer-og-1280w.jpg"
+      },
+      {
+        "format": "jpeg",
+        "size": 1920,
+        "path": "optimized-images\\invisible-grills-dealer-og-1920w.jpg"
+      }
+    ]
+  },
+  "invisible-grills-og": {
+    "original": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\og-images\\invisible-grills-og.jpg",
+    "originalWidth": 960,
+    "srcset": {
+      "webp": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\invisible-grills-og-320w.webp 320w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\invisible-grills-og-640w.webp 640w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\invisible-grills-og-960w.webp 960w",
+      "jpeg": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\invisible-grills-og-640w.jpg 640w"
+    },
+    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 1200px",
+    "variants": [
+      {
+        "format": "webp",
+        "size": 320,
+        "path": "optimized-images\\invisible-grills-og-320w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 640,
+        "path": "optimized-images\\invisible-grills-og-640w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 960,
+        "path": "optimized-images\\invisible-grills-og-960w.webp"
+      },
+      {
+        "format": "jpeg",
+        "size": 640,
+        "path": "optimized-images\\invisible-grills-og-640w.jpg"
+      }
+    ]
+  },
+  "prasanna-invisible-grills-og": {
+    "original": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\og-images\\prasanna-invisible-grills-og.jpg",
+    "originalWidth": 1448,
+    "srcset": {
+      "webp": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\prasanna-invisible-grills-og-320w.webp 320w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\prasanna-invisible-grills-og-640w.webp 640w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\prasanna-invisible-grills-og-960w.webp 960w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\prasanna-invisible-grills-og-1280w.webp 1280w",
+      "jpeg": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\prasanna-invisible-grills-og-640w.jpg 640w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\prasanna-invisible-grills-og-1280w.jpg 1280w"
+    },
+    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 1200px",
+    "variants": [
+      {
+        "format": "webp",
+        "size": 320,
+        "path": "optimized-images\\prasanna-invisible-grills-og-320w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 640,
+        "path": "optimized-images\\prasanna-invisible-grills-og-640w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 960,
+        "path": "optimized-images\\prasanna-invisible-grills-og-960w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 1280,
+        "path": "optimized-images\\prasanna-invisible-grills-og-1280w.webp"
+      },
+      {
+        "format": "jpeg",
+        "size": 640,
+        "path": "optimized-images\\prasanna-invisible-grills-og-640w.jpg"
+      },
+      {
+        "format": "jpeg",
+        "size": 1280,
+        "path": "optimized-images\\prasanna-invisible-grills-og-1280w.jpg"
+      }
+    ]
+  },
+  "window-invisible-grills-og": {
+    "original": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\og-images\\window-invisible-grills-og.jpg",
+    "originalWidth": 1205,
+    "srcset": {
+      "webp": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\window-invisible-grills-og-320w.webp 320w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\window-invisible-grills-og-640w.webp 640w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\window-invisible-grills-og-960w.webp 960w",
+      "jpeg": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\window-invisible-grills-og-640w.jpg 640w"
+    },
+    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 1200px",
+    "variants": [
+      {
+        "format": "webp",
+        "size": 320,
+        "path": "optimized-images\\window-invisible-grills-og-320w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 640,
+        "path": "optimized-images\\window-invisible-grills-og-640w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 960,
+        "path": "optimized-images\\window-invisible-grills-og-960w.webp"
+      },
+      {
+        "format": "jpeg",
+        "size": 640,
+        "path": "optimized-images\\window-invisible-grills-og-640w.jpg"
+      }
+    ]
+  },
+  "video-thumbnail": {
+    "original": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\images\\video-thumbnail.jpg",
+    "originalWidth": 1280,
+    "srcset": {
+      "webp": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\video-thumbnail-320w.webp 320w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\video-thumbnail-640w.webp 640w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\video-thumbnail-960w.webp 960w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\video-thumbnail-1280w.webp 1280w",
+      "jpeg": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\video-thumbnail-640w.jpg 640w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\video-thumbnail-1280w.jpg 1280w"
+    },
+    "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 1200px",
+    "variants": [
+      {
+        "format": "webp",
+        "size": 320,
+        "path": "optimized-images\\video-thumbnail-320w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 640,
+        "path": "optimized-images\\video-thumbnail-640w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 960,
+        "path": "optimized-images\\video-thumbnail-960w.webp"
+      },
+      {
+        "format": "webp",
+        "size": 1280,
+        "path": "optimized-images\\video-thumbnail-1280w.webp"
+      },
+      {
+        "format": "jpeg",
+        "size": 640,
+        "path": "optimized-images\\video-thumbnail-640w.jpg"
+      },
+      {
+        "format": "jpeg",
+        "size": 1280,
+        "path": "optimized-images\\video-thumbnail-1280w.jpg"
+      }
+    ]
+  }
+}

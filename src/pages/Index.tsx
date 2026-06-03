@@ -8,18 +8,20 @@ import { ServiceAreas } from "@/components/home/ServiceAreas";
 import { FAQ } from "@/components/home/FAQ";
 import { CTASection } from "@/components/home/CTASection";
 import { SEOHead } from "@/components/common/SEOHead";
+import { getSiteUrl } from "@/lib/getSiteUrl";
 
 const Index = () => {
+  const siteUrl = getSiteUrl();
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
     name: "Prasanna Invisible Grills",
     description:
       "Premium invisible grills and home utility solutions for residential and commercial properties in Visakhapatnam, Rajahmundry, Vijayawada, Guntur, Tirupati, and Anantapur.",
-    url: "https://prasannainvisible.in",
+    url: siteUrl,
     telephone: "+917339306098",
     email: "info@prasannainvisible.in",
-    image: "https://prasannainvisible.in/logo-Prasanna-Invisible-Grills.png",
+    image: `${siteUrl}/logo-Prasanna-Invisible-Grills.png`,
     address: {
       "@type": "PostalAddress",
       streetAddress: "MVP Colony",

@@ -1,6 +1,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ChevronRight, Home } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import { getSiteUrl } from "@/lib/getSiteUrl";
 
 interface BreadcrumbItem {
   label: string;
@@ -15,6 +16,7 @@ interface BreadcrumbsProps {
 export function Breadcrumbs({ items, darkMode = false }: BreadcrumbsProps) {
   const navigate = useNavigate();
   const location = useLocation();
+  const siteUrl = getSiteUrl();
 
   // Filter out any "Home" items from the input to avoid duplication
   const filteredItems = items.filter(item => item.label.toLowerCase() !== "home");
@@ -28,7 +30,7 @@ export function Breadcrumbs({ items, darkMode = false }: BreadcrumbsProps) {
       "@type": "ListItem",
       position: index + 1,
       name: item.label,
-      item: item.href ? `https://prasannainvisible.in${item.href}` : undefined,
+      item: item.href ? `${siteUrl}${item.href}` : undefined,
     })),
   };
 

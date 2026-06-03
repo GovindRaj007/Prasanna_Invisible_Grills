@@ -1,9 +1,11 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { SEOHead } from "@/components/common/SEOHead";
+import { getSiteUrl } from "@/lib/getSiteUrl";
 
 const NotFound = () => {
   const location = useLocation();
+  const siteUrl = getSiteUrl();
 
   useEffect(() => {
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
@@ -22,11 +24,11 @@ const NotFound = () => {
           "@type": "WebPage",
           "name": "Page Not Found - Prasanna Invisible Grills",
           "description": "Error page - please return to home",
-          "url": "https://prasannainvisible.in/404",
+          "url": `${siteUrl}/404`,
           "isPartOf": {
             "@type": "WebSite",
             "name": "Prasanna Invisible Grills",
-            "url": "https://prasannainvisible.in"
+            "url": siteUrl
           }
         }}
       />

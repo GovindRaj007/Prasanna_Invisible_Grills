@@ -12,6 +12,7 @@ import {
   Building,
 } from "lucide-react";
 import { CTASection } from "@/components/home/CTASection";
+import { getSiteUrl } from "@/lib/getSiteUrl";
 
 interface ServiceLocationProps {
   service: string;
@@ -42,6 +43,7 @@ export function ServiceLocationPage({
   benefits,
   mapEmbedUrl,
 }: ServiceLocationProps) {
+  const siteUrl = getSiteUrl();
   const pageTitle = `${service} in ${location}`;
   const pageUrl = `/${serviceSlug}-${locationSlug}`;
   
@@ -74,7 +76,7 @@ export function ServiceLocationPage({
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: `Prasanna Invisible Grills - ${location}`,
-    image: `https://prasannainvisible.in${getOgImage(serviceSlug)}`,
+    image: `${siteUrl}${getOgImage(serviceSlug)}`,
     address: {
       "@type": "PostalAddress",
       addressLocality: location,
@@ -88,7 +90,7 @@ export function ServiceLocationPage({
     },
     telephone: "+917339306098",
     email: "info@prasannainvisible.in",
-    url: "https://prasannainvisible.in",
+    url: siteUrl,
     sameAs: ["https://facebook.com", "https://instagram.com"],
     hasOfferCatalog: {
       "@type": "OfferCatalog",

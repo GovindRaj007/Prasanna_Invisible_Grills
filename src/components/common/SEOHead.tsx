@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { getSiteUrl } from "@/lib/getSiteUrl";
 
 interface SEOHeadProps {
   title: string;
@@ -20,7 +21,7 @@ export function SEOHead({
   structuredData,
 }: SEOHeadProps) {
   const fullTitle = `${title} | Prasanna Invisible Grills and Nets`;
-  const siteUrl = "https://prasannainvisible.in";
+  const siteUrl = getSiteUrl();
 
   return (
     <Helmet>

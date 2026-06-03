@@ -6,6 +6,7 @@ import { FloatingCTA } from "@/components/common/FloatingCTA";
 import { ReviewVideoModal } from "@/components/common/ReviewVideoModal";
 import { ScrollToTop } from "@/components/common/ScrollToTop";
 import { REVIEW_VIDEO_CONFIG } from "@/config/reviewVideoConfig";
+import { getSiteUrl } from "@/lib/getSiteUrl";
 
 interface LayoutProps {
   children: ReactNode;
@@ -13,6 +14,7 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const siteUrl = getSiteUrl();
 
   // Add VideoObject structured data for SEO
   useEffect(() => {
@@ -21,10 +23,10 @@ export function Layout({ children }: LayoutProps) {
       "@type": "VideoObject",
       "name": "Customer Review - Prasanna Invisible Grills",
       "description": "Watch our satisfied customers share their experience with Prasanna Invisible Grills. Premium invisible grills for windows, balconies, and more.",
-      "thumbnailUrl": "https://prasannainvisible.in/og-images/invisible-grills-og.jpg",
+      "thumbnailUrl": `${siteUrl}/og-images/invisible-grills-og.jpg`,
       "uploadDate": new Date().toISOString(),
       "duration": "PT2M30S",
-      "contentUrl": "https://prasannainvisible.in/videos/customer-reviews.mp4",
+      "contentUrl": `${siteUrl}/videos/customer-reviews.mp4`,
       "interactionCount": "100",
       "author": {
         "@type": "Organization",
@@ -41,7 +43,7 @@ export function Layout({ children }: LayoutProps) {
     return () => {
       document.head.removeChild(script);
     };
-  }, []);
+  }, [siteUrl]);
 
   return (
     <>
@@ -63,8 +65,8 @@ export function Layout({ children }: LayoutProps) {
           "@context": "https://schema.org",
           "@type": "Organization",
           "name": "Prasanna Invisible Grills",
-          "url": "https://prasannainvisible.in",
-          "logo": "https://prasannainvisible.in/og-image.jpg",
+          "url": siteUrl,
+          "logo": `${siteUrl}/og-image.jpg`,
           "description": "Premium invisible grills installation and ceiling cloth hangers for windows, balconies, and railings. Professional installation with 10-year warranty.",
           "telephone": "+917339306098",
           "email": "info@prasannainvisible.in",
@@ -92,14 +94,14 @@ export function Layout({ children }: LayoutProps) {
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
-          "url": "https://prasannainvisible.in",
+          "url": siteUrl,
           "name": "Prasanna Invisible Grills",
           "description": "Premium invisible grills installation and ceiling cloth hangers",
           "potentialAction": {
             "@type": "SearchAction",
             "target": {
               "@type": "EntryPoint",
-              "urlTemplate": "https://prasannainvisible.in/search?q={search_term_string}"
+              "urlTemplate": `${siteUrl}/search?q={search_term_string}`
             },
             "query-input": "required name=search_term_string"
           }

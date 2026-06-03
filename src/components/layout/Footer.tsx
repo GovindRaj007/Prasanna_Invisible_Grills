@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import logoImage from "@/assets/logo-Prasanna-invisible-grills.png";
+import { getSiteUrl } from "@/lib/getSiteUrl";
 import {
   Accordion,
   AccordionContent,
@@ -47,6 +48,7 @@ const locationsByState = {
 
 export function Footer() {
   const navigate = useNavigate();
+  const siteUrl = getSiteUrl();
 
   const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -64,9 +66,9 @@ export function Footer() {
             "@context": "https://schema.org",
             "@type": "Organization",
             "name": "Prasanna Invisible Grills",
-            "url": "https://prasannainvisible.in",
+            "url": siteUrl,
             "email": "info@prasannainvisible.in",
-            "logo": "https://prasannainvisible.in/images/logo-prasanna.png",
+            "logo": `${siteUrl}/images/logo-prasanna.png`,
             "contactPoint": {
               "@type": "ContactPoint",
               "telephone": "+91-7339306098",
@@ -91,7 +93,7 @@ export function Footer() {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": "Prasanna Invisible Grills",
-            "url": "https://prasannainvisible.in",
+            "url": siteUrl,
             "email": "info@prasannainvisible.in",
             "telephone": "+91-7339306098",
             "geo": {

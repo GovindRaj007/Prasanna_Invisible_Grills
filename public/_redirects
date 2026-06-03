@@ -1,0 +1,3 @@
+/* Rewrite requests for React Router SPA - all non-file requests go to index.html */
+/* This must be the last rule to ensure files still serve correctly */
+/*  /index.html   200
