@@ -8,7 +8,7 @@ export const SITE_CONFIG = {
   shortName: "Prasanna Grills",
   description: "Premium invisible grills installation and ceiling cloth hangers with 10-year warranty across Andhra Pradesh & Telangana",
   longDescription: "Expert invisible grills installation for windows, balconies, and railings. Professional ceiling cloth hangers. 316 stainless steel materials. 10-year warranty. Free site visit & consultation. 4.9★ rated service across 16+ cities.",
-  url: process.env.VITE_PUBLIC_SITE_URL || "https://prasannainvisible.in",
+  url: "https://prasannainvisible.in",
   phoneNumber: "+91-7339306098",
   whatsappNumber: "+917339306098",
   email: "info@prasannainvisible.in",

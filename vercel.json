@@ -5,7 +5,6 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "env": {
-    "VITE_PUBLIC_SITE_URL": "@vercel_url",
     "NODE_ENV": "production"
   },
   "github": {
