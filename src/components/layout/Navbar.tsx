@@ -105,7 +105,7 @@ export function Navbar({ onOpenVideoModal }: NavbarProps) {
           className="flex items-center cursor-pointer transition-transform hover:scale-105 focus:outline-none"
           aria-label="Prasanna Invisible Grills - Go to Home"
         >
-          <img src={logoImage} alt="Prasanna Invisible Grills" className="h-[4rem] w-auto md:h-[4.5rem]" />
+          <img src={logoImage} alt="Prasanna Invisible Grills" className="h-[4.2rem] w-auto md:h-[4.5rem]" />
         </button>
 
         {/* Desktop Navigation */}
