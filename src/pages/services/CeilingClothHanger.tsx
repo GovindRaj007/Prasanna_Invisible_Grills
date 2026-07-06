@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Phone, ArrowRight, CheckCircle2, Shirt, ArrowUpDown, Maximize2, Droplets, Hammer, Timer } from "lucide-react";
 import { CeilingClothHangerFAQ } from "@/components/faq/CeilingClothHangerFAQ";
+import { SERVICE_SEO_KEYWORDS, SERVICES } from "@/config/seo.constants";
 import { ServiceImageSlider } from "@/components/services/ServiceImageSlider";
 
 import heroCeilingHanger from "@/assets/hero-ceiling-hanger.jpg";
@@ -40,6 +41,7 @@ const serviceImages = [
 ];
 
 export default function CeilingClothHanger() {
+  const serviceMeta = SERVICES.find((s) => s.slug === "ceiling-cloth-hanger");
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -88,9 +90,9 @@ export default function CeilingClothHanger() {
   return (
     <Layout>
       <SEOHead
-        title="Ceiling Cloth Hanger | Prasanna"
-        description="Space-saving ceiling cloth hanger with motorized pulley system. Rust-proof aluminum, 40+ kg capacity. Expert installation. 5-year warranty."
-        keywords="ceiling cloth hanger, motorized hanger, best ceiling cloth hanger, pulley drying system, space-saving solution, rust-proof hanger"
+        title={`${serviceMeta?.name || "Ceiling Cloth Hanger Installation"} | Prasanna`}
+        description={serviceMeta?.longDescription || "Space-saving ceiling cloth hanger installation with motorized or manual pulley systems. Rust-proof, high-load capacity, and expert setup for Hyderabad, Vizag, Vijayawada, Guntur, and Tirupati."}
+        keywords={SERVICE_SEO_KEYWORDS.clothHanger.join(", ")}
         ogImage="/og-images/ceiling-cloth-hanger-og.jpg"
         canonicalUrl="/ceiling-cloth-hanger"
         structuredData={structuredData}

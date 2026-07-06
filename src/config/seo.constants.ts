@@ -43,6 +43,72 @@ export const SITE_CONFIG = {
   },
 };
 
+export const HOME_SEO_KEYWORDS = [
+  "invisible grills",
+  "invisible grill installation",
+  "invisible grill fitting",
+  "invisible grill services",
+  "balcony invisible grills",
+  "window invisible grills",
+  "ceiling cloth hanger",
+  "invisible grill installation in Hyderabad",
+  "invisible grills in Vizag",
+  "invisible grills in Vijayawada",
+  "invisible grills in Guntur",
+  "invisible grills in Tirupati",
+  "invisible grills in Anantapur",
+  "invisible grill near me",
+  "invisible grill installers",
+] as const;
+
+export const SERVICE_SEO_KEYWORDS = {
+  invisibleGrills: [
+    "invisible grills",
+    "invisible window grills",
+    "safety grills",
+    "balcony grills",
+    "pet safety",
+    "child safety",
+    "stainless steel grills",
+    "modern grills",
+    "frameless grills",
+    "invisible grill installation",
+    "invisible grill fitting",
+    "invisible grill near me",
+  ],
+  balcony: [
+    "balcony invisible grills",
+    "balcony safety grills",
+    "balcony protection",
+    "high-rise safety",
+    "apartment safety",
+    "balcony railings",
+  ],
+  windows: [
+    "window invisible grills",
+    "window safety grills",
+    "window protection",
+    "window security",
+    "home security windows",
+    "burglar proof windows",
+  ],
+  clothHanger: [
+    "ceiling cloth hanger",
+    "roof cloth dryer",
+    "pulley system",
+    "space saving",
+    "cloth drying rack",
+    "balcony space saver",
+  ],
+  dealer: [
+    "invisible grills dealer",
+    "grill dealer",
+    "franchise opportunity",
+    "business partner",
+    "dealer program",
+  ],
+} as const;
+
 /**
  * Services Configuration
  * Core services offered with keywords and metadata

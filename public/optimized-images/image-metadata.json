@@ -150,10 +150,10 @@
   },
   "prasanna-invisible-grills-og": {
     "original": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\og-images\\prasanna-invisible-grills-og.jpg",
-    "originalWidth": 1448,
+    "originalWidth": 1254,
     "srcset": {
-      "webp": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\prasanna-invisible-grills-og-320w.webp 320w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\prasanna-invisible-grills-og-640w.webp 640w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\prasanna-invisible-grills-og-960w.webp 960w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\prasanna-invisible-grills-og-1280w.webp 1280w",
-      "jpeg": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\prasanna-invisible-grills-og-640w.jpg 640w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\prasanna-invisible-grills-og-1280w.jpg 1280w"
+      "webp": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\prasanna-invisible-grills-og-320w.webp 320w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\prasanna-invisible-grills-og-640w.webp 640w, C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\prasanna-invisible-grills-og-960w.webp 960w",
+      "jpeg": "C:\\Users\\Govind Raj\\Desktop\\Prasanna-invisible-grills\\public\\optimized-images\\prasanna-invisible-grills-og-640w.jpg 640w"
     },
     "sizes": "(max-width: 640px) 100vw, (max-width: 1200px) 75vw, 1200px",
     "variants": [
@@ -173,19 +173,9 @@
         "path": "optimized-images\\prasanna-invisible-grills-og-960w.webp"
       },
       {
-        "format": "webp",
-        "size": 1280,
-        "path": "optimized-images\\prasanna-invisible-grills-og-1280w.webp"
-      },
-      {
         "format": "jpeg",
         "size": 640,
         "path": "optimized-images\\prasanna-invisible-grills-og-640w.jpg"
-      },
-      {
-        "format": "jpeg",
-        "size": 1280,
-        "path": "optimized-images\\prasanna-invisible-grills-og-1280w.jpg"
       }
     ]
   },

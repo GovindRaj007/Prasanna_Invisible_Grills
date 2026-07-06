@@ -31,8 +31,15 @@ export default defineConfig(({ mode }) => ({
     },
     rollupOptions: {
       output: {
-        // Let Vite automatically optimize chunk splitting
-        // Removes circular dependency issues
+        // Manual chunk splitting for optimal loading
+        manualChunks: {
+          'vendor': ['react', 'react-dom', 'react-router-dom'],
+          'ui-components': ['@radix-ui/react-accordion', '@radix-ui/react-alert-dialog', '@radix-ui/react-avatar', '@radix-ui/react-checkbox', '@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-label', '@radix-ui/react-popover', '@radix-ui/react-tabs', '@radix-ui/react-tooltip'],
+          'analytics': ['react-helmet-async'],
+          'forms': ['react-hook-form', '@hookform/resolvers', 'zod'],
+          'charts': ['recharts'],
+          'utils': ['clsx', 'tailwind-merge', 'date-fns']
+        }
       },
     },
     // Core Web Vitals optimization
@@ -40,6 +47,10 @@ export default defineConfig(({ mode }) => ({
     // Optimize images in the bundle
     assetsInlineLimit: 4096, // Inline assets smaller than 4kb
     chunkSizeWarningLimit: 1000,
+    // Split chunks to improve cache busting
+    commonjsOptions: {
+      include: /node_modules/,
+    },
   },
   
   // Optimize CSS

@@ -11,6 +11,7 @@ import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { getSiteUrl } from "@/lib/getSiteUrl";
+import { SITE_CONFIG } from "@/config/seo.constants";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -210,7 +211,7 @@ export default function Contact() {
       <SEOHead
         title="Contact Prasanna Invisible Grills | Free Quote & Visit"
         description="Contact Prasanna Invisible Grills for free quote & home visit. Call, WhatsApp, email. Expert consultants ready across Andhra Pradesh & Telangana."
-        keywords="contact Prasanna, invisible grills quote, free consultation, invisible grills near me, best invisible grills, expert advice"
+        keywords={`${SITE_CONFIG.keywords.primary}, ${SITE_CONFIG.keywords.secondary}`}
         canonicalUrl="/contact"
         ogImage="/og-images/prasanna-invisible-grills-og.jpg"
         structuredData={{

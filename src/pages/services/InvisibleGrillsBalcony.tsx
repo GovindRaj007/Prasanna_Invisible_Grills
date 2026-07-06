@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Phone, ArrowRight, CheckCircle2, Fence, Eye, Shield, Wind, Ruler, Sparkles } from "lucide-react";
 import { InvisibleGrillsBalconyFAQ } from "@/components/faq/InvisibleGrillsBalconyFAQ";
+import { SERVICE_SEO_KEYWORDS, SERVICES } from "@/config/seo.constants";
 import { ServiceImageSlider } from "@/components/services/ServiceImageSlider";
 
 import heroBalconyGrill from "@/assets/hero-balcony-grill.jpg";
@@ -44,6 +45,7 @@ const serviceImages = [
 ];
 
 export default function InvisibleGrillsBalcony() {
+  const serviceMeta = SERVICES.find((s) => s.slug === "invisible-grills-balcony");
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -92,9 +94,9 @@ export default function InvisibleGrillsBalcony() {
   return (
     <Layout>
       <SEOHead
-        title="Invisible Balcony Grills | Prasanna"
-        description="Invisible balcony grills for child safety & unobstructed views. 316 stainless steel, weather-resistant. Expert installation, 10-year warranty, 4.9★ rated."
-        keywords="invisible balcony grills, invisible grills for balcony, invisible grills near me, best balcony grills, child-safe railings, balcony protection"
+        title={`${serviceMeta?.name || "Balcony Invisible Grills"} | Prasanna`}
+        description={serviceMeta?.longDescription || "Premium balcony invisible grills and invisible grill for balcony installation. Child-safe, weather-resistant 316 stainless steel that keeps views open."}
+        keywords={SERVICE_SEO_KEYWORDS.balcony.join(", ")}
         ogImage="/og-images/balcony-invisible-grills-og.jpg"
         canonicalUrl="/invisible-grills-balcony"
         structuredData={structuredData}

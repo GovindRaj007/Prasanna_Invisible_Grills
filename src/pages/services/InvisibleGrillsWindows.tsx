@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Phone, ArrowRight, CheckCircle2, Grid3X3, Eye, Shield, Wind, Ruler, Sparkles } from "lucide-react";
 import { InvisibleGrillsWindowsFAQ } from "@/components/faq/InvisibleGrillsWindowsFAQ";
+import { SERVICE_SEO_KEYWORDS, SERVICES } from "@/config/seo.constants";
 import { ServiceImageSlider } from "@/components/services/ServiceImageSlider";
 
 import heroWindowGrill from "@/assets/hero-window-grill.jpg";
@@ -58,6 +59,7 @@ const serviceImages = [
 ];
 
 export default function InvisibleGrillsWindows() {
+  const serviceMeta = SERVICES.find((s) => s.slug === "invisible-grills-windows");
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -106,9 +108,9 @@ export default function InvisibleGrillsWindows() {
   return (
     <Layout>
       <SEOHead
-        title="Invisible Window Grills | Prasanna"
-        description="Invisible window grills for burglar prevention & child safety. 316 stainless steel, invisible design. Expert installation, 10-year warranty across Andhra."
-        keywords="invisible window grills, invisible grills for windows, invisible grills near me, best window grills, burglar prevention, window protection"
+        title={`${serviceMeta?.name || "Invisible Grills for Windows"} | Prasanna`}
+        description={serviceMeta?.longDescription || "Invisible window grills for child safety, burglar prevention, and full ventilation. 316 stainless steel installation for Hyderabad, Vizag, Vijayawada, Guntur, Tirupati, and Rajahmundry."}
+        keywords={SERVICE_SEO_KEYWORDS.windows.join(", ")}
         ogImage="/og-images/window-invisible-grills-og.jpg"
         canonicalUrl="/invisible-grills-windows"
         structuredData={structuredData}

@@ -3,6 +3,7 @@ import { SEOHead } from "@/components/common/SEOHead";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Award, Users, Clock, Target, CheckCircle2 } from "lucide-react";
 import { CTASection } from "@/components/home/CTASection";
+import { SITE_CONFIG } from "@/config/seo.constants";
 
 import heroAbout from "@/assets/hero-about.jpg";
 
@@ -38,7 +39,7 @@ export default function About() {
       <SEOHead
         title="About Prasanna Invisible Grills | Expert Installation"
         description="Prasanna Invisible Grills: 8+ years serving 6000+ customers across Andhra & Telangana. Expert installation, quality materials, 10-year warranty. Trusted safety partner."
-        keywords="Prasanna Invisible Grills, invisible grills company, expert installation, invisible grills near me, best invisible grills, Andhra Pradesh, trusted installer"
+        keywords={`${SITE_CONFIG.keywords.primary}, ${SITE_CONFIG.keywords.secondary}`}
         canonicalUrl="/about"
         ogImage="/og-images/prasanna-invisible-grills-og.jpg"
       />

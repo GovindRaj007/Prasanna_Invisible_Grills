@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { SEOHead } from "@/components/common/SEOHead";
 import { getSiteUrl } from "@/lib/getSiteUrl";
+import { SITE_CONFIG } from "@/config/seo.constants";
 
 const NotFound = () => {
   const location = useLocation();
@@ -16,7 +17,7 @@ const NotFound = () => {
       <SEOHead
         title="Page Not Found | Prasanna Invisible Grills"
         description="Page not found. Return to Prasanna Invisible Grills for invisible grill solutions across Andhra Pradesh & Telangana."
-        keywords="invisible grills, invisible grills near me, best invisible grills, Prasanna"
+        keywords={`${SITE_CONFIG.keywords.primary}, ${SITE_CONFIG.keywords.secondary}`}
         canonicalUrl="/404"
         ogImage="/og-images/prasanna-invisible-grills-og.jpg"
         structuredData={{

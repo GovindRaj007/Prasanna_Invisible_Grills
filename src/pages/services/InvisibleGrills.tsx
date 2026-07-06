@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { InvisibleGrillsFAQ } from "@/components/faq/InvisibleGrillsFAQ";
 import { CTASection } from "@/components/home/CTASection";
+import { SERVICE_SEO_KEYWORDS, SERVICES } from "@/config/seo.constants";
 import { ServiceImageSlider } from "@/components/services/ServiceImageSlider";
 
 import heroInvisibleGrills from "@/assets/hero-invisible-grills.jpg";
@@ -84,6 +85,7 @@ const serviceImages = [
 ];
 
 export default function InvisibleGrills() {
+  const serviceMeta = SERVICES.find((s) => s.slug === "invisible-grills");
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -132,9 +134,9 @@ export default function InvisibleGrills() {
   return (
     <Layout>
       <SEOHead
-        title="Invisible Grills Installation | Prasanna"
-        description="Premium invisible grill installation with 316 stainless steel. Balconies, windows, railings. Expert team, 4.9★ rated, 10-year warranty. Free quote & 4-8 hour install."
-        keywords="invisible grills, invisible grill installation, invisible grills near me, best invisible grills, balcony grills, window grills, 316 stainless steel"
+        title={`${serviceMeta?.name || "Invisible Grills"} Installation | Prasanna`}
+        description={serviceMeta?.longDescription || "Premium invisible grill installation with 316 stainless steel. Balconies, windows, railings. Expert team, 4.9★ rated, 10-year warranty."}
+        keywords={SERVICE_SEO_KEYWORDS.invisibleGrills.join(", ")}
         ogImage="/og-images/invisible-grills-og.jpg"
         canonicalUrl="/invisible-grills"
         structuredData={structuredData}

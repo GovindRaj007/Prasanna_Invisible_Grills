@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Phone, ArrowRight, CheckCircle2, Store, Award, TrendingUp, Users, Truck, Package } from "lucide-react";
 import { InvisibleGrillsDealerFAQ } from "@/components/faq/InvisibleGrillsDealerFAQ";
+import { SERVICE_SEO_KEYWORDS, SERVICES } from "@/config/seo.constants";
 import { ServiceImageSlider } from "@/components/services/ServiceImageSlider";
 
 import heroDealer from "@/assets/hero-dealer.jpg";
@@ -46,6 +47,7 @@ const serviceImages = [
 ];
 
 export default function InvisibleGrillsDealer() {
+  const serviceMeta = SERVICES.find((s) => s.slug === "invisible-grills-dealer");
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -86,9 +88,9 @@ export default function InvisibleGrillsDealer() {
   return (
     <Layout>
       <SEOHead
-        title="Invisible Grills Dealership | Prasanna"
-        description="Authorized Prasanna dealer program with wholesale pricing, training & exclusive territory rights. Bulk discounts. Business opportunity available now."
-        keywords="invisible grills dealer, invisible grills dealership, wholesale pricing, dealership program, business opportunity, bulk discounts"
+        title={`${serviceMeta?.name || "Invisible Grills Dealer Program"} | Prasanna`}
+        description={serviceMeta?.longDescription || "Become an authorized invisible grills dealer with wholesale pricing, training, and exclusive territory rights. Grow your business in Hyderabad, Andhra Pradesh, and Telangana with trusted support."}
+        keywords={SERVICE_SEO_KEYWORDS.dealer.join(", ")}
         ogImage="/og-images/invisible-grills-dealer-og.jpg"
         canonicalUrl="/invisible-grills-dealer"
         structuredData={structuredData}

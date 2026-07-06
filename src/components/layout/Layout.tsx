@@ -6,6 +6,7 @@ import { FloatingCTA } from "@/components/common/FloatingCTA";
 import { ReviewVideoModal } from "@/components/common/ReviewVideoModal";
 import { ScrollToTop } from "@/components/common/ScrollToTop";
 import { REVIEW_VIDEO_CONFIG } from "@/config/reviewVideoConfig";
+import { usePerformanceMonitoring } from "@/hooks/usePerformanceMonitoring";
 import { getSiteUrl } from "@/lib/getSiteUrl";
 
 interface LayoutProps {
@@ -15,6 +16,9 @@ interface LayoutProps {
 export function Layout({ children }: LayoutProps) {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const siteUrl = getSiteUrl();
+  
+  // Enable performance monitoring
+  usePerformanceMonitoring();
 
   // Add VideoObject structured data for SEO
   useEffect(() => {

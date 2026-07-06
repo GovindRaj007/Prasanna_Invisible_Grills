@@ -12,6 +12,7 @@ import {
   Building,
 } from "lucide-react";
 import { CTASection } from "@/components/home/CTASection";
+import { SERVICE_SEO_KEYWORDS, LOCATIONS } from "@/config/seo.constants";
 import { getSiteUrl } from "@/lib/getSiteUrl";
 
 interface ServiceLocationProps {
@@ -33,6 +34,34 @@ const services = [
   { name: "Ceiling Cloth Hanger", slug: "ceiling-cloth-hanger" },
 ];
 
+const serviceMetadata = {
+  "invisible-grills": {
+    title: "Invisible Grills",
+    description: "Invisible grills, invisible grill fitting, and SS316 invisible grill installation",
+    keywords: SERVICE_SEO_KEYWORDS.invisibleGrills,
+  },
+  "invisible-grills-dealer": {
+    title: "Invisible Grills Company",
+    description: "Invisible grills company and professional invisible grill services",
+    keywords: SERVICE_SEO_KEYWORDS.dealer,
+  },
+  "invisible-grills-balcony": {
+    title: "Invisible Grills for Balcony",
+    description: "Balcony invisible grills and invisible grill for balcony installation",
+    keywords: SERVICE_SEO_KEYWORDS.balcony,
+  },
+  "invisible-grills-windows": {
+    title: "Invisible Grills for Windows",
+    description: "Window invisible grills and invisible grill for window installation",
+    keywords: SERVICE_SEO_KEYWORDS.windows,
+  },
+  "ceiling-cloth-hanger": {
+    title: "Ceiling Cloth Hanger",
+    description: "Ceiling cloth hanger and ceiling mounted cloth drying hanger installation",
+    keywords: SERVICE_SEO_KEYWORDS.clothHanger,
+  },
+} as const;
+
 export function ServiceLocationPage({
   service,
   serviceSlug,
@@ -44,15 +73,33 @@ export function ServiceLocationPage({
   mapEmbedUrl,
 }: ServiceLocationProps) {
   const siteUrl = getSiteUrl();
-  const pageTitle = `${service} in ${location}`;
+  const metadata = serviceMetadata[serviceSlug as keyof typeof serviceMetadata];
+  const seoServiceName = metadata?.title || service;
+  const serviceKeywords = metadata?.keywords || SERVICE_SEO_KEYWORDS.invisibleGrills;
+  const pageTitle = `${seoServiceName} in ${location}`;
   const pageUrl = `/${serviceSlug}-${locationSlug}`;
   
-  // SEO-optimized title (50-60 chars) and description (150-160 chars) following Yoast guidelines
-  const seoTitle = `${service} in ${location} | Prasanna`;
+  const locationData = LOCATIONS.find((item) => item.slug === locationSlug);
+  const locationKeywords = locationData?.keywords ?? [];
+  const seoTitle = `${seoServiceName} in ${location}`;
   
-  const seoDescription = `${service} in ${location}. Expert installation with 316 stainless steel materials. Serving ${localities[0]}, ${localities[1] || location} & nearby areas. 10-year warranty. Free quotes.`;
+  const seoDescription = `${metadata?.description || service} in ${location}. Expert ${seoServiceName.toLowerCase()} installation with SS316 stainless steel. Serving ${location}, ${localities[0]}, ${localities[1] || location} and nearby areas with a 10-year warranty.`;
   
-  const seoKeywords = `${service.toLowerCase()} ${location.toLowerCase()}, best ${service.toLowerCase()} in ${location}, ${service.toLowerCase()} near me, professional ${service.toLowerCase()}, ${service.toLowerCase()} installation, affordable ${service.toLowerCase()}, expert ${service.toLowerCase()}`;
+  const seoKeywords = Array.from(
+    new Set([
+      `${seoServiceName.toLowerCase()} ${location}`,
+      `${seoServiceName.toLowerCase()} in ${location}`,
+      `best ${seoServiceName.toLowerCase()} in ${location}`,
+      `${seoServiceName.toLowerCase()} near me ${location}`,
+      ...serviceKeywords,
+      ...locationKeywords,
+      ...serviceKeywords.map((keyword) =>
+        keyword.toLowerCase().includes(location.toLowerCase())
+          ? keyword
+          : `${keyword} ${location}`
+      ),
+    ])
+  ).join(", ");
 
   // Determine OG image based on service slug - use service-specific images
   const getOgImage = (slug: string): string => {

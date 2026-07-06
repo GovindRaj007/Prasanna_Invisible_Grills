@@ -1,141 +1,144 @@
 
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { ScrollToTop } from "@/components/common/ScrollToTop";
+import { PageLoader } from "@/components/common/PageLoader";
 import { useGTMTracking } from "@/hooks/useGTMTracking";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import Contact from "./pages/Contact";
-import About from "./pages/About";
 
-import InvisibleGrills from "./pages/services/InvisibleGrills";
-import InvisibleGrillsDealer from "./pages/services/InvisibleGrillsDealer";
-import InvisibleGrillsBalcony from "./pages/services/InvisibleGrillsBalcony";
-import InvisibleGrillsWindows from "./pages/services/InvisibleGrillsWindows";
-import CeilingClothHanger from "./pages/services/CeilingClothHanger";
+const Index = lazy(() => import("./pages/Index"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Contact = lazy(() => import("./pages/Contact"));
+const About = lazy(() => import("./pages/About"));
 
-import InvisibleGrillsVisakhapatnam from "./pages/locations/InvisibleGrillsVisakhapatnam";
-import InvisibleGrillsDealerVisakhapatnam from "./pages/locations/InvisibleGrillsDealerVisakhapatnam";
-import InvisibleGrillsBalconyVisakhapatnam from "./pages/locations/InvisibleGrillsBalconyVisakhapatnam";
-import InvisibleGrillsWindowsVisakhapatnam from "./pages/locations/InvisibleGrillsWindowsVisakhapatnam";
-import CeilingClothHangerVisakhapatnam from "./pages/locations/CeilingClothHangerVisakhapatnam";
+const InvisibleGrills = lazy(() => import("./pages/services/InvisibleGrills"));
+const InvisibleGrillsDealer = lazy(() => import("./pages/services/InvisibleGrillsDealer"));
+const InvisibleGrillsBalcony = lazy(() => import("./pages/services/InvisibleGrillsBalcony"));
+const InvisibleGrillsWindows = lazy(() => import("./pages/services/InvisibleGrillsWindows"));
+const CeilingClothHanger = lazy(() => import("./pages/services/CeilingClothHanger"));
 
-import InvisibleGrillsRajahmundry from "./pages/locations/InvisibleGrillsRajahmundry";
-import InvisibleGrillsDealerRajahmundry from "./pages/locations/InvisibleGrillsDealerRajahmundry";
-import InvisibleGrillsBalconyRajahmundry from "./pages/locations/InvisibleGrillsBalconyRajahmundry";
-import InvisibleGrillsWindowsRajahmundry from "./pages/locations/InvisibleGrillsWindowsRajahmundry";
-import CeilingClothHangerRajahmundry from "./pages/locations/CeilingClothHangerRajahmundry";
+const InvisibleGrillsVisakhapatnam = lazy(() => import("./pages/locations/InvisibleGrillsVisakhapatnam"));
+const InvisibleGrillsDealerVisakhapatnam = lazy(() => import("./pages/locations/InvisibleGrillsDealerVisakhapatnam"));
+const InvisibleGrillsBalconyVisakhapatnam = lazy(() => import("./pages/locations/InvisibleGrillsBalconyVisakhapatnam"));
+const InvisibleGrillsWindowsVisakhapatnam = lazy(() => import("./pages/locations/InvisibleGrillsWindowsVisakhapatnam"));
+const CeilingClothHangerVisakhapatnam = lazy(() => import("./pages/locations/CeilingClothHangerVisakhapatnam"));
 
-import InvisibleGrillsVijayawada from "./pages/locations/InvisibleGrillsVijayawada";
-import InvisibleGrillsDealerVijayawada from "./pages/locations/InvisibleGrillsDealerVijayawada";
-import InvisibleGrillsBalconyVijayawada from "./pages/locations/InvisibleGrillsBalconyVijayawada";
-import InvisibleGrillsWindowsVijayawada from "./pages/locations/InvisibleGrillsWindowsVijayawada";
-import CeilingClothHangerVijayawada from "./pages/locations/CeilingClothHangerVijayawada";
+const InvisibleGrillsRajahmundry = lazy(() => import("./pages/locations/InvisibleGrillsRajahmundry"));
+const InvisibleGrillsDealerRajahmundry = lazy(() => import("./pages/locations/InvisibleGrillsDealerRajahmundry"));
+const InvisibleGrillsBalconyRajahmundry = lazy(() => import("./pages/locations/InvisibleGrillsBalconyRajahmundry"));
+const InvisibleGrillsWindowsRajahmundry = lazy(() => import("./pages/locations/InvisibleGrillsWindowsRajahmundry"));
+const CeilingClothHangerRajahmundry = lazy(() => import("./pages/locations/CeilingClothHangerRajahmundry"));
 
-import InvisibleGrillsGuntur from "./pages/locations/InvisibleGrillsGuntur";
-import InvisibleGrillsDealerGuntur from "./pages/locations/InvisibleGrillsDealerGuntur";
-import InvisibleGrillsBalconyGuntur from "./pages/locations/InvisibleGrillsBalconyGuntur";
-import InvisibleGrillsWindowsGuntur from "./pages/locations/InvisibleGrillsWindowsGuntur";
-import CeilingClothHangerGuntur from "./pages/locations/CeilingClothHangerGuntur";
+const InvisibleGrillsVijayawada = lazy(() => import("./pages/locations/InvisibleGrillsVijayawada"));
+const InvisibleGrillsDealerVijayawada = lazy(() => import("./pages/locations/InvisibleGrillsDealerVijayawada"));
+const InvisibleGrillsBalconyVijayawada = lazy(() => import("./pages/locations/InvisibleGrillsBalconyVijayawada"));
+const InvisibleGrillsWindowsVijayawada = lazy(() => import("./pages/locations/InvisibleGrillsWindowsVijayawada"));
+const CeilingClothHangerVijayawada = lazy(() => import("./pages/locations/CeilingClothHangerVijayawada"));
 
-import InvisibleGrillsTirupati from "./pages/locations/InvisibleGrillsTirupati";
-import InvisibleGrillsDealerTirupati from "./pages/locations/InvisibleGrillsDealerTirupati";
-import InvisibleGrillsBalconyTirupati from "./pages/locations/InvisibleGrillsBalconyTirupati";
-import InvisibleGrillsWindowsTirupati from "./pages/locations/InvisibleGrillsWindowsTirupati";
-import CeilingClothHangerTirupati from "./pages/locations/CeilingClothHangerTirupati";
+const InvisibleGrillsGuntur = lazy(() => import("./pages/locations/InvisibleGrillsGuntur"));
+const InvisibleGrillsDealerGuntur = lazy(() => import("./pages/locations/InvisibleGrillsDealerGuntur"));
+const InvisibleGrillsBalconyGuntur = lazy(() => import("./pages/locations/InvisibleGrillsBalconyGuntur"));
+const InvisibleGrillsWindowsGuntur = lazy(() => import("./pages/locations/InvisibleGrillsWindowsGuntur"));
+const CeilingClothHangerGuntur = lazy(() => import("./pages/locations/CeilingClothHangerGuntur"));
 
-import InvisibleGrillsAnantapur from "./pages/locations/InvisibleGrillsAnantapur";
-import InvisibleGrillsDealerAnantapur from "./pages/locations/InvisibleGrillsDealerAnantapur";
-import InvisibleGrillsBalconyAnantapur from "./pages/locations/InvisibleGrillsBalconyAnantapur";
-import InvisibleGrillsWindowsAnantapur from "./pages/locations/InvisibleGrillsWindowsAnantapur";
-import CeilingClothHangerAnantapur from "./pages/locations/CeilingClothHangerAnantapur";
+const InvisibleGrillsTirupati = lazy(() => import("./pages/locations/InvisibleGrillsTirupati"));
+const InvisibleGrillsDealerTirupati = lazy(() => import("./pages/locations/InvisibleGrillsDealerTirupati"));
+const InvisibleGrillsBalconyTirupati = lazy(() => import("./pages/locations/InvisibleGrillsBalconyTirupati"));
+const InvisibleGrillsWindowsTirupati = lazy(() => import("./pages/locations/InvisibleGrillsWindowsTirupati"));
+const CeilingClothHangerTirupati = lazy(() => import("./pages/locations/CeilingClothHangerTirupati"));
 
-import InvisibleGrillsHyderabad from "./pages/locations/InvisibleGrillsHyderabad";
-import InvisibleGrillsDealerHyderabad from "./pages/locations/InvisibleGrillsDealerHyderabad";
-import InvisibleGrillsBalconyHyderabad from "./pages/locations/InvisibleGrillsBalconyHyderabad";
-import InvisibleGrillsWindowsHyderabad from "./pages/locations/InvisibleGrillsWindowsHyderabad";
-import CeilingClothHangerHyderabad from "./pages/locations/CeilingClothHangerHyderabad";
+const InvisibleGrillsAnantapur = lazy(() => import("./pages/locations/InvisibleGrillsAnantapur"));
+const InvisibleGrillsDealerAnantapur = lazy(() => import("./pages/locations/InvisibleGrillsDealerAnantapur"));
+const InvisibleGrillsBalconyAnantapur = lazy(() => import("./pages/locations/InvisibleGrillsBalconyAnantapur"));
+const InvisibleGrillsWindowsAnantapur = lazy(() => import("./pages/locations/InvisibleGrillsWindowsAnantapur"));
+const CeilingClothHangerAnantapur = lazy(() => import("./pages/locations/CeilingClothHangerAnantapur"));
 
-import InvisibleGrillsSecunderabad from "./pages/locations/InvisibleGrillsSecunderabad";
-import InvisibleGrillsDealerSecunderabad from "./pages/locations/InvisibleGrillsDealerSecunderabad";
-import InvisibleGrillsBalconySecunderabad from "./pages/locations/InvisibleGrillsBalconySecunderabad";
-import InvisibleGrillsWindowsSecunderabad from "./pages/locations/InvisibleGrillsWindowsSecunderabad";
-import CeilingClothHangerSecunderabad from "./pages/locations/CeilingClothHangerSecunderabad";
+const InvisibleGrillsHyderabad = lazy(() => import("./pages/locations/InvisibleGrillsHyderabad"));
+const InvisibleGrillsDealerHyderabad = lazy(() => import("./pages/locations/InvisibleGrillsDealerHyderabad"));
+const InvisibleGrillsBalconyHyderabad = lazy(() => import("./pages/locations/InvisibleGrillsBalconyHyderabad"));
+const InvisibleGrillsWindowsHyderabad = lazy(() => import("./pages/locations/InvisibleGrillsWindowsHyderabad"));
+const CeilingClothHangerHyderabad = lazy(() => import("./pages/locations/CeilingClothHangerHyderabad"));
 
-import InvisibleGrillsGachibowli from "./pages/locations/InvisibleGrillsGachibowli";
-import InvisibleGrillsDealerGachibowli from "./pages/locations/InvisibleGrillsDealerGachibowli";
-import InvisibleGrillsBalconyGachibowli from "./pages/locations/InvisibleGrillsBalconyGachibowli";
-import InvisibleGrillsWindowsGachibowli from "./pages/locations/InvisibleGrillsWindowsGachibowli";
-import CeilingClothHangerGachibowli from "./pages/locations/CeilingClothHangerGachibowli";
+const InvisibleGrillsSecunderabad = lazy(() => import("./pages/locations/InvisibleGrillsSecunderabad"));
+const InvisibleGrillsDealerSecunderabad = lazy(() => import("./pages/locations/InvisibleGrillsDealerSecunderabad"));
+const InvisibleGrillsBalconySecunderabad = lazy(() => import("./pages/locations/InvisibleGrillsBalconySecunderabad"));
+const InvisibleGrillsWindowsSecunderabad = lazy(() => import("./pages/locations/InvisibleGrillsWindowsSecunderabad"));
+const CeilingClothHangerSecunderabad = lazy(() => import("./pages/locations/CeilingClothHangerSecunderabad"));
 
-import InvisibleGrillsKukatpally from "./pages/locations/InvisibleGrillsKukatpally";
-import InvisibleGrillsDealerKukatpally from "./pages/locations/InvisibleGrillsDealerKukatpally";
-import InvisibleGrillsBalconyKukatpally from "./pages/locations/InvisibleGrillsBalconyKukatpally";
-import InvisibleGrillsWindowsKukatpally from "./pages/locations/InvisibleGrillsWindowsKukatpally";
-import CeilingClothHangerKukatpally from "./pages/locations/CeilingClothHangerKukatpally";
+const InvisibleGrillsGachibowli = lazy(() => import("./pages/locations/InvisibleGrillsGachibowli"));
+const InvisibleGrillsDealerGachibowli = lazy(() => import("./pages/locations/InvisibleGrillsDealerGachibowli"));
+const InvisibleGrillsBalconyGachibowli = lazy(() => import("./pages/locations/InvisibleGrillsBalconyGachibowli"));
+const InvisibleGrillsWindowsGachibowli = lazy(() => import("./pages/locations/InvisibleGrillsWindowsGachibowli"));
+const CeilingClothHangerGachibowli = lazy(() => import("./pages/locations/CeilingClothHangerGachibowli"));
 
-import InvisibleGrillsMadhapur from "./pages/locations/InvisibleGrillsMadhapur";
-import InvisibleGrillsDealerMadhapur from "./pages/locations/InvisibleGrillsDealerMadhapur";
-import InvisibleGrillsBalconyMadhapur from "./pages/locations/InvisibleGrillsBalconyMadhapur";
-import InvisibleGrillsWindowsMadhapur from "./pages/locations/InvisibleGrillsWindowsMadhapur";
-import CeilingClothHangerMadhapur from "./pages/locations/CeilingClothHangerMadhapur";
+const InvisibleGrillsKukatpally = lazy(() => import("./pages/locations/InvisibleGrillsKukatpally"));
+const InvisibleGrillsDealerKukatpally = lazy(() => import("./pages/locations/InvisibleGrillsDealerKukatpally"));
+const InvisibleGrillsBalconyKukatpally = lazy(() => import("./pages/locations/InvisibleGrillsBalconyKukatpally"));
+const InvisibleGrillsWindowsKukatpally = lazy(() => import("./pages/locations/InvisibleGrillsWindowsKukatpally"));
+const CeilingClothHangerKukatpally = lazy(() => import("./pages/locations/CeilingClothHangerKukatpally"));
 
-import InvisibleGrillsShamshabad from "./pages/locations/InvisibleGrillsShamshabad";
-import InvisibleGrillsDealerShamshabad from "./pages/locations/InvisibleGrillsDealerShamshabad";
-import InvisibleGrillsBalconyShamshabad from "./pages/locations/InvisibleGrillsBalconyShamshabad";
-import InvisibleGrillsWindowsShamshabad from "./pages/locations/InvisibleGrillsWindowsShamshabad";
-import CeilingClothHangerShamshabad from "./pages/locations/CeilingClothHangerShamshabad";
+const InvisibleGrillsMadhapur = lazy(() => import("./pages/locations/InvisibleGrillsMadhapur"));
+const InvisibleGrillsDealerMadhapur = lazy(() => import("./pages/locations/InvisibleGrillsDealerMadhapur"));
+const InvisibleGrillsBalconyMadhapur = lazy(() => import("./pages/locations/InvisibleGrillsBalconyMadhapur"));
+const InvisibleGrillsWindowsMadhapur = lazy(() => import("./pages/locations/InvisibleGrillsWindowsMadhapur"));
+const CeilingClothHangerMadhapur = lazy(() => import("./pages/locations/CeilingClothHangerMadhapur"));
 
-import InvisibleGrillsKompally from "./pages/locations/InvisibleGrillsKompally";
-import InvisibleGrillsDealerKompally from "./pages/locations/InvisibleGrillsDealerKompally";
-import InvisibleGrillsBalconyKompally from "./pages/locations/InvisibleGrillsBalconyKompally";
-import InvisibleGrillsWindowsKompally from "./pages/locations/InvisibleGrillsWindowsKompally";
-import CeilingClothHangerKompally from "./pages/locations/CeilingClothHangerKompally";
+const InvisibleGrillsShamshabad = lazy(() => import("./pages/locations/InvisibleGrillsShamshabad"));
+const InvisibleGrillsDealerShamshabad = lazy(() => import("./pages/locations/InvisibleGrillsDealerShamshabad"));
+const InvisibleGrillsBalconyShamshabad = lazy(() => import("./pages/locations/InvisibleGrillsBalconyShamshabad"));
+const InvisibleGrillsWindowsShamshabad = lazy(() => import("./pages/locations/InvisibleGrillsWindowsShamshabad"));
+const CeilingClothHangerShamshabad = lazy(() => import("./pages/locations/CeilingClothHangerShamshabad"));
 
-import InvisibleGrillsMiyapur from "./pages/locations/InvisibleGrillsMiyapur";
-import InvisibleGrillsDealerMiyapur from "./pages/locations/InvisibleGrillsDealerMiyapur";
-import InvisibleGrillsBalconyMiyapur from "./pages/locations/InvisibleGrillsBalconyMiyapur";
-import InvisibleGrillsWindowsMiyapur from "./pages/locations/InvisibleGrillsWindowsMiyapur";
-import CeilingClothHangerMiyapur from "./pages/locations/CeilingClothHangerMiyapur";
+const InvisibleGrillsKompally = lazy(() => import("./pages/locations/InvisibleGrillsKompally"));
+const InvisibleGrillsDealerKompally = lazy(() => import("./pages/locations/InvisibleGrillsDealerKompally"));
+const InvisibleGrillsBalconyKompally = lazy(() => import("./pages/locations/InvisibleGrillsBalconyKompally"));
+const InvisibleGrillsWindowsKompally = lazy(() => import("./pages/locations/InvisibleGrillsWindowsKompally"));
+const CeilingClothHangerKompally = lazy(() => import("./pages/locations/CeilingClothHangerKompally"));
 
-import InvisibleGrillsMedchal from "./pages/locations/InvisibleGrillsMedchal";
-import InvisibleGrillsDealerMedchal from "./pages/locations/InvisibleGrillsDealerMedchal";
-import InvisibleGrillsBalconyMedchal from "./pages/locations/InvisibleGrillsBalconyMedchal";
-import InvisibleGrillsWindowsMedchal from "./pages/locations/InvisibleGrillsWindowsMedchal";
-import CeilingClothHangerMedchal from "./pages/locations/CeilingClothHangerMedchal";
+const InvisibleGrillsMiyapur = lazy(() => import("./pages/locations/InvisibleGrillsMiyapur"));
+const InvisibleGrillsDealerMiyapur = lazy(() => import("./pages/locations/InvisibleGrillsDealerMiyapur"));
+const InvisibleGrillsBalconyMiyapur = lazy(() => import("./pages/locations/InvisibleGrillsBalconyMiyapur"));
+const InvisibleGrillsWindowsMiyapur = lazy(() => import("./pages/locations/InvisibleGrillsWindowsMiyapur"));
+const CeilingClothHangerMiyapur = lazy(() => import("./pages/locations/CeilingClothHangerMiyapur"));
 
-import InvisibleGrillsKondapur from "./pages/locations/InvisibleGrillsKondapur";
-import InvisibleGrillsDealerKondapur from "./pages/locations/InvisibleGrillsDealerKondapur";
-import InvisibleGrillsBalconyKondapur from "./pages/locations/InvisibleGrillsBalconyKondapur";
-import InvisibleGrillsWindowsKondapur from "./pages/locations/InvisibleGrillsWindowsKondapur";
-import CeilingClothHangerKondapur from "./pages/locations/CeilingClothHangerKondapur";
+const InvisibleGrillsMedchal = lazy(() => import("./pages/locations/InvisibleGrillsMedchal"));
+const InvisibleGrillsDealerMedchal = lazy(() => import("./pages/locations/InvisibleGrillsDealerMedchal"));
+const InvisibleGrillsBalconyMedchal = lazy(() => import("./pages/locations/InvisibleGrillsBalconyMedchal"));
+const InvisibleGrillsWindowsMedchal = lazy(() => import("./pages/locations/InvisibleGrillsWindowsMedchal"));
+const CeilingClothHangerMedchal = lazy(() => import("./pages/locations/CeilingClothHangerMedchal"));
 
-import InvisibleGrillsKokapet from "./pages/locations/InvisibleGrillsKokapet";
-import InvisibleGrillsDealerKokapet from "./pages/locations/InvisibleGrillsDealerKokapet";
-import InvisibleGrillsBalconyKokapet from "./pages/locations/InvisibleGrillsBalconyKokapet";
-import InvisibleGrillsWindowsKokapet from "./pages/locations/InvisibleGrillsWindowsKokapet";
-import CeilingClothHangerKokapet from "./pages/locations/CeilingClothHangerKokapet";
+const InvisibleGrillsKondapur = lazy(() => import("./pages/locations/InvisibleGrillsKondapur"));
+const InvisibleGrillsDealerKondapur = lazy(() => import("./pages/locations/InvisibleGrillsDealerKondapur"));
+const InvisibleGrillsBalconyKondapur = lazy(() => import("./pages/locations/InvisibleGrillsBalconyKondapur"));
+const InvisibleGrillsWindowsKondapur = lazy(() => import("./pages/locations/InvisibleGrillsWindowsKondapur"));
+const CeilingClothHangerKondapur = lazy(() => import("./pages/locations/CeilingClothHangerKondapur"));
 
-import InvisibleGrillsTellapur from "./pages/locations/InvisibleGrillsTellapur";
-import InvisibleGrillsDealerTellapur from "./pages/locations/InvisibleGrillsDealerTellapur";
-import InvisibleGrillsBalconyTellapur from "./pages/locations/InvisibleGrillsBalconyTellapur";
-import InvisibleGrillsWindowsTellapur from "./pages/locations/InvisibleGrillsWindowsTellapur";
-import CeilingClothHangerTellapur from "./pages/locations/CeilingClothHangerTellapur";
+const InvisibleGrillsKokapet = lazy(() => import("./pages/locations/InvisibleGrillsKokapet"));
+const InvisibleGrillsDealerKokapet = lazy(() => import("./pages/locations/InvisibleGrillsDealerKokapet"));
+const InvisibleGrillsBalconyKokapet = lazy(() => import("./pages/locations/InvisibleGrillsBalconyKokapet"));
+const InvisibleGrillsWindowsKokapet = lazy(() => import("./pages/locations/InvisibleGrillsWindowsKokapet"));
+const CeilingClothHangerKokapet = lazy(() => import("./pages/locations/CeilingClothHangerKokapet"));
 
-import InvisibleGrillsMahbubnagar from "./pages/locations/InvisibleGrillsMahbubnagar";
-import InvisibleGrillsDealerMahbubnagar from "./pages/locations/InvisibleGrillsDealerMahbubnagar";
-import InvisibleGrillsBalconyMahbubnagar from "./pages/locations/InvisibleGrillsBalconyMahbubnagar";
-import InvisibleGrillsWindowsMahbubnagar from "./pages/locations/InvisibleGrillsWindowsMahbubnagar";
-import CeilingClothHangerMahbubnagar from "./pages/locations/CeilingClothHangerMahbubnagar";
+const InvisibleGrillsTellapur = lazy(() => import("./pages/locations/InvisibleGrillsTellapur"));
+const InvisibleGrillsDealerTellapur = lazy(() => import("./pages/locations/InvisibleGrillsDealerTellapur"));
+const InvisibleGrillsBalconyTellapur = lazy(() => import("./pages/locations/InvisibleGrillsBalconyTellapur"));
+const InvisibleGrillsWindowsTellapur = lazy(() => import("./pages/locations/InvisibleGrillsWindowsTellapur"));
+const CeilingClothHangerTellapur = lazy(() => import("./pages/locations/CeilingClothHangerTellapur"));
 
-import InvisibleGrillsWarangal from "./pages/locations/InvisibleGrillsWarangal";
-import InvisibleGrillsDealerWarangal from "./pages/locations/InvisibleGrillsDealerWarangal";
-import InvisibleGrillsBalconyWarangal from "./pages/locations/InvisibleGrillsBalconyWarangal";
-import InvisibleGrillsWindowsWarangal from "./pages/locations/InvisibleGrillsWindowsWarangal";
-import CeilingClothHangerWarangal from "./pages/locations/CeilingClothHangerWarangal";
+const InvisibleGrillsMahbubnagar = lazy(() => import("./pages/locations/InvisibleGrillsMahbubnagar"));
+const InvisibleGrillsDealerMahbubnagar = lazy(() => import("./pages/locations/InvisibleGrillsDealerMahbubnagar"));
+const InvisibleGrillsBalconyMahbubnagar = lazy(() => import("./pages/locations/InvisibleGrillsBalconyMahbubnagar"));
+const InvisibleGrillsWindowsMahbubnagar = lazy(() => import("./pages/locations/InvisibleGrillsWindowsMahbubnagar"));
+const CeilingClothHangerMahbubnagar = lazy(() => import("./pages/locations/CeilingClothHangerMahbubnagar"));
+
+const InvisibleGrillsWarangal = lazy(() => import("./pages/locations/InvisibleGrillsWarangal"));
+const InvisibleGrillsDealerWarangal = lazy(() => import("./pages/locations/InvisibleGrillsDealerWarangal"));
+const InvisibleGrillsBalconyWarangal = lazy(() => import("./pages/locations/InvisibleGrillsBalconyWarangal"));
+const InvisibleGrillsWindowsWarangal = lazy(() => import("./pages/locations/InvisibleGrillsWindowsWarangal"));
+const CeilingClothHangerWarangal = lazy(() => import("./pages/locations/CeilingClothHangerWarangal"));
 
 const queryClient = new QueryClient();
 
@@ -148,7 +151,8 @@ const App = () => {
           <Toaster />
           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <ScrollToTop />
-            <Routes>
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
@@ -281,6 +285,7 @@ const App = () => {
 
             <Route path="*" element={<NotFound />} />
             </Routes>
+            </Suspense>
           </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>

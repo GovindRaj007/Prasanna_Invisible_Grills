@@ -7,7 +7,9 @@ import { Testimonials } from "@/components/home/Testimonials";
 import { ServiceAreas } from "@/components/home/ServiceAreas";
 import { FAQ } from "@/components/home/FAQ";
 import { CTASection } from "@/components/home/CTASection";
+import { DeferredSection } from "@/components/common/DeferredSection";
 import { SEOHead } from "@/components/common/SEOHead";
+import { HOME_SEO_KEYWORDS } from "@/config/seo.constants";
 import { getSiteUrl } from "@/lib/getSiteUrl";
 
 const Index = () => {
@@ -75,21 +77,35 @@ const Index = () => {
   return (
     <Layout>
       <SEOHead
-        title="Invisible Grills Across Andhra & Telangana | Prasanna"
-        description="Expert invisible grills installation across Andhra Pradesh & Telangana. 8+ years, 6000+ homes. Premium safety solutions with 10-year warranty. Free quotes."
-        keywords="invisible grills, invisible grills installation, invisible grills near me, best invisible grills, balcony grills, ceiling cloth hanger, Andhra Pradesh, Telangana"
+        title="Invisible Grills Installation in Andhra Pradesh, Telangana & Hyderabad"
+        description="Invisible grills, invisible grill fitting, invisible grill installation, balcony invisible grills, window invisible grills, and ceiling cloth hanger installation across Andhra Pradesh, Telangana, Hyderabad, Vizag, Vijayawada, Guntur, Tirupati, and Rajahmundry."
+        keywords={HOME_SEO_KEYWORDS.join(", ")}
         ogImage="/og-images/prasanna-invisible-grills-og.jpg"
         canonicalUrl="/"
         structuredData={structuredData}
       />
       <HeroSlider />
-      <ImageShowcase />
-      <ServicesSection />
-      <WhyChooseUs />
-      <Testimonials />
-      <ServiceAreas />
-      <FAQ />
-      <CTASection />
+      <DeferredSection rootMargin="300px 0px 300px 0px">
+        <ImageShowcase />
+      </DeferredSection>
+      <DeferredSection rootMargin="300px 0px 300px 0px">
+        <ServicesSection />
+      </DeferredSection>
+      <DeferredSection rootMargin="400px 0px 400px 0px">
+        <WhyChooseUs />
+      </DeferredSection>
+      <DeferredSection rootMargin="400px 0px 400px 0px">
+        <Testimonials />
+      </DeferredSection>
+      <DeferredSection rootMargin="400px 0px 400px 0px">
+        <ServiceAreas />
+      </DeferredSection>
+      <DeferredSection rootMargin="300px 0px 300px 0px">
+        <FAQ />
+      </DeferredSection>
+      <DeferredSection rootMargin="200px 0px 200px 0px">
+        <CTASection />
+      </DeferredSection>
     </Layout>
   );
 };
