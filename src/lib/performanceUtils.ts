@@ -32,8 +32,8 @@ export function measureLCP() {
     try {
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        const lastEntry = entries[entries.length - 1];
-        if (process.env.MODE === "development") {
+        const lastEntry = entries[entries.length - 1] as PerformanceEntry & { renderTime?: number; loadTime?: number };
+        if (import.meta.env.DEV) {
           console.log("LCP:", {
             time: lastEntry.renderTime || lastEntry.loadTime,
             element: (lastEntry as any).element?.tagName || "unknown",

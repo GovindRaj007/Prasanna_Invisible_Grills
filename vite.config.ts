@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  plugins: [react(), mode === "development"].filter(Boolean),
+  plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -34,11 +34,9 @@ export default defineConfig(({ mode }) => ({
         // Manual chunk splitting for optimal loading
         manualChunks: {
           'vendor': ['react', 'react-dom', 'react-router-dom'],
-          'ui-components': ['@radix-ui/react-accordion', '@radix-ui/react-alert-dialog', '@radix-ui/react-avatar', '@radix-ui/react-checkbox', '@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-label', '@radix-ui/react-popover', '@radix-ui/react-tabs', '@radix-ui/react-tooltip'],
-          'analytics': ['react-helmet-async'],
-          'forms': ['react-hook-form', '@hookform/resolvers', 'zod'],
-          'charts': ['recharts'],
-          'utils': ['clsx', 'tailwind-merge', 'date-fns']
+          'ui-components': ['@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-label', '@radix-ui/react-select', '@radix-ui/react-tabs', '@radix-ui/react-toast', '@radix-ui/react-tooltip'],
+          'seo': ['react-helmet-async'],
+          'utils': ['clsx', 'tailwind-merge']
         }
       },
     },

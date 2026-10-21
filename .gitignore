@@ -42,3 +42,6 @@ Thumbs.db
 .coverage
 .nyc_output
 coverage/
+
+# Generated at build time by scripts/generate-sitemaps-enhanced.js
+public/sitemap*.xml

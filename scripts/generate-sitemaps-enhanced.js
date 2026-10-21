@@ -221,15 +221,17 @@ function generateSitemapIndex() {
 function generateLegacySitemap() {
   const staticXml = generateStaticPagesSitemap();
   const { xml: servicesXml } = generateServicesLocationsSitemap();
-  const imagesXml = generateImagesSitemap();
 
-  // Merge into single sitemap
+  // Extract the <url> entries between the opening <urlset ...> tag and </urlset>
+  const urlEntries = (xml) => xml.slice(xml.indexOf('>', xml.indexOf('<urlset')) + 1, xml.lastIndexOf('</urlset>'));
+
+  // Merge into single sitemap (images sitemap is omitted: its URLs duplicate
+  // the static pages, which already carry their image metadata)
   const combined = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
          xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-${staticXml.split('</urlset>')[0].split('<urlset')[1].split('>')[1]}
-${servicesXml.split('</urlset>')[0].split('<urlset')[1].split('>')[1]}
-${imagesXml.split('</urlset>')[0].split('<urlset')[1].split('>')[1]}
+${urlEntries(staticXml)}
+${urlEntries(servicesXml)}
 </urlset>`;
 
   return combined;
