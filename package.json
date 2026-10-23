@@ -28,7 +28,11 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
+<<<<<<< HEAD
     "react-router-dom": "^7.18.4",
+=======
+    "react-router-dom": "^6.30.6",
+>>>>>>> 09cf00a0ec038407ccb6449ea58ff61f9126a6fd
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"
   },
@@ -48,12 +52,23 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^15.15.0",
+<<<<<<< HEAD
     "postcss": "^8.5.6",
     "sharp": "^0.35.5",
+=======
+    "jsdom": "^20.0.3",
+    "postcss": "^8.5.23",
+    "sharp": "^0.33.5",
+>>>>>>> 09cf00a0ec038407ccb6449ea58ff61f9126a6fd
     "tailwindcss": "^3.4.17",
     "terser": "^5.46.2",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0",
+<<<<<<< HEAD
     "vite": "^7.3.1"
+=======
+    "vite": "^7.3.7",
+    "vitest": "^3.2.6"
+>>>>>>> 09cf00a0ec038407ccb6449ea58ff61f9126a6fd
   }
 }
