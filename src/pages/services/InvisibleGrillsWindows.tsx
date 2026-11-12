@@ -5,12 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Phone, ArrowRight, CheckCircle2, Grid3X3, Eye, Shield, Wind, Ruler, Sparkles } from "lucide-react";
 import { InvisibleGrillsWindowsFAQ } from "@/components/faq/InvisibleGrillsWindowsFAQ";
-import { SERVICE_SEO_KEYWORDS, SERVICES } from "@/config/seo.constants";
+import { LOCATIONS, getService } from "@/config/seo.constants";
+import { PHONES } from "@/config/business";
+import { graph, serviceNode, webPageNode } from "@/lib/schema";
+
+const SERVICE = getService("invisible-grills-windows")!;
+const PAGE_PATH = "/invisible-grills-windows";
+const PAGE_TITLE = "Invisible Grills for Windows – Window Safety Grills";
+const PAGE_DESCRIPTION = "Window invisible grills for sliding, casement & French windows. Keeps light and air, protects kids & pets. 10-year warranty. Hyderabad, Vizag & Vijayawada.";
 import { ServiceImageSlider } from "@/components/services/ServiceImageSlider";
 
-import heroWindowGrill from "@/assets/hero-window-grill.jpg";
-import heroInvisibleGrills from "@/assets/window-invisible-grill.jpg";
-import windowGrill from "@/assets/service-invisible-grills-3.jpg";
+import heroWindowGrill from "@/assets/hero-window-grill.webp";
+import heroInvisibleGrills from "@/assets/window-invisible-grill.webp";
+import windowGrill from "@/assets/service-invisible-grills-3.webp";
 
 const benefits = [
   "Complete child and pet safety for all windows",
@@ -37,20 +44,7 @@ const windowTypes = [
   { title: "Fixed Glass Windows", description: "Simple, permanent installation for fixed glass panels.", image: "🖼️" },
 ];
 
-const locations = [
-  { name: "Visakhapatnam", slug: "visakhapatnam" },
-  { name: "Rajahmundry", slug: "rajahmundry" },
-  { name: "Vijayawada", slug: "vijayawada" },
-  { name: "Guntur", slug: "guntur" },
-  { name: "Tirupati", slug: "tirupati" },
-  { name: "Anantapur", slug: "anantapur" },
-  { name: "Hyderabad", slug: "hyderabad" },
-  { name: "Secunderabad", slug: "secunderabad" },
-  { name: "Gachibowli", slug: "gachibowli" },
-  { name: "Kukatpally", slug: "kukatpally" },
-  { name: "Madhapur", slug: "madhapur" },
-  { name: "Warangal", slug: "warangal" },
-];
+const locations = LOCATIONS.map((l) => ({ name: l.city, slug: l.slug }));
 
 const serviceImages = [
   { src: heroWindowGrill, alt: "Invisible Grill for Windows" },
@@ -59,66 +53,24 @@ const serviceImages = [
 ];
 
 export default function InvisibleGrillsWindows() {
-  const serviceMeta = SERVICES.find((s) => s.slug === "invisible-grills-windows");
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: "Window Invisible Grill Installation",
-    name: "Invisible Grills for Windows",
-    description: "Professional invisible grill installation for windows. Provides child safety, burglar prevention, and pet containment while maintaining crystal clear views. 316 marine-grade stainless steel, easy maintenance, 10-year warranty.",
-    provider: {
-      "@type": "HomeAndConstructionBusiness",
-      name: "Prasanna Invisible Grills",
-      telephone: "+917339306098",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Visakhapatnam",
-        addressRegion: "Andhra Pradesh",
-        addressCountry: "IN"
-      }
-    },
-    areaServed: [
-      { "@type": "City", "name": "Visakhapatnam" },
-      { "@type": "City", "name": "Rajahmundry" },
-      { "@type": "City", "name": "Vijayawada" },
-      { "@type": "City", "name": "Guntur" },
-      { "@type": "City", "name": "Tirupati" },
-      { "@type": "City", "name": "Anantapur" },
-      { "@type": "City", "name": "Hyderabad" },
-      { "@type": "City", "name": "Mahbubnagar" },
-      { "@type": "City", "name": "Warangal" },
-      { "@type": "City", "name": "Telangana" }
-    ],
-    offers: {
-      "@type": "Offer",
-      availability: "https://schema.org/InStock",
-      priceCurrency: "INR",
-      price: "On Request",
-      description: "Professional window grill installation with 10-year warranty"
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: 4.9,
-      reviewCount: 150,
-      bestRating: 5,
-      worstRating: 1
-    }
-  };
+  const structuredData = graph(
+    webPageNode({ path: PAGE_PATH, title: PAGE_TITLE, description: PAGE_DESCRIPTION, image: SERVICE.ogImage }),
+    serviceNode({ service: SERVICE, path: PAGE_PATH, description: PAGE_DESCRIPTION })
+  );
 
   return (
     <Layout>
       <SEOHead
-        title={`${serviceMeta?.name || "Invisible Grills for Windows"} | Prasanna`}
-        description={serviceMeta?.longDescription || "Invisible window grills for child safety, burglar prevention, and full ventilation. 316 stainless steel installation for Hyderabad, Vizag, Vijayawada, Guntur, Tirupati, and Rajahmundry."}
-        keywords={SERVICE_SEO_KEYWORDS.windows.join(", ")}
-        ogImage="/og-images/window-invisible-grills-og.jpg"
-        canonicalUrl="/invisible-grills-windows"
+        title={PAGE_TITLE}
+        description={PAGE_DESCRIPTION}
+        canonicalUrl={PAGE_PATH}
+        ogImage={SERVICE.ogImage}
         structuredData={structuredData}
       />
 
       <section className="relative py-16 md:py-28 overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroWindowGrill} alt="Invisible Grill for Windows" className="h-full w-full object-cover" />
+          <img src={heroWindowGrill} alt="Invisible Grill for Windows" width={1600} height={900} {...{ fetchpriority: "high" }} className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(222,47%,8%,0.95)] via-[hsl(222,47%,10%,0.88)] to-[hsl(222,47%,10%,0.75)]" />
         </div>
         <div className="absolute inset-0 grid-pattern-dark opacity-30" />
@@ -137,7 +89,7 @@ export default function InvisibleGrillsWindows() {
                 <Link to="/contact" className="flex items-center gap-2">Get Free Quote <ArrowRight className="h-5 w-5" /></Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 bg-white/10 text-white hover:bg-white/20" asChild>
-                <a href="tel:+917339306098" data-track="call" className="flex items-center gap-2"><Phone className="h-5 w-5" /> Call: +91 73393 06098</a>
+                <a href={`tel:${PHONES.primary.e164}`} data-track="call" className="flex items-center gap-2"><Phone className="h-5 w-5" /> Call: {PHONES.primary.display}</a>
               </Button>
             </div>
           </div>
@@ -221,7 +173,7 @@ export default function InvisibleGrillsWindows() {
                 <Link to="/contact" className="flex items-center gap-2">Book Free Site Visit <ArrowRight className="h-5 w-5" /></Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 bg-white/10 text-white hover:bg-white/20" asChild>
-                <a href="tel:+917339306098" data-track="call">Call: +91 73393 06098</a>
+                <a href={`tel:${PHONES.primary.e164}`} data-track="call">Call: {PHONES.primary.display}</a>
               </Button>
             </div>
           </div>

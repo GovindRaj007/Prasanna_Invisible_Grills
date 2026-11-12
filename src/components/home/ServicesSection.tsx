@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Grid3X3, Store, Fence, Shirt } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-import heroInvisibleGrills from "@/assets/hero-invisible-grills.jpg";
-import heroDealer from "@/assets/hero-dealer.jpg";
-import heroCeilingHanger from "@/assets/hero-ceiling-hanger.jpg";
-import heroBalconyGrill from "@/assets/balcony-invisible-grills.jpg";
-import heroWindowGrill from "@/assets/service-invisible-grills-3.jpg";
+import heroInvisibleGrills from "@/assets/hero-invisible-grills.webp";
+import heroDealer from "@/assets/hero-dealer.webp";
+import heroCeilingHanger from "@/assets/hero-ceiling-hanger.webp";
+import heroBalconyGrill from "@/assets/balcony-invisible-grills.webp";
+import heroWindowGrill from "@/assets/service-invisible-grills-3.webp";
 
 const services = [
   {
@@ -77,8 +77,8 @@ export function ServicesSection() {
 
         {/* Services Grid */}
         <div className="flex flex-wrap gap-6 justify-center justify-center animate-fade-in">
-          {services.map((service, index) => (
-            <div className="w-full sm:w-[18rem] md:w-76 lg:w-80 min-w-[18rem] max-w-[470px]">
+          {services.map((service) => (
+            <div key={service.href} className="w-full sm:w-[18rem] md:w-76 lg:w-80 min-w-[18rem] max-w-[470px]">
             <Link
               key={service.href}
               to={service.href}
@@ -89,6 +89,8 @@ export function ServicesSection() {
                 <img
                   src={service.image}
                   alt={service.title}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 {/* Reduced shadow overlay */}

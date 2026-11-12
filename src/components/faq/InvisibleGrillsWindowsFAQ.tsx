@@ -3,7 +3,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@/components/ui/details-accordion";
 import { Helmet } from "react-helmet-async";
 
 const faqs = [
@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     question: "What is the cost of invisible grills for windows?",
-    answer: "The cost depends on various factors including window size, type, and specific requirements. For accurate pricing tailored to your windows, we recommend calling us at +91 7339306098. Our team will provide a free measurement and detailed quotation with transparent pricing.",
+    answer: "The cost depends on various factors including window size, type, and specific requirements. For accurate pricing tailored to your windows, we recommend calling us at +91 73393 06098. Our team will provide a free measurement and detailed quotation with transparent pricing.",
   },
   {
     question: "How long does window invisible grill installation take?",

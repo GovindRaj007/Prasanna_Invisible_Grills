@@ -5,14 +5,21 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Phone, ArrowRight, CheckCircle2, Store, Award, TrendingUp, Users, Truck, Package } from "lucide-react";
 import { InvisibleGrillsDealerFAQ } from "@/components/faq/InvisibleGrillsDealerFAQ";
-import { SERVICE_SEO_KEYWORDS, SERVICES } from "@/config/seo.constants";
+import { LOCATIONS, getService } from "@/config/seo.constants";
+import { PHONES } from "@/config/business";
+import { graph, serviceNode, webPageNode } from "@/lib/schema";
+
+const SERVICE = getService("invisible-grills-dealer")!;
+const PAGE_PATH = "/invisible-grills-dealer";
+const PAGE_TITLE = "Invisible Grills Dealer, Supplier & Wholesale";
+const PAGE_DESCRIPTION = "Invisible grills dealer & wholesale supplier: SS316 cables, aluminium tracks & fittings for contractors and builders, plus dealership with training.";
 import { ServiceImageSlider } from "@/components/services/ServiceImageSlider";
 
-import heroDealer from "@/assets/hero-dealer.jpg";
-import dealerInventory1 from "@/assets/invisible-grills-dealer-1.jpg";
-import dealerInventory2 from "@/assets/invisible-grills-dealer-2.jpg";
-import dealerInventory3 from "@/assets/invisible-grills-dealer-3.jpg";
-import dealerInventory4 from "@/assets/invisible-grills-dealer-4.jpg";
+import heroDealer from "@/assets/hero-dealer.webp";
+import dealerInventory1 from "@/assets/invisible-grills-dealer-1.webp";
+import dealerInventory2 from "@/assets/invisible-grills-dealer-2.webp";
+import dealerInventory3 from "@/assets/invisible-grills-dealer-3.webp";
+import dealerInventory4 from "@/assets/invisible-grills-dealer-4.webp";
 
 const benefits = [
   "Official authorized dealership with genuine products",
@@ -47,59 +54,25 @@ const serviceImages = [
 ];
 
 export default function InvisibleGrillsDealer() {
-  const serviceMeta = SERVICES.find((s) => s.slug === "invisible-grills-dealer");
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: "Dealership & Wholesale Opportunity",
-    name: "Invisible Grills Dealership & Wholesale",
-    description: "Become an authorized invisible grills dealer with exclusive territory rights. Access wholesale pricing, professional training, marketing support, and bulk order benefits. Perfect for hardware stores, contractors, and distributors.",
-    provider: {
-      "@type": "HomeAndConstructionBusiness",
-      name: "Prasanna Invisible Grills",
-      telephone: "+917339306098",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Visakhapatnam",
-        addressRegion: "Andhra Pradesh",
-        addressCountry: "IN"
-      }
-    },
-    areaServed: [
-      { "@type": "City", "name": "Visakhapatnam" },
-      { "@type": "City", "name": "Rajahmundry" },
-      { "@type": "City", "name": "Vijayawada" },
-      { "@type": "City", "name": "Guntur" },
-      { "@type": "City", "name": "Tirupati" },
-      { "@type": "City", "name": "Anantapur" },
-      { "@type": "City", "name": "Hyderabad" },
-      { "@type": "City", "name": "Mahbubnagar" },
-      { "@type": "City", "name": "Warangal" },
-      { "@type": "City", "name": "Telangana" }
-    ],
-    offers: {
-      "@type": "Offer",
-      availability: "https://schema.org/InStock",
-      priceCurrency: "INR",
-      description: "Wholesale pricing with exclusive territory rights"
-    }
-  };
+  const structuredData = graph(
+    webPageNode({ path: PAGE_PATH, title: PAGE_TITLE, description: PAGE_DESCRIPTION, image: SERVICE.ogImage }),
+    serviceNode({ service: SERVICE, path: PAGE_PATH, description: PAGE_DESCRIPTION })
+  );
 
   return (
     <Layout>
       <SEOHead
-        title={`${serviceMeta?.name || "Invisible Grills Dealer Program"} | Prasanna`}
-        description={serviceMeta?.longDescription || "Become an authorized invisible grills dealer with wholesale pricing, training, and exclusive territory rights. Grow your business in Hyderabad, Andhra Pradesh, and Telangana with trusted support."}
-        keywords={SERVICE_SEO_KEYWORDS.dealer.join(", ")}
-        ogImage="/og-images/invisible-grills-dealer-og.jpg"
-        canonicalUrl="/invisible-grills-dealer"
+        title={PAGE_TITLE}
+        description={PAGE_DESCRIPTION}
+        canonicalUrl={PAGE_PATH}
+        ogImage={SERVICE.ogImage}
         structuredData={structuredData}
       />
 
       {/* Hero */}
       <section className="relative py-16 md:py-28 overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroDealer} alt="Invisible Grills Dealership" className="h-full w-full object-cover" />
+          <img src={heroDealer} alt="Invisible Grills Dealership" width={1600} height={900} {...{ fetchpriority: "high" }} className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(222,47%,8%,0.95)] via-[hsl(222,47%,10%,0.88)] to-[hsl(222,47%,10%,0.75)]" />
         </div>
         <div className="absolute inset-0 grid-pattern-dark opacity-30" />
@@ -118,7 +91,7 @@ export default function InvisibleGrillsDealer() {
                 <Link to="/contact" className="flex items-center gap-2">Apply for Dealership <ArrowRight className="h-5 w-5" /></Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 bg-white/10 text-white hover:bg-white/20" asChild>
-                <a href="tel:+917339306098" data-track="call" className="flex items-center gap-2"><Phone className="h-5 w-5" /> Call: +91 73393 06098</a>
+                <a href={`tel:${PHONES.primary.e164}`} data-track="call" className="flex items-center gap-2"><Phone className="h-5 w-5" /> Call: {PHONES.primary.display}</a>
               </Button>
             </div>
           </div>
@@ -183,20 +156,10 @@ export default function InvisibleGrillsDealer() {
         <div className="container">
           <h2 className="mb-8 text-center font-heading text-3xl font-bold text-white">Dealer Network by Location</h2>
           <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-4">
-            {[
-              { name: "Visakhapatnam", slug: "visakhapatnam" },
-              { name: "Rajahmundry", slug: "rajahmundry" },
-              { name: "Vijayawada", slug: "vijayawada" },
-              { name: "Guntur", slug: "guntur" },
-              { name: "Tirupati", slug: "tirupati" },
-              { name: "Anantapur", slug: "anantapur" },
-              { name: "Hyderabad", slug: "hyderabad" },
-              { name: "Secunderabad", slug: "secunderabad" },
-              { name: "Warangal", slug: "warangal" },
-            ].map((loc) => (
+            {LOCATIONS.map((loc) => (
               <Link key={loc.slug} to={`/invisible-grills-dealer-${loc.slug}`}
                 className="flex items-center justify-between rounded-xl bg-gradient-to-br from-[hsl(222,47%,11%)] via-[hsl(217,33%,17%)] to-[hsl(215,25%,22%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1 border border-white/10">
-                <span className="font-medium text-white">{loc.name}</span>
+                <span className="font-medium text-white">{loc.city}</span>
                 <ArrowRight className="h-4 w-4 text-accent" />
               </Link>
             ))}
@@ -216,7 +179,7 @@ export default function InvisibleGrillsDealer() {
                 <Link to="/contact" className="flex items-center gap-2">Apply Now <ArrowRight className="h-5 w-5" /></Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 bg-white/10 text-white hover:bg-white/20" asChild>
-                <a href="tel:+917339306098" data-track="call">Call: +91 73393 06098</a>
+                <a href={`tel:${PHONES.primary.e164}`} data-track="call">Call: {PHONES.primary.display}</a>
               </Button>
             </div>
           </div>

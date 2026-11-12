@@ -1,72 +1,77 @@
 import { Helmet } from "react-helmet-async";
-import { getSiteUrl } from "@/lib/getSiteUrl";
+import { BUSINESS, SITE_URL } from "@/config/business";
 
 interface SEOHeadProps {
+  /** Page title without brand; brand is appended when it fits (~65 chars). */
   title: string;
   description: string;
-  keywords?: string;
-  canonicalUrl?: string;
+  /** Path of the canonical URL, e.g. "/invisible-grills-hyderabad" */
+  canonicalUrl: string;
   ogImage?: string;
+  ogImageAlt?: string;
   ogType?: string;
-  structuredData?: object;
+  /** One or more JSON-LD objects */
+  structuredData?: object | object[];
+  /** Set for pages that must not be indexed (404, thank-you, etc.) */
+  noindex?: boolean;
+}
+
+const MAX_TITLE = 65;
+
+export function buildTitle(title: string) {
+  if (title.includes(BUSINESS.name)) return title;
+  const full = `${title} | ${BUSINESS.name}`;
+  if (full.length <= MAX_TITLE) return full;
+  const short = `${title} | ${BUSINESS.shortName}`;
+  return short.length <= MAX_TITLE + 5 ? short : title;
 }
 
 export function SEOHead({
   title,
   description,
-  keywords,
   canonicalUrl,
   ogImage = "/og-images/prasanna-invisible-grills-og.jpg",
+  ogImageAlt,
   ogType = "website",
   structuredData,
+  noindex = false,
 }: SEOHeadProps) {
-  const fullTitle = `${title} | Prasanna Invisible Grills and Nets`;
-  const siteUrl = getSiteUrl();
+  const fullTitle = buildTitle(title);
+  const url = canonicalUrl === "/" ? `${SITE_URL}/` : `${SITE_URL}${canonicalUrl}`;
+  const image = ogImage.startsWith("http") ? ogImage : `${SITE_URL}${ogImage}`;
+  const robots = noindex
+    ? "noindex, follow"
+    : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
+  const jsonLd = structuredData ? (Array.isArray(structuredData) ? structuredData : [structuredData]) : [];
 
   return (
     <Helmet>
-      {/* Primary Meta Tags */}
       <title>{fullTitle}</title>
-      <meta name="title" content={fullTitle} />
       <meta name="description" content={description} />
-      {keywords && <meta name="keywords" content={keywords} />}
-      
-      {/* Robots Meta Tag - Ensure all pages are indexable */}
-      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-      <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-      
-      {/* Language and Alternate URLs */}
-      <meta httpEquiv="content-language" content="en-IN" />
-      <link rel="alternate" hrefLang="en-IN" href={`${siteUrl}${canonicalUrl || '/'}`} />
-      
-      {/* Canonical URL */}
-      {canonicalUrl && <link rel="canonical" href={`${siteUrl}${canonicalUrl}`} />}
+      <meta name="robots" content={robots} />
+      {!noindex && <link rel="canonical" href={url} />}
 
-      {/* Open Graph / Facebook */}
       <meta property="og:type" content={ogType} />
-      <meta property="og:url" content={canonicalUrl ? `${siteUrl}${canonicalUrl}` : siteUrl} />
+      <meta property="og:site_name" content={BUSINESS.name} />
+      <meta property="og:locale" content="en_IN" />
+      <meta property="og:url" content={url} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+      <meta property="og:image" content={image} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={ogImageAlt ?? title} />
 
-      {/* Twitter */}
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={canonicalUrl ? `${siteUrl}${canonicalUrl}` : siteUrl} />
-      <meta property="twitter:title" content={fullTitle} />
-      <meta property="twitter:description" content={description} />
-      <meta property="twitter:image" content={`${siteUrl}${ogImage}`} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={fullTitle} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={image} />
 
-      {/* Mobile & Viewport optimization */}
-      <meta name="format-detection" content="telephone=yes" />
-      <meta name="theme-color" content="#000000" />
-      <meta name="mobile-web-app-capable" content="yes" />
-      <meta name="apple-mobile-web-app-capable" content="yes" />
-      <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-      {/* Structured Data */}
-      {structuredData && (
-        <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
-      )}
+      {jsonLd.map((data, i) => (
+        <script key={i} type="application/ld+json">
+          {JSON.stringify(data)}
+        </script>
+      ))}
     </Helmet>
   );
 }

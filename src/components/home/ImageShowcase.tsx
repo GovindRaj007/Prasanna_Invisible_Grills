@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-import heroInvisibleGrills from "@/assets/hero-invisible-grills.jpg";
-import balconyGrills from "@/assets/balcony-invisible-grills.jpg";
-import heroDealer from "@/assets/hero-dealer.jpg";
-import heroCeilingHanger from "@/assets/hero-ceiling-hanger.jpg";
-import balconyGrill from "@/assets/balcony-invisible-grills-1.jpg";
-import heroWindowGrill from "@/assets/service-invisible-grills-3.jpg";
-import promoSlide from "@/assets/promo-prasanna-invisible-grills.jpg";
+import heroInvisibleGrills from "@/assets/hero-invisible-grills.webp";
+import balconyGrills from "@/assets/balcony-invisible-grills.webp";
+import heroDealer from "@/assets/hero-dealer.webp";
+import heroCeilingHanger from "@/assets/hero-ceiling-hanger.webp";
+import balconyGrill from "@/assets/balcony-invisible-grills-1.webp";
+import heroWindowGrill from "@/assets/service-invisible-grills-3.webp";
+import promoSlide from "@/assets/promo-prasanna-invisible-grills.webp";
 
 const showcaseImages = [
   { src: heroInvisibleGrills, alt: "Invisible Grills Installation", label: "SS316 Invisible Grills" },

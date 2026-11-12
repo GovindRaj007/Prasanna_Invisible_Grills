@@ -1,10 +1,13 @@
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { addResourceHints, measureLCP } from "@/lib/performanceUtils";
 
-// Initialize performance optimizations
-addResourceHints();
-measureLCP();
+const container = document.getElementById("root")!;
 
-createRoot(document.getElementById("root")!).render(<App />);
+// Pages are prerendered to static HTML at build time (scripts/prerender.mjs);
+// hydrate that markup instead of re-rendering it. Dev server has an empty root.
+if (container.hasChildNodes()) {
+  hydrateRoot(container, <App />);
+} else {
+  createRoot(container).render(<App />);
+}

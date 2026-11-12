@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(({ mode, isSsrBuild }) => ({
   server: {
     host: "::",
     port: 8080,
@@ -17,49 +17,45 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  build: {
-    // Production build optimization
-    outDir: "dist",
-    assetsDir: "assets",
-    sourcemap: false, // Disable source maps in production for security
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        drop_console: true, // Remove console logs in production
-        drop_debugger: true,
+  build: isSsrBuild
+    ? {
+        // Build-time only bundle used by scripts/prerender.mjs
+        outDir: "dist-server",
+        emptyOutDir: true,
+        minify: false,
+        sourcemap: false,
+      }
+    : {
+        outDir: "dist",
+        assetsDir: "assets",
+        sourcemap: false,
+        minify: "terser",
+        terserOptions: {
+          compress: {
+            drop_console: true,
+            drop_debugger: true,
+          },
+        },
+        rollupOptions: {
+          output: {
+            // Only the framework is pinned to a long-lived vendor chunk; everything else is
+            // split per route by Rollup so pages don't download components they don't use.
+            manualChunks: {
+              vendor: ["react", "react-dom", "react-router-dom", "react-helmet-async"],
+            },
+          },
+        },
+        reportCompressedSize: false,
+        assetsInlineLimit: 4096,
+        chunkSizeWarningLimit: 1000,
       },
-    },
-    rollupOptions: {
-      output: {
-        // Manual chunk splitting for optimal loading
-        manualChunks: {
-          'vendor': ['react', 'react-dom', 'react-router-dom'],
-          'ui-components': ['@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-label', '@radix-ui/react-select', '@radix-ui/react-tabs', '@radix-ui/react-toast', '@radix-ui/react-tooltip'],
-          'seo': ['react-helmet-async'],
-          'utils': ['clsx', 'tailwind-merge']
-        }
-      },
-    },
-    // Core Web Vitals optimization
-    reportCompressedSize: false, // Speed up build
-    // Optimize images in the bundle
-    assetsInlineLimit: 4096, // Inline assets smaller than 4kb
-    chunkSizeWarningLimit: 1000,
-    // Split chunks to improve cache busting
-    commonjsOptions: {
-      include: /node_modules/,
-    },
+  ssr: {
+    // CommonJS packages that need bundling for Node ESM named imports during prerender
+    noExternal: ["react-helmet-async"],
   },
-  
-  // Optimize CSS
   css: {
-    preprocessorOptions: {
-      // Pre-processor options for CSS optimization
-    },
     postcss: "./postcss.config.js",
   },
-  
-  // Enable gzip compression metadata (for server configuration)
   define: {
     "process.env.NODE_ENV": JSON.stringify(mode),
   },

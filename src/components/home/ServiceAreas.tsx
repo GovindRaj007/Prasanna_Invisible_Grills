@@ -2,124 +2,17 @@ import { useState, useRef,  TouchEvent } from "react";
 import { Link } from "react-router-dom";
 import { MapPin, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { LOCATIONS_BY_STATE, SERVICES } from "@/config/seo.constants";
 
-const services = [
-  { name: "Invisible Grills", slug: "invisible-grills" },
-  { name: "Invisible Grills Dealer", slug: "invisible-grills-dealer" },
-  { name: "Invisible Grills for Balcony", slug: "invisible-grills-balcony" },
-  { name: "Invisible Grill for Windows", slug: "invisible-grills-windows" },
-  { name: "Ceiling Cloth Hanger", slug: "ceiling-cloth-hanger" },
-];
+const services = SERVICES.map((s) => ({ name: s.name, slug: s.slug }));
 
 const areasByState = {
-  "Andhra Pradesh": [
-    {
-      city: "Visakhapatnam",
-      slug: "visakhapatnam",
-      localities: ["Beach Road", "MVP Colony", "Siripuram", "Madhurawada", "Gajuwaka"],
-    },
-    {
-      city: "Rajahmundry",
-      slug: "rajahmundry",
-      localities: ["City Centre", "Desai Nagar", "Vinayak Nagar", "Gopal Nagar", "Indira Nagar"],
-    },
-    {
-      city: "Vijayawada",
-      slug: "vijayawada",
-      localities: ["Benz Circle", "MG Road", "Labbipet", "Gurunanak Colony", "Auto Nagar"],
-    },
-    {
-      city: "Guntur",
-      slug: "guntur",
-      localities: ["Brodipet", "Arundelpet", "Naaz Center", "Lakshmipuram", "Kothapet"],
-    },
-    {
-      city: "Tirupati",
-      slug: "tirupati",
-      localities: ["Alipiri", "Tiruchanoor", "Mangalam", "Balaji Colony", "Renigunta Road"],
-    },
-    {
-      city: "Anantapur",
-      slug: "anantapur",
-      localities: ["Clock Tower", "Saptagiri Circle", "Narpala Road", "Bypass Road", "JNTU Area"],
-    },
-  ],
-  "Telangana": [
-    {
-      city: "Hyderabad",
-      slug: "hyderabad",
-      localities: ["Banjara Hills", "Jubilee Hills", "Hitech City", "Madhapur", "Kondapur"],
-    },
-    {
-      city: "Secunderabad",
-      slug: "secunderabad",
-      localities: ["Begumpet", "Trimulgherry", "Bowenpally", "Maredpally", "Tarnaka"],
-    },
-    {
-      city: "Gachibowli",
-      slug: "gachibowli",
-      localities: ["Financial District", "Nanakramguda", "Raidurg", "DLF Cyber City", "Mind Space"],
-    },
-    {
-      city: "Kukatpally",
-      slug: "kukatpally",
-      localities: ["KPHB Colony", "Allwyn Colony", "Moosapet", "Kukatpally Housing Board", "Balaji Nagar"],
-    },
-    {
-      city: "Madhapur",
-      slug: "madhapur",
-      localities: ["Ayyappa Society", "Kavuri Hills", "Cyber Towers", "Hitech City", "Durgam Cheruvu"],
-    },
-    {
-      city: "Shamshabad",
-      slug: "shamshabad",
-      localities: ["Rajiv Gandhi Airport", "Mamidipally", "Budvel", "Kishanguda", "Pedda Golconda"],
-    },
-    {
-      city: "Kompally",
-      slug: "kompally",
-      localities: ["Gundlapochampally", "Petbasheerabad", "Medchal", "Kandlakoya", "Bachupally"],
-    },
-    {
-      city: "Miyapur",
-      slug: "miyapur",
-      localities: ["Chandanagar", "BHEL", "Lingampally", "Hafeezpet", "Ameenpur"],
-    },
-    {
-      city: "Medchal",
-      slug: "medchal",
-      localities: ["Shamirpet", "Alwal", "Malkajgiri", "Yapral", "Bowenpally"],
-    },
-    {
-      city: "Kondapur",
-      slug: "kondapur",
-      localities: ["Botanical Garden", "Jayabheri Enclave", "Kothaguda", "Hafeezpet", "HITEC City"],
-    },
-    {
-      city: "Kokapet",
-      slug: "kokapet",
-      localities: ["Financial District", "Narsingi", "Gandipet", "Puppalguda", "Manikonda"],
-    },
-    {
-      city: "Tellapur",
-      slug: "tellapur",
-      localities: ["Osman Nagar", "Nallagandla", "Patancheru", "Gopanpally", "Gowlidoddi"],
-    },
-    {
-      city: "Mahbubnagar",
-      slug: "mahbubnagar",
-      localities: ["Town Center", "Jadcherla", "Pillalamarri", "Devarkadra", "Addakal"],
-    },
-    {
-      city: "Warangal",
-      slug: "warangal",
-      localities: ["Hanamkonda", "Kazipet", "Subedari", "Hunter Road", "Balasamudram"],
-    },
-  ],
+  Telangana: LOCATIONS_BY_STATE.Telangana,
+  "Andhra Pradesh": LOCATIONS_BY_STATE["Andhra Pradesh"],
 };
 
 interface LocationSliderProps {
-  areas: typeof areasByState["Andhra Pradesh"];
+  areas: readonly (typeof areasByState)["Telangana"][number][];
   stateName: string;
 }
 
@@ -279,37 +172,38 @@ export function ServiceAreas() {
             Service Areas
           </span>
           <h2 className="mb-4 font-heading text-3xl font-bold text-white md:text-4xl">
-            Serving Major Cities Across South India
+            Invisible Grills Across Telangana &amp; Andhra Pradesh
           </h2>
           <p className="text-lg text-white/80">
-            We provide professional installation services across Andhra Pradesh and Telangana. 
-            Find our services in your city.
+            Branches in Hyderabad, Visakhapatnam and Vijayawada with installation teams covering
+            {" "}{areasByState.Telangana.length + areasByState["Andhra Pradesh"].length} cities and areas. Find our services in your city.
           </p>
         </div>
 
         {/* State Tabs */}
-        <Tabs defaultValue="andhra-pradesh" className="w-full">
+        <Tabs defaultValue="telangana" className="w-full">
           <TabsList className="mx-auto mb-8 flex w-fit gap-2 bg-white/10 p-1.5 rounded-full">
-            <TabsTrigger 
-              value="andhra-pradesh" 
-              className="rounded-full px-6 py-2 text-sm font-medium text-white/70 data-[state=active]:bg-accent data-[state=active]:text-white transition-all"
-            >
-              Andhra Pradesh
-            </TabsTrigger>
             <TabsTrigger 
               value="telangana" 
               className="rounded-full px-6 py-2 text-sm font-medium text-white/70 data-[state=active]:bg-accent data-[state=active]:text-white transition-all"
             >
               Telangana
             </TabsTrigger>
+            <TabsTrigger 
+              value="andhra-pradesh" 
+              className="rounded-full px-6 py-2 text-sm font-medium text-white/70 data-[state=active]:bg-accent data-[state=active]:text-white transition-all"
+            >
+              Andhra Pradesh
+            </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="andhra-pradesh" className="mt-0">
-            <LocationSlider areas={areasByState["Andhra Pradesh"]} stateName="Andhra Pradesh" />
+          {/* forceMount keeps both states' links in the HTML for crawlers */}
+          <TabsContent value="telangana" forceMount className="mt-0 data-[state=inactive]:hidden">
+            <LocationSlider areas={areasByState["Telangana"]} stateName="Telangana" />
           </TabsContent>
 
-          <TabsContent value="telangana" className="mt-0">
-            <LocationSlider areas={areasByState["Telangana"]} stateName="Telangana" />
+          <TabsContent value="andhra-pradesh" forceMount className="mt-0 data-[state=inactive]:hidden">
+            <LocationSlider areas={areasByState["Andhra Pradesh"]} stateName="Andhra Pradesh" />
           </TabsContent>
         </Tabs>
       </div>

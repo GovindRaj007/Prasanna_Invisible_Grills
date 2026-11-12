@@ -23,7 +23,7 @@ const reasons = [
     icon: Wrench,
     title: "Professional Expertise",
     description:
-      "Over 8 years of experience with 10,000+ successful installations across residential and commercial properties.",
+      "Since 2015, our own teams have completed 3,500+ installations across homes, apartments and commercial properties in Telangana and Andhra Pradesh.",
   },
   {
     icon: HeadphonesIcon,
@@ -54,7 +54,7 @@ export function WhyChooseUs() {
           </h2>
           <p className="text-lg text-white/70">
             When it comes to your family's safety, settle for nothing less than the best. 
-            Here's why thousands trust us with their homes.
+            Here's why 3,500+ families trust us with their homes.
           </p>
         </div>
 

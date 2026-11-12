@@ -3,7 +3,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@/components/ui/details-accordion";
 import { Helmet } from "react-helmet-async";
 
 const faqs = [
@@ -35,7 +35,7 @@ const faqs = [
   {
     question: "What is the cost of invisible grill installation?",
     answer:
-      "The cost of invisible grills depends on various factors including the area to be covered and specific requirements. For accurate pricing tailored to your needs, we recommend calling us directly at +91 7339306098. Our team will provide a free site visit and a detailed quotation with transparent pricing and no hidden charges.",
+      "The cost of invisible grills depends on various factors including the area to be covered and specific requirements. For accurate pricing tailored to your needs, we recommend calling us directly at +91 73393 06098. Our team will provide a free site visit and a detailed quotation with transparent pricing and no hidden charges.",
   },
   {
     question: "How do I maintain invisible grills?",

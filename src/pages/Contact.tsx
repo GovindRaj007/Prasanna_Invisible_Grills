@@ -10,10 +10,14 @@ import { Phone, Mail, MapPin, Clock, CheckCircle } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { getSiteUrl } from "@/lib/getSiteUrl";
-import { SITE_CONFIG } from "@/config/seo.constants";
+import { BranchList } from "@/components/common/BranchList";
+import { BRANCHES, BUSINESS, ORGANIZATION_ID, PHONES, branchEmbedUrl, whatsappLink } from "@/config/business";
+import { LOCATIONS, SERVICES } from "@/config/seo.constants";
+import { graph, webPageNode } from "@/lib/schema";
 
 export default function Contact() {
+  const [activeBranchId, setActiveBranchId] = useState(BRANCHES[0].id);
+  const activeBranch = BRANCHES.find((b) => b.id === activeBranchId) ?? BRANCHES[0];
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -34,7 +38,6 @@ export default function Contact() {
     email: false,
   });
   const { toast } = useToast();
-  const siteUrl = getSiteUrl();
 
   // Validate name - minimum 7 letters (excluding spaces)
   const isNameValid = (name: string) => {
@@ -206,33 +209,22 @@ export default function Contact() {
     }
   };
 
+  const pageTitle = "Contact Us – Branches in Hyderabad, Vizag & Vijayawada";
+  const pageDescription =
+    "Call +91 73393 06098 or visit our branches in Hyderabad (Kollur, Gachibowli – Kondapur), Visakhapatnam & Vijayawada. Open 7 days, 8 AM – 6 PM.";
+
   return (
     <Layout>
       <SEOHead
-        title="Contact Prasanna Invisible Grills | Free Quote & Visit"
-        description="Contact Prasanna Invisible Grills for free quote & home visit. Call, WhatsApp, email. Expert consultants ready across Andhra Pradesh & Telangana."
-        keywords={`${SITE_CONFIG.keywords.primary}, ${SITE_CONFIG.keywords.secondary}`}
+        title={pageTitle}
+        description={pageDescription}
         canonicalUrl="/contact"
-        ogImage="/og-images/prasanna-invisible-grills-og.jpg"
-        structuredData={{
-          "@context": "https://schema.org",
-          "@type": "ContactPage",
-          "name": "Contact Prasanna Invisible Grills",
-          "description": "Contact Prasanna Invisible Grills for free consultation and quote",
-          "url": `${siteUrl}/contact`,
-          "organization": {
-            "@type": "LocalBusiness",
-            "name": "Prasanna Invisible Grills",
-            "telephone": "+917339306098",
-            "email": "info@prasannainvisible.in",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Visakhapatnam",
-              "addressRegion": "Andhra Pradesh",
-              "addressCountry": "IN"
-            }
+        structuredData={graph(
+          {
+            ...webPageNode({ path: "/contact", title: pageTitle, description: pageDescription, type: "ContactPage" }),
+            mainEntity: { "@id": ORGANIZATION_ID },
           }
-        }}
+        )}
       />
 
       <section className="section-bg-2 relative py-12 md:py-16">
@@ -241,7 +233,11 @@ export default function Contact() {
           <Breadcrumbs items={[{ label: "Contact" }]} darkMode />
           <h1 className="mt-4 font-heading text-4xl font-bold text-white md:text-5xl">Contact Us</h1>
           <p className="mt-4 max-w-2xl text-lg text-white/80">
-            Ready to protect your home? Get in touch for a free consultation and quote. Our team responds within 2 hours.
+            Get a free site visit and quote for invisible grills and ceiling cloth hangers. Call{" "}
+            <a href={`tel:${PHONES.primary.e164}`} data-track="call" className="font-semibold text-white underline-offset-4 hover:underline">
+              {PHONES.primary.display}
+            </a>{" "}
+            or visit one of our {BRANCHES.length} branches – {BUSINESS.hours.short.toLowerCase()}.
           </p>
         </div>
       </section>
@@ -347,11 +343,11 @@ export default function Contact() {
                         <SelectValue placeholder="Select service" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="invisible-grills">Invisible Grills</SelectItem>
-                        <SelectItem value="invisible-grills-dealer">Invisible Grills Dealer</SelectItem>
-                        <SelectItem value="invisible-grills-balcony">Invisible Grills for Balcony</SelectItem>
-                        <SelectItem value="invisible-grills-windows">Invisible Grill for Windows</SelectItem>
-                        <SelectItem value="ceiling-cloth-hanger">Ceiling Cloth Hanger</SelectItem>
+                        {SERVICES.map((s) => (
+                          <SelectItem key={s.slug} value={s.slug}>
+                            {s.name}
+                          </SelectItem>
+                        ))}
                         <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>
@@ -367,14 +363,11 @@ export default function Contact() {
                         <SelectValue placeholder="Select city" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="visakhapatnam">Visakhapatnam</SelectItem>
-                        <SelectItem value="vijayawada">Vijayawada</SelectItem>
-                        <SelectItem value="guntur">Guntur</SelectItem>
-                        <SelectItem value="tirupati">Tirupati</SelectItem>
-                        <SelectItem value="anantapur">Anantapur</SelectItem>
-                        <SelectItem value="hyderabad">Hyderabad</SelectItem>
-                        <SelectItem value="secunderabad">Secunderabad</SelectItem>
-                        <SelectItem value="warangal">Warangal</SelectItem>
+                        {LOCATIONS.map((loc) => (
+                          <SelectItem key={loc.slug} value={loc.slug}>
+                            {loc.parentCity ? `${loc.city}, ${loc.parentCity}` : loc.city}
+                          </SelectItem>
+                        ))}
                         <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>
@@ -413,48 +406,30 @@ export default function Contact() {
                 <p className="text-muted-foreground">Prefer to reach out directly? Use any of the methods below.</p>
               </div>
               <div className="space-y-4">
-                <div className="space-y-3">
-                <a href="tel:+917339306098" data-track="call" className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20"><Phone className="h-6 w-6 text-primary" /></div>
+                <div className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/20"><Phone className="h-6 w-6 text-primary" aria-hidden="true" /></div>
                   <div className="flex-1">
                     <p className="font-semibold text-white">Call Us</p>
                     <div className="flex flex-col gap-0.5">
-                      <p className="text-white/70">+91 7339306098</p>
-                      <p className="text-white/70">+91 8328376098</p>
+                      {[PHONES.primary, PHONES.secondary].map((p) => (
+                        <a key={p.e164} href={`tel:${p.e164}`} data-track="call" className="text-white/80 hover:text-white">
+                          {p.display} <span className="text-xs text-white/50">({p.label})</span>
+                        </a>
+                      ))}
                     </div>
                   </div>
-                </a>
-              </div>
-                <a href="https://wa.me/917339306098" data-track="whatsapp" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366]/20"><WhatsAppIcon className="h-6 w-6 text-[#25D366]" /></div>
-                  <div><p className="font-semibold text-white">WhatsApp</p><p className="text-white/70">Chat with us instantly</p></div>
-                </a>
-                <a href="mailto:info@prasannainvisible.in" className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20"><Mail className="h-6 w-6 text-primary" /></div>
-                  <div><p className="font-semibold text-white">Email</p><p className="text-white/70">info@prasannainvisible.in</p></div>
-                </a>
-              </div>
-              <div className="rounded-xl bg-gradient-to-br from-[hsl(222,47%,11%)] via-[hsl(217,33%,17%)] to-[hsl(215,25%,22%)] p-6 shadow-lg">
-                <h3 className="mb-4 font-heading text-lg font-semibold text-white">Head Office</h3>
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <MapPin className="mt-0.5 h-5 w-5 text-accent" />
-                    <p className="text-white/70">21-34/1, Viman Nagar,<br />Kakani Nagar, Visakhapatnam – 530009</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Clock className="mt-0.5 h-5 w-5 text-accent" />
-                    <div className="text-white/70"><p>Mon - Sat: 9:00 AM - 7:00 PM</p><p>Sunday: 10:00 AM - 5:00 PM</p></div>
-                  </div>
                 </div>
-                <div className="mt-4 flex flex-col gap-2 border-t border-white/10 pt-4">
-                  <a 
-                    href="https://www.google.com/maps/dir/?api=1&destination=21-34/1,+Viman+Nagar,+Kakani+Nagar,+Visakhapatnam,+530009"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-primary hover:underline"
-                  >
-                    📍 Get Directions
-                  </a>
+                <a href={whatsappLink()} data-track="whatsapp" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#25D366]/20"><WhatsAppIcon className="h-6 w-6 text-[#25D366]" /></div>
+                  <div><p className="font-semibold text-white">WhatsApp</p><p className="text-white/70">{PHONES.primary.display}</p></div>
+                </a>
+                <a href={`mailto:${BUSINESS.email}`} className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/20"><Mail className="h-6 w-6 text-primary" aria-hidden="true" /></div>
+                  <div><p className="font-semibold text-white">Email</p><p className="text-white/70">{BUSINESS.email}</p></div>
+                </a>
+                <div className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-[hsl(215,25%,15%)] via-[hsl(217,30%,20%)] to-[hsl(220,35%,18%)] p-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/20"><Clock className="h-6 w-6 text-primary" aria-hidden="true" /></div>
+                  <div><p className="font-semibold text-white">Working Hours (all branches)</p><p className="text-white/70">{BUSINESS.hours.label}</p></div>
                 </div>
               </div>
             </div>
@@ -462,15 +437,38 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="section-bg-5 relative pb-8">
+      {/* Branches */}
+      <section id="branches" className="section-bg-5 relative py-12 md:py-16" aria-labelledby="branches-heading">
         <div className="absolute inset-0 grid-pattern opacity-30" />
         <div className="container relative z-10">
-          <h2 className="mb-8 text-center font-heading text-2xl font-bold text-foreground">Find Us</h2>
-          <div className="overflow-hidden rounded-2xl shadow-lg">
+          <div className="mx-auto mb-8 max-w-3xl text-center">
+            <h2 id="branches-heading" className="mb-3 font-heading text-2xl font-bold text-foreground md:text-3xl">
+              Our Branches
+            </h2>
+            <p className="text-muted-foreground">
+              Two branches in Hyderabad, one in Visakhapatnam and one in Vijayawada – each with its own installation
+              team for faster site visits across Telangana and Andhra Pradesh.
+            </p>
+          </div>
+          <BranchList onSelect={(b) => setActiveBranchId(b.id)} selectedId={activeBranch.id} />
+
+          <div className="mt-8 overflow-hidden rounded-2xl shadow-lg">
+            <div className="flex flex-wrap items-center gap-2 bg-[hsl(222,47%,11%)] px-4 py-3 text-sm text-white">
+              <MapPin className="h-4 w-4 text-accent" aria-hidden="true" />
+              <span className="font-medium">
+                {activeBranch.area}, {activeBranch.city}
+              </span>
+            </div>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3800.1310241462825!2d83.22323687463464!3d17.73846449259752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3968744d7ba41d%3A0x981e3823aa3ee38c!2s21-3%2F4%2F3%2C%20Viman%20Nagar%2C%20Kakani%20Nagar%2C%20Visakhapatnam%2C%20Andhra%20Pradesh%20530009!5e0!3m2!1sen!2sin!4v1771075787961!5m2!1sen!2sin" 
-              width="100%" height="400" style={{ border: 0 }} allowFullScreen loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade" title="Prasanna Invisible Grills Office Location"
+              key={activeBranch.id}
+              src={branchEmbedUrl(activeBranch)}
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title={`Map – ${BUSINESS.name}, ${activeBranch.area}, ${activeBranch.city}`}
             />
           </div>
         </div>

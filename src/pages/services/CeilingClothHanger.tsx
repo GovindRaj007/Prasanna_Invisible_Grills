@@ -5,11 +5,18 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Phone, ArrowRight, CheckCircle2, Shirt, ArrowUpDown, Maximize2, Droplets, Hammer, Timer } from "lucide-react";
 import { CeilingClothHangerFAQ } from "@/components/faq/CeilingClothHangerFAQ";
-import { SERVICE_SEO_KEYWORDS, SERVICES } from "@/config/seo.constants";
+import { LOCATIONS, getService } from "@/config/seo.constants";
+import { PHONES } from "@/config/business";
+import { graph, serviceNode, webPageNode } from "@/lib/schema";
+
+const SERVICE = getService("ceiling-cloth-hanger")!;
+const PAGE_PATH = "/ceiling-cloth-hanger";
+const PAGE_TITLE = "Ceiling Cloth Hanger Installation – Pulley Drying Rack";
+const PAGE_DESCRIPTION = "Ceiling-mounted pulley cloth drying hangers (4, 6 & 8 rod) – rust-proof, 25–50 kg capacity, 5-year warranty. Installed in Hyderabad, Vizag & Vijayawada.";
 import { ServiceImageSlider } from "@/components/services/ServiceImageSlider";
 
-import heroCeilingHanger from "@/assets/hero-ceiling-hanger.jpg";
-import ceilingHanger2 from "@/assets/ceiling-hanger-2.jpg";
+import heroCeilingHanger from "@/assets/hero-ceiling-hanger.webp";
+import ceilingHanger2 from "@/assets/ceiling-hanger-2.webp";
 
 const benefits = [
   "Space-saving pulley system for small balconies",
@@ -41,66 +48,24 @@ const serviceImages = [
 ];
 
 export default function CeilingClothHanger() {
-  const serviceMeta = SERVICES.find((s) => s.slug === "ceiling-cloth-hanger");
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: "Motorized Ceiling Cloth Hanger Installation",
-    name: "Ceiling Cloth Hanger Installation",
-    description: "Professional installation of motorized and manual ceiling cloth hanger systems. Perfect for small apartments and balconies. Space-saving solution with efficient pulley systems. Easy installation and maintenance.",
-    provider: {
-      "@type": "HomeAndConstructionBusiness",
-      name: "Prasanna Invisible Grills",
-      telephone: "+917339306098",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Visakhapatnam",
-        addressRegion: "Andhra Pradesh",
-        addressCountry: "IN"
-      }
-    },
-    areaServed: [
-      { "@type": "City", "name": "Visakhapatnam" },
-      { "@type": "City", "name": "Rajahmundry" },
-      { "@type": "City", "name": "Vijayawada" },
-      { "@type": "City", "name": "Guntur" },
-      { "@type": "City", "name": "Tirupati" },
-      { "@type": "City", "name": "Anantapur" },
-      { "@type": "City", "name": "Hyderabad" },
-      { "@type": "City", "name": "Mahbubnagar" },
-      { "@type": "City", "name": "Warangal" },
-      { "@type": "City", "name": "Telangana" }
-    ],
-    offers: {
-      "@type": "Offer",
-      availability: "https://schema.org/InStock",
-      priceCurrency: "INR",
-      price: "2499",
-      description: "Motorized and manual ceiling cloth hanger installation"
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: 4.9,
-      reviewCount: 150,
-      bestRating: 5,
-      worstRating: 1
-    }
-  };
+  const structuredData = graph(
+    webPageNode({ path: PAGE_PATH, title: PAGE_TITLE, description: PAGE_DESCRIPTION, image: SERVICE.ogImage }),
+    serviceNode({ service: SERVICE, path: PAGE_PATH, description: PAGE_DESCRIPTION })
+  );
 
   return (
     <Layout>
       <SEOHead
-        title={`${serviceMeta?.name || "Ceiling Cloth Hanger Installation"} | Prasanna`}
-        description={serviceMeta?.longDescription || "Space-saving ceiling cloth hanger installation with motorized or manual pulley systems. Rust-proof, high-load capacity, and expert setup for Hyderabad, Vizag, Vijayawada, Guntur, and Tirupati."}
-        keywords={SERVICE_SEO_KEYWORDS.clothHanger.join(", ")}
-        ogImage="/og-images/ceiling-cloth-hanger-og.jpg"
-        canonicalUrl="/ceiling-cloth-hanger"
+        title={PAGE_TITLE}
+        description={PAGE_DESCRIPTION}
+        canonicalUrl={PAGE_PATH}
+        ogImage={SERVICE.ogImage}
         structuredData={structuredData}
       />
 
       <section className="relative py-16 md:py-28 overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroCeilingHanger} alt="Ceiling Cloth Hanger Installation" className="h-full w-full object-cover" />
+          <img src={heroCeilingHanger} alt="Ceiling Cloth Hanger Installation" width={1600} height={900} {...{ fetchpriority: "high" }} className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(222,47%,8%,0.95)] via-[hsl(222,47%,10%,0.88)] to-[hsl(222,47%,10%,0.75)]" />
         </div>
         <div className="absolute inset-0 grid-pattern-dark opacity-30" />
@@ -119,7 +84,7 @@ export default function CeilingClothHanger() {
                 <Link to="/contact" className="flex items-center gap-2">Get Free Quote <ArrowRight className="h-5 w-5" /></Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 bg-white/10 text-white hover:bg-white/20" asChild>
-                <a href="tel:+917339306098" data-track="call" className="flex items-center gap-2"><Phone className="h-5 w-5" /> Call: +91 73393 06098</a>
+                <a href={`tel:${PHONES.primary.e164}`} data-track="call" className="flex items-center gap-2"><Phone className="h-5 w-5" /> Call: {PHONES.primary.display}</a>
               </Button>
             </div>
           </div>
@@ -182,20 +147,10 @@ export default function CeilingClothHanger() {
         <div className="container">
           <h2 className="mb-8 text-center font-heading text-3xl font-bold text-white">Ceiling Hangers by Location</h2>
           <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-4">
-            {[
-              { name: "Visakhapatnam", slug: "visakhapatnam" },
-              { name: "Rajahmundry", slug: "rajahmundry" },
-              { name: "Vijayawada", slug: "vijayawada" },
-              { name: "Guntur", slug: "guntur" },
-              { name: "Tirupati", slug: "tirupati" },
-              { name: "Anantapur", slug: "anantapur" },
-              { name: "Hyderabad", slug: "hyderabad" },
-              { name: "Secunderabad", slug: "secunderabad" },
-              { name: "Warangal", slug: "warangal" },
-            ].map((loc) => (
+            {LOCATIONS.map((loc) => (
               <Link key={loc.slug} to={`/ceiling-cloth-hanger-${loc.slug}`}
                 className="flex items-center justify-between rounded-xl bg-gradient-to-br from-[hsl(222,47%,11%)] via-[hsl(217,33%,17%)] to-[hsl(215,25%,22%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1 border border-white/10">
-                <span className="font-medium text-white">{loc.name}</span>
+                <span className="font-medium text-white">{loc.city}</span>
                 <ArrowRight className="h-4 w-4 text-accent" />
               </Link>
             ))}
@@ -215,7 +170,7 @@ export default function CeilingClothHanger() {
                 <Link to="/contact" className="flex items-center gap-2">Book Installation <ArrowRight className="h-5 w-5" /></Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 bg-white/10 text-white hover:bg-white/20" asChild>
-                <a href="tel:+917339306098" data-track="call">Call: +91 73393 06098</a>
+                <a href={`tel:${PHONES.primary.e164}`} data-track="call">Call: {PHONES.primary.display}</a>
               </Button>
             </div>
           </div>

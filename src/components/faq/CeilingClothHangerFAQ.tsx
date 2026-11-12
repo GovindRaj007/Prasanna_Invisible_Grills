@@ -3,7 +3,9 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@/components/ui/details-accordion";
+import { Helmet } from "react-helmet-async";
+import { faqNode, graph } from "@/lib/schema";
 
 const faqs = [
   {
@@ -34,7 +36,10 @@ const faqs = [
 
 export function CeilingClothHangerFAQ() {
   return (
-    <section className="section-bg-1 pt-8 pb-12 md:py-16">
+    <section className="section-bg-1 relative pt-8 pb-12 md:py-16">
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(graph(faqNode(faqs)))}</script>
+      </Helmet>
       <div className="absolute inset-0 grid-pattern opacity-50" />
       <div className="container relative z-10">
         <div className="mx-auto mb-12 max-w-3xl text-center">

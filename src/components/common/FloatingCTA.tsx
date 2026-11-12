@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Phone } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { PHONES, whatsappLink } from "@/config/business";
 
 export function FloatingCTA() {
   const [showWhatsApp, setShowWhatsApp] = useState(true);
@@ -13,8 +14,8 @@ export function FloatingCTA() {
   }, []);
 
   const href = showWhatsApp
-    ? "https://wa.me/917339306098?text=Hi,%20I'm%20interested%20in%20your%20invisible%20grills%20and%20nets%20services."
-    : "tel:+917339306098";
+    ? whatsappLink()
+    : `tel:${PHONES.primary.e164}`;
 
   const label = showWhatsApp ? "Chat on WhatsApp" : "Call Now";
 

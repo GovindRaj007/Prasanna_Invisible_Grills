@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
@@ -6,115 +6,29 @@ import { FloatingCTA } from "@/components/common/FloatingCTA";
 import { ReviewVideoModal } from "@/components/common/ReviewVideoModal";
 import { ScrollToTop } from "@/components/common/ScrollToTop";
 import { REVIEW_VIDEO_CONFIG } from "@/config/reviewVideoConfig";
-import { usePerformanceMonitoring } from "@/hooks/usePerformanceMonitoring";
-import { getSiteUrl } from "@/lib/getSiteUrl";
+import { siteGraph } from "@/lib/schema";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
+// Built once – identical on every page (Organization, WebSite, branches).
+const SITE_GRAPH = JSON.stringify(siteGraph());
+
 export function Layout({ children }: LayoutProps) {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-  const siteUrl = getSiteUrl();
-  
-  // Enable performance monitoring
-  usePerformanceMonitoring();
-
-  // Add VideoObject structured data for SEO
-  useEffect(() => {
-    const videoSchema = {
-      "@context": "https://schema.org",
-      "@type": "VideoObject",
-      "name": "Customer Review - Prasanna Invisible Grills",
-      "description": "Watch our satisfied customers share their experience with Prasanna Invisible Grills. Premium invisible grills for windows, balconies, and more.",
-      "thumbnailUrl": `${siteUrl}/og-images/invisible-grills-og.jpg`,
-      "uploadDate": new Date().toISOString(),
-      "duration": "PT2M30S",
-      "contentUrl": `${siteUrl}/videos/customer-reviews.mp4`,
-      "interactionCount": "100",
-      "author": {
-        "@type": "Organization",
-        "name": "Prasanna Invisible Grills"
-      }
-    };
-
-    // Create script tag
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.textContent = JSON.stringify(videoSchema);
-    document.head.appendChild(script);
-
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, [siteUrl]);
 
   return (
     <>
       <Helmet>
-        {/* Global SEO Meta Tags for All Pages */}
-        {/* Ensure crawlability and indexing priority */}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-        <meta charSet="utf-8" />
-        <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
-        
-        {/* DNS Prefetch for Critical Resources */}
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* Organization Global Schema */}
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "name": "Prasanna Invisible Grills",
-          "url": siteUrl,
-          "logo": `${siteUrl}/og-image.jpg`,
-          "description": "Premium invisible grills installation and ceiling cloth hangers for windows, balconies, and railings. Professional installation with 10-year warranty.",
-          "telephone": "+917339306098",
-          "email": "info@prasannainvisible.in",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Visakhapatnam",
-            "addressLocality": "Visakhapatnam",
-            "addressRegion": "Andhra Pradesh",
-            "postalCode": "530016",
-            "addressCountry": "IN"
-          },
-          "sameAs": [
-            "https://facebook.com",
-            "https://instagram.com"
-          ],
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "contactType": "Customer Service",
-            "telephone": "+917339306098",
-            "email": "info@prasannainvisible.in"
-          }
-        })}</script>
-
-        {/* Website Schema for Sitelinks */}
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "url": siteUrl,
-          "name": "Prasanna Invisible Grills",
-          "description": "Premium invisible grills installation and ceiling cloth hangers",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": `${siteUrl}/search?q={search_term_string}`
-            },
-            "query-input": "required name=search_term_string"
-          }
-        })}</script>
+        <script type="application/ld+json">{SITE_GRAPH}</script>
       </Helmet>
-      
+
       <div className="flex min-h-screen flex-col">
         <Navbar onOpenVideoModal={() => setIsVideoModalOpen(true)} />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
         <Footer />
         <FloatingCTA />
         <ScrollToTop />

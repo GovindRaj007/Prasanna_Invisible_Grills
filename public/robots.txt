@@ -1,21 +1,50 @@
+# Prasanna Invisible Grills – https://prasannainvisible.in
+# All public pages are open to search engines and AI answer engines.
+
 User-agent: *
 Allow: /
-Allow: /assets/
-Allow: /og-images/
-Allow: /images/
-Allow: /optimized-images/
-Disallow: /admin/
-Disallow: /private/
-Disallow: /search
-Disallow: /*?*sort
-Disallow: /*?*filter
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+
+# Search engines
+User-agent: Googlebot
+Allow: /
 
 User-agent: Bingbot
 Allow: /
-Disallow: /admin/
-Disallow: /private/
-Crawl-delay: 1
 
-# Sitemaps (must be absolute URLs)
-Sitemap: https://prasannainvisible.in/sitemap-index.xml
+# AI search / answer engines (ChatGPT, Claude, Perplexity, Gemini, Apple, Copilot)
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 Sitemap: https://prasannainvisible.in/sitemap.xml

@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef, useCallback, TouchEvent } from "react";
 import { Star, Quote } from "lucide-react";
-import { Helmet } from "react-helmet-async";
-import { getSiteUrl } from "@/lib/getSiteUrl";
 
 const testimonials = [
   {
@@ -47,8 +45,7 @@ export function Testimonials() {
   const [isTransitioning, setIsTransitioning] = useState(true);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
-  const siteUrl = getSiteUrl();
+  const touchEndX = useRef(0);
 
   // Use doubled array for seamless infinite loop
   const extendedTestimonials = [...testimonials, ...testimonials];
@@ -118,50 +115,8 @@ export function Testimonials() {
   const handleMouseUp = () => setIsPaused(false);
   const handleMouseLeave = () => setIsPaused(false);
 
-  // Generate Review/AggregateRating Schema
-  const aggregateReviewSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": `${siteUrl}/#organization`,
-    "name": "Prasanna Invisible Grills",
-    "url": siteUrl,
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": 4.9,
-      "reviewCount": 150,
-      "bestRating": 5,
-      "worstRating": 1
-    }
-  };
-
-  const reviewSchemas = testimonials.map((testimonial) => ({
-    "@context": "https://schema.org",
-    "@type": "Review",
-    reviewRating: {
-      "@type": "Rating",
-      ratingValue: parseFloat(testimonial.rating.toString()),
-      bestRating: 5,
-      worstRating: 1
-    },
-    reviewBody: testimonial.text,
-    author: {
-      "@type": "Person",
-      name: testimonial.name
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Prasanna Invisible Grills"
-    }
-  }));
-
   return (
     <section className="section-bg-3 relative py-16 md:py-24 overflow-hidden">
-      <Helmet>
-        <script type="application/ld+json">{JSON.stringify(aggregateReviewSchema)}</script>
-        {reviewSchemas.map((schema, index) => (
-          <script key={index} type="application/ld+json">{JSON.stringify(schema)}</script>
-        ))}
-      </Helmet>
       <div className="absolute inset-0 grid-pattern opacity-40" />
       <div className="container relative z-10">
         {/* Section Header */}

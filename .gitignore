@@ -45,3 +45,8 @@ coverage/
 
 # Generated at build time by scripts/generate-sitemaps-enhanced.js
 public/sitemap*.xml
+dist-server
+
+# Search Console exports (scripts/gsc.mjs) and OAuth secrets – never commit
+gsc-data/
+client_secret*.json

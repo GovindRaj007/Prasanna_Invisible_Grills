@@ -7,6 +7,9 @@
 Options -MultiViews -Indexes
 DirectoryIndex index.html
 
+# Unknown URLs get a real 404 status with a helpful (noindex) page – no soft 404s.
+ErrorDocument 404 /404.html
+
 # -----------------------------------------------------------------------------
 # MIME types (sitemaps, manifest, modern image/video formats)
 # -----------------------------------------------------------------------------
@@ -49,13 +52,28 @@ DirectoryIndex index.html
   RewriteRule (^|/)\.(?!well-known/) - [F,L]
 
   # ---------------------------------------------------------------------------
-  # SPA routing: serve real files/dirs directly, everything else -> index.html
+  # Duplicate-content guards for prerendered pages
+  #   /about.html -> /about   (direct requests only, not internal rewrites)
+  #   /about/     -> /about   (trailing slash; canonical URLs have none)
   # ---------------------------------------------------------------------------
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{THE_REQUEST} \s/+([^?\s]+?)\.html[\s?] [NC]
+  RewriteCond %1 !^404$
+  RewriteRule ^ /%1 [L,R=301]
+
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.+)/$ /$1 [L,R=301]
+
+  # ---------------------------------------------------------------------------
+  # Routing
+  #   1. Real files (assets, images, sitemap.xml, llms.txt...) are served as-is.
+  #   2. /invisible-grills-hyderabad -> invisible-grills-hyderabad.html (prerendered)
+  #   3. Anything else falls through to ErrorDocument 404 (/404.html, status 404).
+  # ---------------------------------------------------------------------------
+  RewriteCond %{REQUEST_FILENAME} -f
   RewriteRule ^ - [L]
 
-  RewriteRule ^ index.html [L]
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^([^/.]+)$ $1.html [L]
 </IfModule>
 
 # -----------------------------------------------------------------------------

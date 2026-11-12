@@ -3,7 +3,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@/components/ui/details-accordion";
 import { Helmet } from "react-helmet-async";
 
 const faqs = [
@@ -40,12 +40,12 @@ const faqs = [
   {
     question: "Do you provide services in my area?",
     answer:
-      "We currently serve all major areas in Visakhapatnam, Rajahmundry, Vijayawada, Guntur, Tirupati, and Anantapur. For locations outside these cities, please contact us for availability. We're constantly expanding our service areas across Andhra Pradesh.",
+      "Yes, across Telangana and Andhra Pradesh. We have two branches in Hyderabad (Kollur and Gachibowli – Kondapur Road), one in Visakhapatnam (Kakani Nagar) and one in Vijayawada (Tadepalli). From these we cover Hyderabad, Secunderabad, Gachibowli, Kondapur, Madhapur, Kukatpally, Miyapur, Kokapet, Tellapur, Kompally, Medchal, Shamshabad, Mahbubnagar, Warangal, Visakhapatnam, Rajahmundry, Vijayawada, Guntur, Tirupati and Anantapur. For other locations, call +91 73393 06098 to check availability.",
   },
   {
     question: "What is the cost of invisible grill installation?",
     answer:
-      "The cost of invisible grills depends on various factors including the area to be covered and specific requirements. For accurate pricing tailored to your needs, we recommend calling us directly at +91 7339306098. Our team will provide a free site visit and a detailed quotation with transparent pricing and no hidden charges.",
+      "The cost of invisible grills depends on various factors including the area to be covered and specific requirements. For accurate pricing tailored to your needs, we recommend calling us directly at +91 73393 06098. Our team will provide a free site visit and a detailed quotation with transparent pricing and no hidden charges.",
   },
 ];
 

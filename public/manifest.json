@@ -1,33 +1,21 @@
 {
   "name": "Prasanna Invisible Grills",
   "short_name": "Prasanna Grills",
-  "description": "Premium invisible grills installation and ceiling cloth hangers. Professional service with 10-year warranty.",
+  "description": "Invisible grills for balconies and windows and ceiling cloth hangers – branches in Hyderabad, Visakhapatnam and Vijayawada.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "theme_color": "#000000",
+  "theme_color": "#0f172a",
   "background_color": "#ffffff",
+  "lang": "en-IN",
+  "categories": ["business", "lifestyle"],
   "icons": [
     {
       "src": "/favicon.png",
+      "sizes": "139x147",
       "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "/og-image.jpg",
-      "sizes": "540x720",
-      "type": "image/jpeg"
-    }
-  ],
-  "categories": ["business", "home-improvement"],
-  "screenshots_large": [
-    {
-      "src": "/og-image.jpg",
-      "sizes": "1080x1440",
-      "type": "image/jpeg"
+      "purpose": "any"
     }
   ]
 }

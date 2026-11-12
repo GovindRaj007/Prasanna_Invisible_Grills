@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, Phone, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ReviewVideoButton } from "@/components/common/ReviewVideoButton";
 import { ReviewVideoPreview } from "@/components/common/ReviewVideoPreview";
 import { REVIEW_VIDEO_CONFIG } from "@/config/reviewVideoConfig";
-import logoImage from "@/assets/logo-Prasanna-invisible-grills.png";
+import { SERVICES, LOCATIONS_BY_STATE } from "@/config/seo.constants";
+import { PHONES } from "@/config/business";
+import logoImage from "@/assets/logo-Prasanna-invisible-grills.webp";
 import {
   Accordion,
   AccordionContent,
@@ -21,40 +23,11 @@ import {
   SheetDescription,
 } from "@/components/ui/sheet";
 
-const services = [
-  { name: "Invisible Grills", href: "/invisible-grills", slug: "invisible-grills" },
-  { name: "Invisible Grills Dealer", href: "/invisible-grills-dealer", slug: "invisible-grills-dealer" },
-  { name: "Invisible Grills for Balcony", href: "/invisible-grills-balcony", slug: "invisible-grills-balcony" },
-  { name: "Invisible Grill for Windows", href: "/invisible-grills-windows", slug: "invisible-grills-windows" },
-  { name: "Ceiling Cloth Hanger", href: "/ceiling-cloth-hanger", slug: "ceiling-cloth-hanger" },
-];
+const services = SERVICES.map((s) => ({ name: s.name, href: "/" + s.slug, slug: s.slug }));
 
-const locationsByState = {
-  "Andhra Pradesh": [
-    { name: "Visakhapatnam", slug: "visakhapatnam" },
-    { name: "Rajahmundry", slug: "rajahmundry" },
-    { name: "Vijayawada", slug: "vijayawada" },
-    { name: "Guntur", slug: "guntur" },
-    { name: "Tirupati", slug: "tirupati" },
-    { name: "Anantapur", slug: "anantapur" },
-  ],
-  "Telangana": [
-    { name: "Hyderabad", slug: "hyderabad" },
-    { name: "Secunderabad", slug: "secunderabad" },
-    { name: "Gachibowli", slug: "gachibowli" },
-    { name: "Kukatpally", slug: "kukatpally" },
-    { name: "Madhapur", slug: "madhapur" },
-    { name: "Shamshabad", slug: "shamshabad" },
-    { name: "Kompally", slug: "kompally" },
-    { name: "Miyapur", slug: "miyapur" },
-    { name: "Medchal", slug: "medchal" },
-    { name: "Kondapur", slug: "kondapur" },
-    { name: "Kokapet", slug: "kokapet" },
-    { name: "Tellapur", slug: "tellapur" },
-    { name: "Mahbubnagar", slug: "mahbubnagar" },
-    { name: "Warangal", slug: "warangal" },
-  ],
-};
+const locationsByState = Object.fromEntries(
+  Object.entries(LOCATIONS_BY_STATE).map(([state, locs]) => [state, locs.map((l) => ({ name: l.city, slug: l.slug }))])
+) as Record<string, { name: string; slug: string }[]>;
 
 interface NavbarProps {
   onOpenVideoModal: () => void;
@@ -65,8 +38,7 @@ export function Navbar({ onOpenVideoModal }: NavbarProps) {
   const [mobileAccordionValue, setMobileAccordionValue] = useState<string>("");
   const [mobileStateAccordionValue, setMobileStateAccordionValue] = useState<string>("");
   const location = useLocation();
-  const navigate = useNavigate();
-
+  
   // Handle browser back button when mobile menu is open
   useEffect(() => {
     const handlePopState = (event: PopStateEvent) => {
@@ -89,9 +61,7 @@ export function Navbar({ onOpenVideoModal }: NavbarProps) {
 
   const isActive = (path: string) => location.pathname === path;
 
-  const handleLogoClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    navigate("/");
+  const handleLogoClick = () => {
     // Scroll to top of page
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -100,13 +70,14 @@ export function Navbar({ onOpenVideoModal }: NavbarProps) {
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-gradient-to-r from-[hsl(222,47%,11%,0.92)] via-[hsl(217,33%,17%,0.88)] to-[hsl(215,25%,22%,0.85)] backdrop-blur-xl">
       <nav className="container flex h-[4.5rem] items-center justify-between md:h-20">
         {/* Logo */}
-        <button 
+        <Link
+          to="/"
           onClick={handleLogoClick}
           className="flex items-center cursor-pointer transition-transform hover:scale-105 focus:outline-none"
           aria-label="Prasanna Invisible Grills - Go to Home"
         >
-          <img src={logoImage} alt="Prasanna Invisible Grills" className="h-[4.2rem] w-auto md:h-[4.5rem]" />
-        </button>
+          <img src={logoImage} alt="Prasanna Invisible Grills" width={191} height={67} className="h-[4.2rem] w-auto md:h-[4.5rem]" />
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-1 lg:flex">
@@ -144,40 +115,26 @@ export function Navbar({ onOpenVideoModal }: NavbarProps) {
               Locations
               <ChevronDown className="h-4 w-4" />
             </button>
-            <div className="absolute left-0 top-full z-50 hidden w-80 rounded-lg border border-white/10 bg-gradient-to-br from-[hsl(222,47%,11%)] via-[hsl(217,33%,17%)] to-[hsl(215,25%,22%)] shadow-xl backdrop-blur-xl group-hover:block max-h-[70vh] overflow-y-auto">
-              <Accordion type="single" collapsible className="w-full">
+            <div className="absolute left-0 top-full z-50 hidden w-[30rem] rounded-lg border border-white/10 bg-gradient-to-br from-[hsl(222,47%,11%)] via-[hsl(217,33%,17%)] to-[hsl(215,25%,22%)] shadow-xl backdrop-blur-xl group-hover:block max-h-[70vh] overflow-y-auto">
+              <div className="grid grid-cols-2 gap-4 p-4">
                 {Object.entries(locationsByState).map(([state, locations]) => (
-                  <AccordionItem key={state} value={state} className="border-b border-white/10">
-                    <AccordionTrigger className="px-4 py-3 text-base font-semibold text-accent hover:no-underline hover:bg-white/5">
-                      {state}
-                    </AccordionTrigger>
-                    <AccordionContent className="pb-0">
-                      <Accordion type="single" collapsible className="w-full pl-2">
-                        {locations.map((loc) => (
-                          <AccordionItem key={loc.slug} value={loc.slug} className="border-b-0">
-                            <AccordionTrigger className="px-4 py-2.5 text-sm font-medium text-white/90 hover:no-underline hover:bg-white/5">
-                              {loc.name}
-                            </AccordionTrigger>
-                            <AccordionContent className="pb-0">
-                              <div className="space-y-1 pb-2 pl-4">
-                                {services.map((service) => (
-                                  <Link
-                                    key={`${service.slug}-${loc.slug}`}
-                                    to={`/${service.slug}-${loc.slug}`}
-                                    className="block rounded-md px-3 py-2 text-xs font-medium text-white/70 hover:bg-white/10 hover:text-white transition-colors"
-                                  >
-                                    {service.name}
-                                  </Link>
-                                ))}
-                              </div>
-                            </AccordionContent>
-                          </AccordionItem>
-                        ))}
-                      </Accordion>
-                    </AccordionContent>
-                  </AccordionItem>
+                  <div key={state}>
+                    <p className="mb-2 px-2 text-sm font-semibold text-accent">{state}</p>
+                    <ul className="space-y-0.5">
+                      {locations.map((loc) => (
+                        <li key={loc.slug}>
+                          <Link
+                            to={"/invisible-grills-" + loc.slug}
+                            className="block rounded-md px-2 py-1.5 text-sm text-white/85 hover:bg-white/10 hover:text-white transition-colors"
+                          >
+                            {loc.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </Accordion>
+              </div>
             </div>
           </div>
 
@@ -204,12 +161,12 @@ export function Navbar({ onOpenVideoModal }: NavbarProps) {
         <div className="hidden items-center gap-3 lg:flex">
           <ReviewVideoButton onClick={onOpenVideoModal} />
           <div className="flex flex-col items-center">
-            <a href="tel:+917339306098" data-track="call" className="flex items-center gap-2 rounded-md border border-white/30 bg-white/10 px-3 py-2 text-sm font-medium text-white hover:bg-white/20 transition-colors">
+            <a href={`tel:${PHONES.primary.e164}`} data-track="call" className="flex items-center gap-2 rounded-md border border-white/30 bg-white/10 px-3 py-2 text-sm font-medium text-white hover:bg-white/20 transition-colors">
               <Phone className="h-4 w-4" />
               <span>Call Now</span>
             </a>
           </div>
-          <Button size="sm" className="cta-gradient text-white">
+          <Button size="sm" className="cta-gradient text-white" asChild>
             <Link to="/contact">Get Free Quote</Link>
           </Button>
         </div>
@@ -359,9 +316,9 @@ export function Navbar({ onOpenVideoModal }: NavbarProps) {
               {/* Bottom CTA */}
               <div className="px-4 pb-6 pt-2 border-t border-white/10 space-y-3">
                 <div className="flex flex-col space-y-2">
-                  <a href="tel:+917339306098" data-track="call" className="flex items-center justify-center gap-2 rounded-md border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-medium text-white hover:bg-white/20 transition-colors">
+                  <a href={`tel:${PHONES.primary.e164}`} data-track="call" className="flex items-center justify-center gap-2 rounded-md border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-medium text-white hover:bg-white/20 transition-colors">
                     <Phone className="h-4 w-4" />
-                    Call: +91 73393 06098
+                    Call: {PHONES.primary.display}
                   </a>
                 </div>
                 <SheetClose asChild>

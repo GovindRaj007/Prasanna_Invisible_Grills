@@ -14,13 +14,20 @@ import {
 } from "lucide-react";
 import { InvisibleGrillsFAQ } from "@/components/faq/InvisibleGrillsFAQ";
 import { CTASection } from "@/components/home/CTASection";
-import { SERVICE_SEO_KEYWORDS, SERVICES } from "@/config/seo.constants";
+import { LOCATIONS, getService } from "@/config/seo.constants";
+import { PHONES } from "@/config/business";
+import { graph, serviceNode, webPageNode } from "@/lib/schema";
+
+const SERVICE = getService("invisible-grills")!;
+const PAGE_PATH = "/invisible-grills";
+const PAGE_TITLE = "Invisible Grills Installation – SS316 Safety Grills";
+const PAGE_DESCRIPTION = "Invisible grills for balconies, windows & staircases with SS316 marine-grade cables. Child & pet safe, 10-year warranty. Hyderabad, Vizag & Vijayawada.";
 import { ServiceImageSlider } from "@/components/services/ServiceImageSlider";
 
-import heroInvisibleGrills from "@/assets/hero-invisible-grills.jpg";
-import serviceInvisibleGrills1 from "@/assets/service-invisible-grills-1.jpg";
-import serviceInvisibleGrills2 from "@/assets/service-invisible-grills-2.jpg";
-import serviceInvisibleGrills3 from "@/assets/service-invisible-grills-3.jpg";
+import heroInvisibleGrills from "@/assets/hero-invisible-grills.webp";
+import serviceInvisibleGrills1 from "@/assets/service-invisible-grills-1.webp";
+import serviceInvisibleGrills2 from "@/assets/service-invisible-grills-2.webp";
+import serviceInvisibleGrills3 from "@/assets/service-invisible-grills-3.webp";
 
 const features = [
   {
@@ -63,20 +70,7 @@ const specifications = [
   { label: "Corrosion Resistance", value: "High (Marine Grade)" },
 ];
 
-const locations = [
-  { name: "Visakhapatnam", slug: "visakhapatnam" },
-  { name: "Rajahmundry", slug: "rajahmundry" },
-  { name: "Vijayawada", slug: "vijayawada" },
-  { name: "Guntur", slug: "guntur" },
-  { name: "Tirupati", slug: "tirupati" },
-  { name: "Anantapur", slug: "anantapur" },
-  { name: "Hyderabad", slug: "hyderabad" },
-  { name: "Secunderabad", slug: "secunderabad" },
-  { name: "Gachibowli", slug: "gachibowli" },
-  { name: "Kukatpally", slug: "kukatpally" },
-  { name: "Madhapur", slug: "madhapur" },
-  { name: "Warangal", slug: "warangal" },
-];
+const locations = LOCATIONS.map((l) => ({ name: l.city, slug: l.slug }));
 
 const serviceImages = [
   { src: serviceInvisibleGrills1, alt: "Invisible Grills Installation" },
@@ -85,67 +79,25 @@ const serviceImages = [
 ];
 
 export default function InvisibleGrills() {
-  const serviceMeta = SERVICES.find((s) => s.slug === "invisible-grills");
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: "Invisible Grill Installation",
-    name: "Premium Invisible Grills Installation",
-    description: "Professional invisible grill installation using 316 marine-grade stainless steel cables. Provides maximum safety for balconies and windows while maintaining unobstructed views. 10-year warranty and professional installation included.",
-    provider: {
-      "@type": "HomeAndConstructionBusiness",
-      name: "Prasanna Invisible Grills",
-      telephone: "+917339306098",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Visakhapatnam",
-        addressRegion: "Andhra Pradesh",
-        addressCountry: "IN"
-      }
-    },
-    areaServed: [
-      { "@type": "City", "name": "Visakhapatnam" },
-      { "@type": "City", "name": "Rajahmundry" },
-      { "@type": "City", "name": "Vijayawada" },
-      { "@type": "City", "name": "Guntur" },
-      { "@type": "City", "name": "Tirupati" },
-      { "@type": "City", "name": "Anantapur" },
-      { "@type": "City", "name": "Hyderabad" },
-      { "@type": "City", "name": "Mahbubnagar" },
-      { "@type": "City", "name": "Warangal" },
-      { "@type": "City", "name": "Telangana" }
-    ],
-    offers: {
-      "@type": "Offer",
-      availability: "https://schema.org/InStock",
-      priceCurrency: "INR",
-      price: "On Request",
-      description: "Professional installation with 10-year warranty"
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: 4.9,
-      reviewCount: 150,
-      bestRating: 5,
-      worstRating: 1
-    }
-  };
+  const structuredData = graph(
+    webPageNode({ path: PAGE_PATH, title: PAGE_TITLE, description: PAGE_DESCRIPTION, image: SERVICE.ogImage }),
+    serviceNode({ service: SERVICE, path: PAGE_PATH, description: PAGE_DESCRIPTION })
+  );
 
   return (
     <Layout>
       <SEOHead
-        title={`${serviceMeta?.name || "Invisible Grills"} Installation | Prasanna`}
-        description={serviceMeta?.longDescription || "Premium invisible grill installation with 316 stainless steel. Balconies, windows, railings. Expert team, 4.9★ rated, 10-year warranty."}
-        keywords={SERVICE_SEO_KEYWORDS.invisibleGrills.join(", ")}
-        ogImage="/og-images/invisible-grills-og.jpg"
-        canonicalUrl="/invisible-grills"
+        title={PAGE_TITLE}
+        description={PAGE_DESCRIPTION}
+        canonicalUrl={PAGE_PATH}
+        ogImage={SERVICE.ogImage}
         structuredData={structuredData}
       />
 
       {/* Hero Section */}
       <section className="relative py-16 md:py-28 overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroInvisibleGrills} alt="Invisible Grills Installation" className="h-full w-full object-cover" />
+          <img src={heroInvisibleGrills} alt="Invisible Grills Installation" width={1600} height={900} {...{ fetchpriority: "high" }} className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(222,47%,8%,0.95)] via-[hsl(222,47%,10%,0.88)] to-[hsl(222,47%,10%,0.75)]" />
         </div>
         <div className="absolute inset-0 grid-pattern-dark opacity-30" />
@@ -166,7 +118,7 @@ export default function InvisibleGrills() {
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 bg-white/10 text-white hover:bg-white/20" asChild>
-                <a href="tel:+917339306098" data-track="call" className="flex items-center gap-2">
+                <a href={`tel:${PHONES.primary.e164}`} data-track="call" className="flex items-center gap-2">
                   <Phone className="h-5 w-5" /> Call Now
                 </a>
               </Button>

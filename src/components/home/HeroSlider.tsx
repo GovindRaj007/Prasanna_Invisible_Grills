@@ -3,11 +3,17 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Phone, ArrowRight, Grid3X3, Store, Fence, Shirt } from "lucide-react";
 
-import heroInvisibleGrills from "@/assets/hero-invisible-grills.jpg";
-import heroDealer from "@/assets/hero-dealer.jpg";
-import heroCeilingHanger from "@/assets/hero-ceiling-hanger.jpg";
-import heroBalconyGrill from "@/assets/hero-balcony-grill.jpg";
-import heroWindowGrill from "@/assets/hero-window-grill.jpg";
+import heroInvisibleGrills from "@/assets/hero-invisible-grills.webp";
+import heroDealer from "@/assets/hero-dealer.webp";
+import heroCeilingHanger from "@/assets/hero-ceiling-hanger.webp";
+import heroBalconyGrill from "@/assets/hero-balcony-grill.webp";
+import heroWindowGrill from "@/assets/hero-window-grill.webp";
+import heroInvisibleGrillsSm from "@/assets/hero-invisible-grills-sm.webp";
+import heroDealerSm from "@/assets/hero-dealer-sm.webp";
+import heroCeilingHangerSm from "@/assets/hero-ceiling-hanger-sm.webp";
+import heroBalconyGrillSm from "@/assets/hero-balcony-grill-sm.webp";
+import heroWindowGrillSm from "@/assets/hero-window-grill-sm.webp";
+import { PHONES } from "@/config/business";
 
 const slides = [
   {
@@ -17,6 +23,7 @@ const slides = [
     subtitle: "Premium Stainless Steel Protection",
     description: "Experience unobstructed views with our marine-grade SS316 invisible grills. Child-safe, rust-proof, and aesthetically superior protection for your balconies and windows.",
     image: heroInvisibleGrills,
+    imageSm: heroInvisibleGrillsSm,
     keywords: ["Child Safety", "Rust-Proof", "10-Year Warranty"],
     href: "/invisible-grills",
     cta: "Explore Invisible Grills",
@@ -28,6 +35,7 @@ const slides = [
     subtitle: "Authorized Dealership & Wholesale",
     description: "Partner with us for wholesale invisible grills. Access dealer pricing, installation training, and exclusive territory rights to grow your business.",
     image: heroDealer,
+    imageSm: heroDealerSm,
     keywords: ["Wholesale Pricing", "Dealer Training", "Territory Rights"],
     href: "/invisible-grills-dealer",
     cta: "Become a Dealer",
@@ -39,6 +47,7 @@ const slides = [
     subtitle: "Premium Balcony Protection",
     description: "Transform your balcony into a safe, open space with crystal-clear views. Custom-fit solutions for apartments and villas with maximum safety.",
     image: heroBalconyGrill,
+    imageSm: heroBalconyGrillSm,
     keywords: ["Balcony Safety", "Clear Views", "Custom Fit"],
     href: "/invisible-grills-balcony",
     cta: "Protect Your Balcony",
@@ -50,6 +59,7 @@ const slides = [
     subtitle: "Invisible Window Protection",
     description: "Secure your windows with virtually invisible grills. Maximum safety for children and pets while maintaining clear views and natural ventilation.",
     image: heroWindowGrill,
+    imageSm: heroWindowGrillSm,
     keywords: ["Window Safety", "Child Protection", "Clear Views"],
     href: "/invisible-grills-windows",
     cta: "Secure Windows",
@@ -61,6 +71,7 @@ const slides = [
     subtitle: "Space-Saving Drying Solutions",
     description: "Maximize your space with our premium ceiling-mounted cloth drying systems. Pulley-operated, rust-proof, and designed for the modern Indian home.",
     image: heroCeilingHanger,
+    imageSm: heroCeilingHangerSm,
     keywords: ["Pulley System", "Space Saving", "Rust-Proof"],
     href: "/ceiling-cloth-hanger",
     cta: "Explore Hangers",
@@ -71,6 +82,12 @@ export function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  // Only the first slide image loads up-front (LCP); the rest load after idle.
+  const [loadAll, setLoadAll] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setLoadAll(true), 2500);
+    return () => clearTimeout(t);
+  }, []);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
@@ -163,11 +180,20 @@ export function HeroSlider() {
             index === currentSlide ? "opacity-100 hero-slide-active" : "opacity-0"
           }`}
         >
-          <img
-            src={s.image}
-            alt={s.title}
-            className="h-full w-full object-cover"
-          />
+          {(index === 0 || loadAll || index === currentSlide) && (
+            <img
+              src={s.image}
+              srcSet={`${s.imageSm} 828w, ${s.image} 1600w`}
+              sizes="100vw"
+              alt={`${s.title} – ${s.subtitle}`}
+              width={1600}
+              height={900}
+              loading={index === 0 ? "eager" : "lazy"}
+              {...{ fetchpriority: index === 0 ? "high" : "low" }}
+              decoding={index === 0 ? "sync" : "async"}
+              className="h-full w-full object-cover"
+            />
+          )}
           {/* Dark overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(222,47%,8%,0.92)] via-[hsl(222,47%,10%,0.85)] to-[hsl(222,47%,10%,0.7)]" />
         </div>
@@ -184,27 +210,27 @@ export function HeroSlider() {
             key={`badge-${currentSlide}`}
             className="hero-content-animate mb-4 md:mb-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-medium text-white backdrop-blur-sm"
           >
-            <slide.icon className="h-3 w-3 md:h-4 md:w-4 text-accent" />
-            India's Premium Safety Grill Specialists
+            <slide.icon className="h-3 w-3 md:h-4 md:w-4 text-accent" aria-hidden="true" />
+            <h1 className="font-medium">Invisible Grills &amp; Ceiling Cloth Hangers in Hyderabad, Vizag &amp; Vijayawada</h1>
           </div>
 
           {/* Title */}
-          <h1 
+          <p
             key={`title-${currentSlide}`}
             className="hero-content-animate mb-2 md:mb-3 font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white"
             style={{ animationDelay: "0.1s" }}
           >
             {slide.title}
-          </h1>
+          </p>
 
           {/* Subtitle */}
-          <h2 
+          <p
             key={`subtitle-${currentSlide}`}
             className="hero-content-animate mb-4 md:mb-6 font-heading text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-accent"
             style={{ animationDelay: "0.2s" }}
           >
             {slide.subtitle}
-          </h2>
+          </p>
 
           {/* Description */}
           <p 
@@ -253,9 +279,9 @@ export function HeroSlider() {
               className="border-white/30 bg-white/10 text-white hover:bg-white/20 h-11 md:h-12 text-sm md:text-base px-5 md:px-6"
               asChild
             >
-              <a href="tel:+91 7339306098" data-track="call" className="flex items-center gap-2">
+              <a href={`tel:${PHONES.primary.e164}`} data-track="call" className="flex items-center gap-2">
                 <Phone className="h-4 w-4 md:h-5 md:w-5" />
-                +91 7339306098
+                {PHONES.primary.display}
               </a>
             </Button>
           </div>

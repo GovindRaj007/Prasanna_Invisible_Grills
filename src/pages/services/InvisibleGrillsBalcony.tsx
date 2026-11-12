@@ -5,12 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Phone, ArrowRight, CheckCircle2, Fence, Eye, Shield, Wind, Ruler, Sparkles } from "lucide-react";
 import { InvisibleGrillsBalconyFAQ } from "@/components/faq/InvisibleGrillsBalconyFAQ";
-import { SERVICE_SEO_KEYWORDS, SERVICES } from "@/config/seo.constants";
+import { LOCATIONS, getService } from "@/config/seo.constants";
+import { PHONES } from "@/config/business";
+import { graph, serviceNode, webPageNode } from "@/lib/schema";
+
+const SERVICE = getService("invisible-grills-balcony")!;
+const PAGE_PATH = "/invisible-grills-balcony";
+const PAGE_TITLE = "Invisible Grills for Balcony – Balcony Safety Grills";
+const PAGE_DESCRIPTION = "Balcony invisible grills with SS316 cables at 2–3 inch spacing – open views, no falls. 10-year warranty, free site visit in Hyderabad, Vizag & Vijayawada.";
 import { ServiceImageSlider } from "@/components/services/ServiceImageSlider";
 
-import heroBalconyGrill from "@/assets/hero-balcony-grill.jpg";
-import balconyGrill from "@/assets/balcony-invisible-grills.jpg";
-import balconyGrill1 from "@/assets/balcony-invisible-grills-1.jpg";
+import heroBalconyGrill from "@/assets/hero-balcony-grill.webp";
+import balconyGrill from "@/assets/balcony-invisible-grills.webp";
+import balconyGrill1 from "@/assets/balcony-invisible-grills-1.webp";
 
 const benefits = [
   "Unobstructed panoramic views from your balcony",
@@ -45,66 +52,24 @@ const serviceImages = [
 ];
 
 export default function InvisibleGrillsBalcony() {
-  const serviceMeta = SERVICES.find((s) => s.slug === "invisible-grills-balcony");
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: "Balcony Invisible Grill Installation",
-    name: "Invisible Grills for Balcony",
-    description: "Premium invisible grill installation for balconies. Provides child and pet safety with crystal clear unobstructed views. 316 marine-grade stainless steel cables, weather-resistant design, 10-year warranty.",
-    provider: {
-      "@type": "HomeAndConstructionBusiness",
-      name: "Prasanna Invisible Grills",
-      telephone: "+917339306098",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Visakhapatnam",
-        addressRegion: "Andhra Pradesh",
-        addressCountry: "IN"
-      }
-    },
-    areaServed: [
-      { "@type": "City", "name": "Visakhapatnam" },
-      { "@type": "City", "name": "Rajahmundry" },
-      { "@type": "City", "name": "Vijayawada" },
-      { "@type": "City", "name": "Guntur" },
-      { "@type": "City", "name": "Tirupati" },
-      { "@type": "City", "name": "Anantapur" },
-      { "@type": "City", "name": "Hyderabad" },
-      { "@type": "City", "name": "Mahbubnagar" },
-      { "@type": "City", "name": "Warangal" },
-      { "@type": "City", "name": "Telangana" }
-    ],
-    offers: {
-      "@type": "Offer",
-      availability: "https://schema.org/InStock",
-      priceCurrency: "INR",
-      price: "On Request",
-      description: "Professional balcony grill installation with 10-year warranty"
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: 4.9,
-      reviewCount: 150,
-      bestRating: 5,
-      worstRating: 1
-    }
-  };
+  const structuredData = graph(
+    webPageNode({ path: PAGE_PATH, title: PAGE_TITLE, description: PAGE_DESCRIPTION, image: SERVICE.ogImage }),
+    serviceNode({ service: SERVICE, path: PAGE_PATH, description: PAGE_DESCRIPTION })
+  );
 
   return (
     <Layout>
       <SEOHead
-        title={`${serviceMeta?.name || "Balcony Invisible Grills"} | Prasanna`}
-        description={serviceMeta?.longDescription || "Premium balcony invisible grills and invisible grill for balcony installation. Child-safe, weather-resistant 316 stainless steel that keeps views open."}
-        keywords={SERVICE_SEO_KEYWORDS.balcony.join(", ")}
-        ogImage="/og-images/balcony-invisible-grills-og.jpg"
-        canonicalUrl="/invisible-grills-balcony"
+        title={PAGE_TITLE}
+        description={PAGE_DESCRIPTION}
+        canonicalUrl={PAGE_PATH}
+        ogImage={SERVICE.ogImage}
         structuredData={structuredData}
       />
 
       <section className="relative py-16 md:py-28 overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroBalconyGrill} alt="Invisible Grills for Balcony" className="h-full w-full object-cover" />
+          <img src={heroBalconyGrill} alt="Invisible Grills for Balcony" width={1600} height={900} {...{ fetchpriority: "high" }} className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(222,47%,8%,0.95)] via-[hsl(222,47%,10%,0.88)] to-[hsl(222,47%,10%,0.75)]" />
         </div>
         <div className="absolute inset-0 grid-pattern-dark opacity-30" />
@@ -123,7 +88,7 @@ export default function InvisibleGrillsBalcony() {
                 <Link to="/contact" className="flex items-center gap-2">Get Free Quote <ArrowRight className="h-5 w-5" /></Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 bg-white/10 text-white hover:bg-white/20" asChild>
-                <a href="tel:+917339306098" data-track="call" className="flex items-center gap-2"><Phone className="h-5 w-5" /> Call: +91 73393 06098</a>
+                <a href={`tel:${PHONES.primary.e164}`} data-track="call" className="flex items-center gap-2"><Phone className="h-5 w-5" /> Call: {PHONES.primary.display}</a>
               </Button>
             </div>
           </div>
@@ -183,20 +148,10 @@ export default function InvisibleGrillsBalcony() {
         <div className="container">
           <h2 className="mb-8 text-center font-heading text-3xl font-bold text-white">Balcony Grills by Location</h2>
           <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-4">
-            {[
-              { name: "Visakhapatnam", slug: "visakhapatnam" },
-              { name: "Rajahmundry", slug: "rajahmundry" },
-              { name: "Vijayawada", slug: "vijayawada" },
-              { name: "Guntur", slug: "guntur" },
-              { name: "Tirupati", slug: "tirupati" },
-              { name: "Anantapur", slug: "anantapur" },
-              { name: "Hyderabad", slug: "hyderabad" },
-              { name: "Secunderabad", slug: "secunderabad" },
-              { name: "Warangal", slug: "warangal" },
-            ].map((loc) => (
+            {LOCATIONS.map((loc) => (
               <Link key={loc.slug} to={`/invisible-grills-balcony-${loc.slug}`}
                 className="flex items-center justify-between rounded-xl bg-gradient-to-br from-[hsl(222,47%,11%)] via-[hsl(217,33%,17%)] to-[hsl(215,25%,22%)] p-4 transition-all hover:shadow-lg hover:-translate-y-1 border border-white/10">
-                <span className="font-medium text-white">{loc.name}</span>
+                <span className="font-medium text-white">{loc.city}</span>
                 <ArrowRight className="h-4 w-4 text-accent" />
               </Link>
             ))}
@@ -216,7 +171,7 @@ export default function InvisibleGrillsBalcony() {
                 <Link to="/contact" className="flex items-center gap-2">Book Free Site Visit <ArrowRight className="h-5 w-5" /></Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 bg-white/10 text-white hover:bg-white/20" asChild>
-                <a href="tel:+917339306098" data-track="call">Call: +91 73393 06098</a>
+                <a href={`tel:${PHONES.primary.e164}`} data-track="call">Call: {PHONES.primary.display}</a>
               </Button>
             </div>
           </div>

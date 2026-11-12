@@ -1,566 +1,252 @@
 /**
- * SEO Configuration Constants
- * Centralized SEO metadata for the entire application
+ * SEO content configuration: services and service-area locations.
+ * Business identity (phones, branches, hours) lives in ./business.ts.
+ *
+ * NOTE: scripts/generate-sitemaps-enhanced.js and scripts/prerender.mjs
+ * derive the route list from App routes; keep slugs here in sync with App.tsx.
  */
 
-export const SITE_CONFIG = {
-  name: "Prasanna Invisible Grills",
-  shortName: "Prasanna Grills",
-  description: "Premium invisible grills installation and ceiling cloth hangers with 10-year warranty across Andhra Pradesh & Telangana",
-  longDescription: "Expert invisible grills installation for windows, balconies, and railings. Professional ceiling cloth hangers. 316 stainless steel materials. 10-year warranty. Free site visit & consultation. 4.9★ rated service across 16+ cities.",
-  url: "https://prasannainvisible.in",
-  phoneNumber: "+91-7339306098",
-  whatsappNumber: "+917339306098",
-  email: "info@prasannainvisible.in",
-  address: {
-    streetAddress: "MVP Colony",
-    locality: "Visakhapatnam",
-    region: "Andhra Pradesh",
-    postalCode: "530017",
-    country: "IN",
-  },
-  coordinates: {
-    latitude: 17.7231,
-    longitude: 83.0512,
-  },
-  socialProfiles: {
-    facebook: "https://facebook.com/prasannainvisiblegrills",
-    instagram: "https://instagram.com/prasannainvisiblegrills",
-    youtube: "https://youtube.com/@prasannainvisiblegrills",
-  },
-  businessHours: {
-    monday: "08:00-18:00",
-    tuesday: "08:00-18:00",
-    wednesday: "08:00-18:00",
-    thursday: "08:00-18:00",
-    friday: "08:00-18:00",
-    saturday: "08:00-18:00",
-    sunday: "closed",
-  },
-  keywords: {
-    primary: "invisible grills, invisible grill installation, safety grills",
-    secondary: "balcony grills, window grills, ceiling cloth hanger, dealer",
-  },
-};
+export type ServiceSlug =
+  | "invisible-grills"
+  | "invisible-grills-balcony"
+  | "invisible-grills-windows"
+  | "ceiling-cloth-hanger"
+  | "invisible-grills-dealer";
 
-export const HOME_SEO_KEYWORDS = [
-  "invisible grills",
-  "invisible grill installation",
-  "invisible grill fitting",
-  "invisible grill services",
-  "balcony invisible grills",
-  "window invisible grills",
-  "ceiling cloth hanger",
-  "invisible grill installation in Hyderabad",
-  "invisible grills in Vizag",
-  "invisible grills in Vijayawada",
-  "invisible grills in Guntur",
-  "invisible grills in Tirupati",
-  "invisible grills in Anantapur",
-  "invisible grill near me",
-  "invisible grill installers",
-] as const;
+export interface ServiceInfo {
+  slug: ServiceSlug;
+  /** Navigation / card name */
+  name: string;
+  /** Name used in "<seoName> in <City>" titles and H1s */
+  seoName: string;
+  /** schema.org serviceType */
+  serviceType: string;
+  description: string;
+  ogImage: string;
+  /** Short answer-first summary used on location pages and llms.txt */
+  summary: string;
+  highlights: string[];
+}
 
-export const SERVICE_SEO_KEYWORDS = {
-  invisibleGrills: [
-    "invisible grills",
-    "invisible window grills",
-    "safety grills",
-    "balcony grills",
-    "pet safety",
-    "child safety",
-    "stainless steel grills",
-    "modern grills",
-    "frameless grills",
-    "invisible grill installation",
-    "invisible grill fitting",
-    "invisible grill near me",
-  ],
-  balcony: [
-    "balcony invisible grills",
-    "balcony safety grills",
-    "balcony protection",
-    "high-rise safety",
-    "apartment safety",
-    "balcony railings",
-  ],
-  windows: [
-    "window invisible grills",
-    "window safety grills",
-    "window protection",
-    "window security",
-    "home security windows",
-    "burglar proof windows",
-  ],
-  clothHanger: [
-    "ceiling cloth hanger",
-    "roof cloth dryer",
-    "pulley system",
-    "space saving",
-    "cloth drying rack",
-    "balcony space saver",
-  ],
-  dealer: [
-    "invisible grills dealer",
-    "grill dealer",
-    "franchise opportunity",
-    "business partner",
-    "dealer program",
-  ],
-} as const;
-
-/**
- * Services Configuration
- * Core services offered with keywords and metadata
- */
-export const SERVICES = [
+export const SERVICES: ServiceInfo[] = [
   {
-    id: "invisible-grills",
-    name: "Invisible Grills",
     slug: "invisible-grills",
-    description: "Premium invisible grills for windows and balconies",
-    longDescription: "Professional invisible grills installation using 316 stainless steel materials. Provides complete safety without compromising aesthetics. Perfect for apartments, villas, and penthouses.",
-    keywords: [
-      "invisible grills",
-      "invisible window grills",
-      "safety grills",
-      "balcony grills",
-      "pet safety",
-      "child safety",
-      "stainless steel grills",
-      "modern grills",
-      "frameless grills",
+    name: "Invisible Grills",
+    seoName: "Invisible Grills",
+    serviceType: "Invisible grill installation",
+    description:
+      "Invisible grills installation for balconies, windows, staircases and terraces using SS316 marine-grade stainless steel cables with a 10-year warranty.",
+    ogImage: "/og-images/invisible-grills-og.jpg",
+    summary:
+      "Invisible grills are tensioned SS316 stainless-steel cables (2–3 mm) fixed vertically in aluminium tracks at 2–3 inch spacing. They protect children and pets from falls without blocking the view, light or airflow.",
+    highlights: [
+      "SS316 marine-grade stainless steel cables",
+      "2–3 inch spacing — child & pet safe",
+      "Installed in 4–8 hours for a typical balcony",
+      "10-year warranty on material and workmanship",
     ],
-    features: [
-      "316 Stainless Steel",
-      "10-Year Warranty",
-      "Professional Installation",
-      "Invisible Design",
-      "Child & Pet Safe",
-      "Weather Resistant",
-    ],
-    price: "Custom Quote",
-    image: "/og-images/invisible-grills-og.jpg",
-    priority: "0.95",
   },
   {
-    id: "invisible-grills-balcony",
-    name: "Invisible Grills for Balcony",
     slug: "invisible-grills-balcony",
-    description: "Safety grills specifically designed for balconies",
-    longDescription: "Specialized invisible grill system for balcony safety. Maintains open views while providing complete protection. Ideal for high-rise apartments and modern buildings.",
-    keywords: [
-      "balcony invisible grills",
-      "balcony safety grills",
-      "balcony protection",
-      "high-rise safety",
-      "apartment safety",
-      "balcony railings",
+    name: "Invisible Grills for Balcony",
+    seoName: "Invisible Grills for Balcony",
+    serviceType: "Balcony invisible grill installation",
+    description:
+      "Balcony invisible grills for apartments, villas and high-rises — open views with fall protection for children and pets, SS316 cables and a 10-year warranty.",
+    ogImage: "/og-images/balcony-invisible-grills-og.jpg",
+    summary:
+      "Balcony invisible grills replace bulky iron grills or nets with near-invisible SS316 cables, keeping the balcony open while stopping falls. They suit high-rise apartments where builders or associations don't allow external grills.",
+    highlights: [
+      "Ideal for high-rise apartments and gated communities",
+      "No change to the building's elevation",
+      "Weather, UV and rust resistant",
+      "Free site measurement and quote",
     ],
-    features: [
-      "Balcony-Specific Design",
-      "High Load Capacity",
-      "Weather Proof",
-      "Easy Maintenance",
-      "10-Year Warranty",
-    ],
-    price: "Custom Quote",
-    image: "/og-images/balcony-invisible-grills-og.jpg",
-    priority: "0.90",
   },
   {
-    id: "invisible-grills-windows",
-    name: "Invisible Grills for Windows",
     slug: "invisible-grills-windows",
-    description: "Protective window grills with invisible design",
-    longDescription: "Premium window grills that blend seamlessly with your décor. Provides security without visual obstruction. Perfect for maintaining architectural aesthetics.",
-    keywords: [
-      "window invisible grills",
-      "window safety grills",
-      "window protection",
-      "window security",
-      "home security windows",
-      "burglar proof windows",
+    name: "Invisible Grill for Windows",
+    seoName: "Invisible Grills for Windows",
+    serviceType: "Window invisible grill installation",
+    description:
+      "Window invisible grills for sliding, casement and French windows — child-safe protection that keeps light, ventilation and views, with a 10-year warranty.",
+    ogImage: "/og-images/window-invisible-grills-og.jpg",
+    summary:
+      "Window invisible grills are fitted inside or outside the window frame with SS316 cables, so windows stay openable for ventilation while children and pets are protected. A typical window takes 2–4 hours to install.",
+    highlights: [
+      "Works with sliding, casement and French windows",
+      "Keeps ventilation and natural light",
+      "2–4 hours per window",
+      "Rust-proof, low maintenance",
     ],
-    features: [
-      "Invisible Design",
-      "Burglary Prevention",
-      "View Preservation",
-      "Easy Cleaning",
-      "10-Year Warranty",
-    ],
-    price: "Custom Quote",
-    image: "/og-images/window-invisible-grills-og.jpg",
-    priority: "0.90",
   },
   {
-    id: "ceiling-cloth-hanger",
-    name: "Ceiling Cloth Hanger",
     slug: "ceiling-cloth-hanger",
-    description: "Space-saving pulley system for clothes drying",
-    longDescription: "Innovative ceiling-mounted cloth hanger system. Saves precious balcony and floor space. Perfect for apartments with limited outdoor space. Smooth pulley mechanism with heavy-load capacity.",
-    keywords: [
-      "ceiling cloth hanger",
-      "roof cloth dryer",
-      "pulley system",
-      "space saving",
-      "cloth drying rack",
-      "balcony space saver",
+    name: "Ceiling Cloth Hanger",
+    seoName: "Ceiling Cloth Hanger",
+    serviceType: "Ceiling cloth hanger installation",
+    description:
+      "Ceiling-mounted pulley cloth drying hangers for balconies and utility areas — space-saving, rust-proof, quick installation.",
+    ogImage: "/og-images/ceiling-cloth-hanger-og.jpg",
+    summary:
+      "A ceiling cloth hanger is a pulley-operated drying rack mounted on the balcony or utility ceiling. Rods are lowered to hang clothes and raised to dry them overhead, freeing floor and railing space.",
+    highlights: [
+      "Pulley-operated — lower, load and raise",
+      "Stainless steel / aluminium rust-proof rods",
+      "Holds 25–50 kg depending on model",
+      "Installed in 2–3 hours, 5-year warranty",
     ],
-    features: [
-      "Pulley System",
-      "Heavy Load Capacity",
-      "Space Saving",
-      "Easy Installation",
-      "10-Year Warranty",
-    ],
-    price: "Custom Quote",
-    image: "/og-images/ceiling-cloth-hanger-og.jpg",
-    priority: "0.85",
   },
   {
-    id: "invisible-grills-dealer",
-    name: "Invisible Grills Dealer",
     slug: "invisible-grills-dealer",
-    description: "Become a authorized dealer partner",
-    longDescription: "Join our network of authorized dealers. Competitive margins, comprehensive support, and proven business model. Perfect business opportunity for entrepreneurs.",
-    keywords: [
-      "invisible grills dealer",
-      "grill dealer",
-      "franchise opportunity",
-      "business partner",
-      "dealer program",
+    name: "Invisible Grills Dealer",
+    seoName: "Invisible Grills Dealer",
+    serviceType: "Invisible grill dealership and wholesale supply",
+    description:
+      "Invisible grills dealer and wholesale supplier — SS316 cables, tracks and accessories for contractors, builders and retailers, with dealership opportunities.",
+    ogImage: "/og-images/invisible-grills-dealer-og.jpg",
+    summary:
+      "As an invisible grills dealer and wholesale supplier, Prasanna supplies SS316 cables, aluminium tracks and fittings to contractors, builders and retailers, and offers dealership with installation training.",
+    highlights: [
+      "Wholesale SS316 cables, tracks and fittings",
+      "Bulk pricing for builders and contractors",
+      "Dealership with installation training",
+      "Supply across Telangana and Andhra Pradesh",
     ],
-    features: [
-      "High Margins",
-      "Proven Business Model",
-      "Marketing Support",
-      "Training",
-      "Territory Protection",
-    ],
-    price: "Contact for Details",
-    image: "/og-images/invisible-grills-dealer-og.jpg",
-    priority: "0.80",
   },
-] as const;
+];
 
-/**
- * Locations Configuration
- * Detailed location data with coordinates and keywords
- */
-export const LOCATIONS = [
-  // Andhra Pradesh
-  {
-    state: "Andhra Pradesh",
-    city: "Visakhapatnam",
-    slug: "visakhapatnam",
-    latitude: 17.7231,
-    longitude: 83.0512,
-    keywords: ["Visakhapatnam", "Vizag", "Port City"],
-    localities: ["Dwarakanagar", "Madhurawada", "Gajuwaka", "Vizag City"],
-    priority: "0.95",
-  },
-  {
-    state: "Andhra Pradesh",
-    city: "Rajahmundry",
-    slug: "rajahmundry",
-    latitude: 17.3689,
-    longitude: 81.7743,
-    keywords: ["Rajahmundry", "Raj", "East Godavari"],
-    localities: ["Railway New Town", "Indira Nagar", "Prakasam Nagar"],
-    priority: "0.90",
-  },
-  {
-    state: "Andhra Pradesh",
-    city: "Vijayawada",
-    slug: "vijayawada",
-    latitude: 16.5062,
-    longitude: 80.6480,
-    keywords: ["Vijayawada", "Krishna City", "NTR City"],
-    localities: ["Labbipet", "Patamata", "Bhavanipuram", "Kanuru"],
-    priority: "0.90",
-  },
-  {
-    state: "Andhra Pradesh",
-    city: "Guntur",
-    slug: "guntur",
-    latitude: 16.3056,
-    longitude: 80.4515,
-    keywords: ["Guntur", "Potti Sri Ramulu", "Guntur City"],
-    localities: ["Railway Kodad", "Suryaraopet", "Kushaiguda"],
-    priority: "0.85",
-  },
-  {
-    state: "Andhra Pradesh",
-    city: "Tirupati",
-    slug: "tirupati",
-    latitude: 13.1939,
-    longitude: 79.8941,
-    keywords: ["Tirupati", "Tirupati Temple City", "SRIKALAHASTEESWARA"],
-    localities: ["Renigunta", "Chandragiri", "A. Rangapuram"],
-    priority: "0.85",
-  },
-  {
-    state: "Andhra Pradesh",
-    city: "Anantapur",
-    slug: "anantapur",
-    latitude: 14.5833,
-    longitude: 77.6167,
-    keywords: ["Anantapur", "Rayalaseema", "Dhone"],
-    localities: ["Anantapur City", "Kalyandrug"],
-    priority: "0.80",
-  },
-  // Telangana
-  {
-    state: "Telangana",
-    city: "Hyderabad",
-    slug: "hyderabad",
-    latitude: 17.3850,
-    longitude: 78.4867,
-    keywords: ["Hyderabad", "IT City", "Pearl City"],
-    localities: ["Kukatpally", "Gachibowli", "Madhapur", "Ameerpet", "Kondapur"],
-    priority: "0.95",
-  },
-  {
-    state: "Telangana",
-    city: "Secunderabad",
-    slug: "secunderabad",
-    latitude: 17.3688,
-    longitude: 78.5031,
-    keywords: ["Secunderabad", "Cantonment"],
-    localities: ["Monda Market", "Begumpet", "Trimulgherry"],
-    priority: "0.90",
-  },
-  {
-    state: "Telangana",
-    city: "Gachibowli",
-    slug: "gachibowli",
-    latitude: 17.4435,
-    longitude: 78.4435,
-    keywords: ["Gachibowli", "HITEC City", "Hi-Tech City"],
-    localities: ["JNTU", "Nanakramguda", "Indu Nagar"],
-    priority: "0.88",
-  },
-  {
-    state: "Telangana",
-    city: "Kukatpally",
-    slug: "kukatpally",
-    latitude: 17.4603,
-    longitude: 78.4164,
-    keywords: ["Kukatpally", "Allwyn Colony"],
-    localities: ["Allwyn Colony", "Saifabad", "Jala Vihar"],
-    priority: "0.85",
-  },
-  {
-    state: "Telangana",
-    city: "Madhapur",
-    slug: "madhapur",
-    latitude: 17.4493,
-    longitude: 78.4623,
-    keywords: ["Madhapur", "Manikonda"],
-    localities: ["Manikonda", "Marredpally"],
-    priority: "0.85",
-  },
-  {
-    state: "Telangana",
-    city: "Shamshabad",
-    slug: "shamshabad",
-    latitude: 17.2695,
-    longitude: 78.3697,
-    keywords: ["Shamshabad", "Airport Area"],
-    localities: ["Airport Zone", "RGI Airport"],
-    priority: "0.80",
-  },
-  {
-    state: "Telangana",
-    city: "Kompally",
-    slug: "kompally",
-    latitude: 17.5531,
-    longitude: 78.3992,
-    keywords: ["Kompally", "Suraram"],
-    localities: ["Suraram", "Pocharam"],
-    priority: "0.78",
-  },
-  {
-    state: "Telangana",
-    city: "Miyapur",
-    slug: "miyapur",
-    latitude: 17.5117,
-    longitude: 78.3306,
-    keywords: ["Miyapur", "Miyarpur"],
-    localities: ["Miyapur Main Road"],
-    priority: "0.78",
-  },
-  {
-    state: "Telangana",
-    city: "Medchal",
-    slug: "medchal",
-    latitude: 17.3950,
-    longitude: 78.6117,
-    keywords: ["Medchal", "Malkajgiri"],
-    localities: ["Medchal Town"],
-    priority: "0.75",
-  },
-  {
-    state: "Telangana",
-    city: "Kondapur",
-    slug: "kondapur",
-    latitude: 17.4592,
-    longitude: 78.5156,
-    keywords: ["Kondapur", "Kondapur Market"],
-    localities: ["Kondapur Market"],
-    priority: "0.75",
-  },
-  {
-    state: "Telangana",
-    city: "Kokapet",
-    slug: "kokapet",
-    latitude: 17.3708,
-    longitude: 78.4783,
-    keywords: ["Kokapet", "Kokapet Main Road"],
-    localities: ["Kokapet Area"],
-    priority: "0.75",
-  },
-  {
-    state: "Telangana",
-    city: "Tellapur",
-    slug: "tellapur",
-    latitude: 17.4804,
-    longitude: 78.5523,
-    keywords: ["Tellapur", "Tech Mahindra"],
-    localities: ["Tech Park", "Tellapur"],
-    priority: "0.72",
-  },
-  {
-    state: "Telangana",
-    city: "Mahbubnagar",
-    slug: "mahbubnagar",
-    latitude: 16.7859,
-    longitude: 77.6700,
-    keywords: ["Mahbubnagar", "Mominpet"],
-    localities: ["Mahbubnagar City"],
-    priority: "0.70",
-  },
-  {
-    state: "Telangana",
-    city: "Warangal",
-    slug: "warangal",
-    latitude: 17.9689,
-    longitude: 78.6294,
-    keywords: ["Warangal", "Warangal Fort"],
-    localities: ["Warangal City", "Kazipet"],
-    priority: "0.70",
-  },
-] as const;
+export const getService = (slug: string) => SERVICES.find((s) => s.slug === slug);
 
-/**
- * FAQ Data
- * Comprehensive FAQ for schema and page rendering
- */
-export const FAQ_DATA = [
-  {
-    id: "what-are-invisible-grills",
-    question: "What are invisible grills?",
-    answer: "Invisible grills are transparent security barriers made from stainless steel wires that provide safety without obstructing views. They're almost invisible from a distance, maintaining your property's aesthetic while ensuring security.",
-    category: "General",
-  },
-  {
-    id: "how-durable-are-they",
-    question: "How long do invisible grills last?",
-    answer: "Our invisible grills are made from 316-grade stainless steel and come with a 10-year warranty. With proper maintenance, they can last 20+ years, even in harsh weather conditions.",
-    category: "Durability",
-  },
-  {
-    id: "installation-time",
-    question: "How long does installation take?",
-    answer: "Professional installation typically takes 4-8 hours depending on size and complexity. Our expert team works efficiently while ensuring perfect installation quality.",
-    category: "Installation",
-  },
-  {
-    id: "cost-range",
-    question: "What is the cost of invisible grills?",
-    answer: "Cost varies based on size, location, and customization. We provide free site visits and personalized quotes. Typically range from ₹5,000 to ₹50,000+ depending on requirements.",
-    category: "Pricing",
-  },
-  {
-    id: "child-pet-safe",
-    question: "Are invisible grills safe for children and pets?",
-    answer: "Yes! Our invisible grills are specifically designed with child and pet safety in mind. The tight wire spacing prevents fingers from getting stuck and protects pets from falling or escaping.",
-    category: "Safety",
-  },
-  {
-    id: "maintenance-required",
-    question: "What maintenance is required?",
-    answer: "Minimal maintenance is needed. Occasional wiping with a damp cloth and mild soap keeps them clean. Stainless steel's corrosion-resistant properties mean virtually no rusting or degradation.",
-    category: "Maintenance",
-  },
-  {
-    id: "view-obstruction",
-    question: "Do invisible grills obstruct the view?",
-    answer: "No, the primary advantage of invisible grills is their transparency. The thin stainless steel wires are barely visible from a distance, preserving your views and natural light.",
-    category: "Features",
-  },
-  {
-    id: "customization-options",
-    question: "Can invisible grills be customized?",
-    answer: "Yes! We offer complete customization including different wire spacing, frame colors, and mounting options. We can adapt our grills to any window or balcony configuration.",
-    category: "Customization",
-  },
-  {
-    id: "installation-warranty",
-    question: "What warranty do you provide?",
-    answer: "We provide a comprehensive 10-year warranty covering materials and workmanship. Our warranty includes repairs and replacements for any manufacturing defects.",
-    category: "Warranty",
-  },
-  {
-    id: "free-consultation",
-    question: "Do you offer free consultation?",
-    answer: "Yes! We provide completely free site visits, consultations, and quotes. Our experts will assess your requirements and provide personalized solutions.",
-    category: "Service",
-  },
-] as const;
-
-/**
- * Generate location-specific keywords
- */
-export function generateLocationKeywords(
-  location: (typeof LOCATIONS)[number],
-  service?: (typeof SERVICES)[number]
-): string[] {
-  const baseKeywords = [
-    location.city,
-    `${location.city} invisible grills`,
-    `${location.city} safety grills`,
-    `best invisible grills in ${location.city}`,
-    `invisible grills near me ${location.city}`,
-    `professional grill installation ${location.city}`,
-  ];
-
-  if (service) {
-    baseKeywords.push(
-      `${service.name} in ${location.city}`,
-      `${service.name} near me ${location.city}`,
-      `${service.slug} ${location.city}`,
-      `best ${service.name.toLowerCase()} in ${location.city}`
-    );
-  }
-
-  return baseKeywords;
+export interface LocationInfo {
+  city: string;
+  slug: string;
+  state: "Telangana" | "Andhra Pradesh";
+  /** City (metro) the area belongs to, used for schema containedInPlace */
+  parentCity?: string;
+  altNames?: string[];
+  /** Alternate name people actually search with (shown in titles/H1), e.g. "Vizag" */
+  searchAlias?: string;
+  latitude: number;
+  longitude: number;
+  localities: string[];
+  /** Neighbouring location slugs for internal linking */
+  nearby: string[];
 }
 
-/**
- * Get all service+location combinations
- */
-export function getAllServiceLocationCombinations() {
-  return SERVICES.flatMap(service =>
-    LOCATIONS.map(location => ({
-      service,
-      location,
-      route: `/${service.slug}-${location.slug}`,
-    }))
-  );
-}
+/** Telangana (Hyderabad) first, matching branch priority. */
+export const LOCATIONS: LocationInfo[] = [
+  {
+    city: "Hyderabad", slug: "hyderabad", state: "Telangana", latitude: 17.385, longitude: 78.4867,
+    localities: ["Banjara Hills", "Jubilee Hills", "Hitech City", "Madhapur", "Kondapur", "Gachibowli", "Kukatpally", "Kollur"],
+    nearby: ["secunderabad", "gachibowli", "kondapur", "madhapur", "kukatpally", "kokapet"],
+  },
+  {
+    city: "Secunderabad", slug: "secunderabad", state: "Telangana", parentCity: "Hyderabad", latitude: 17.4399, longitude: 78.4983,
+    localities: ["Begumpet", "Trimulgherry", "Bowenpally", "Marredpally", "Tarnaka", "Sainikpuri"],
+    nearby: ["hyderabad", "kompally", "medchal", "kukatpally"],
+  },
+  {
+    city: "Gachibowli", slug: "gachibowli", state: "Telangana", parentCity: "Hyderabad", latitude: 17.4401, longitude: 78.3489,
+    localities: ["Financial District", "Nanakramguda", "Raidurg", "Khajaguda", "Gopanpally", "Wipro Circle"],
+    nearby: ["kondapur", "madhapur", "kokapet", "tellapur", "miyapur"],
+  },
+  {
+    city: "Kondapur", slug: "kondapur", state: "Telangana", parentCity: "Hyderabad", latitude: 17.4615, longitude: 78.3657,
+    localities: ["Botanical Garden", "Jayabheri Enclave", "Kothaguda", "Hafeezpet", "Masjid Banda", "Raghavendra Colony"],
+    nearby: ["gachibowli", "madhapur", "miyapur", "kukatpally"],
+  },
+  {
+    city: "Madhapur", slug: "madhapur", state: "Telangana", parentCity: "Hyderabad", latitude: 17.4483, longitude: 78.3915,
+    localities: ["Ayyappa Society", "Kavuri Hills", "Cyber Towers", "Hitech City", "Durgam Cheruvu", "Image Gardens"],
+    nearby: ["gachibowli", "kondapur", "kukatpally", "hyderabad"],
+  },
+  {
+    city: "Kukatpally", slug: "kukatpally", state: "Telangana", parentCity: "Hyderabad", latitude: 17.4948, longitude: 78.3996,
+    localities: ["KPHB Colony", "Allwyn Colony", "Moosapet", "Balaji Nagar", "Nizampet", "Pragathi Nagar"],
+    nearby: ["miyapur", "kondapur", "madhapur", "kompally"],
+  },
+  {
+    city: "Miyapur", slug: "miyapur", state: "Telangana", parentCity: "Hyderabad", latitude: 17.4968, longitude: 78.3614,
+    localities: ["Chandanagar", "BHEL", "Lingampally", "Hafeezpet", "Ameenpur", "Bachupally"],
+    nearby: ["kukatpally", "kondapur", "tellapur", "gachibowli"],
+  },
+  {
+    city: "Kokapet", slug: "kokapet", state: "Telangana", parentCity: "Hyderabad", latitude: 17.3976, longitude: 78.3399,
+    localities: ["Financial District", "Narsingi", "Gandipet", "Puppalguda", "Manikonda", "Neopolis"],
+    nearby: ["gachibowli", "tellapur", "shamshabad", "madhapur"],
+  },
+  {
+    city: "Tellapur", slug: "tellapur", state: "Telangana", parentCity: "Hyderabad", latitude: 17.4686, longitude: 78.2878,
+    localities: ["Osman Nagar", "Nallagandla", "Kollur", "Gopanpally", "Gowlidoddi", "Ameenpur"],
+    nearby: ["gachibowli", "miyapur", "kokapet", "kondapur"],
+  },
+  {
+    city: "Kompally", slug: "kompally", state: "Telangana", parentCity: "Hyderabad", latitude: 17.536, longitude: 78.484,
+    localities: ["Gundlapochampally", "Petbasheerabad", "Kandlakoya", "Suchitra", "Jeedimetla", "Dulapally"],
+    nearby: ["medchal", "secunderabad", "kukatpally"],
+  },
+  {
+    city: "Medchal", slug: "medchal", state: "Telangana", parentCity: "Hyderabad", latitude: 17.629, longitude: 78.481,
+    localities: ["Shamirpet", "Alwal", "Malkajgiri", "Yapral", "Kompally", "Gowdavelly"],
+    nearby: ["kompally", "secunderabad"],
+  },
+  {
+    city: "Shamshabad", slug: "shamshabad", state: "Telangana", parentCity: "Hyderabad", latitude: 17.2403, longitude: 78.4294,
+    localities: ["RGI Airport", "Mamidipally", "Budvel", "Kishanguda", "Satamrai", "Tukkuguda"],
+    nearby: ["kokapet", "hyderabad", "mahbubnagar"],
+  },
+  {
+    city: "Mahbubnagar", slug: "mahbubnagar", state: "Telangana", latitude: 16.7375, longitude: 78.0081,
+    localities: ["Town Centre", "Jadcherla", "Pillalamarri", "Devarakadra", "Bhootpur", "New Town"],
+    nearby: ["shamshabad", "hyderabad"],
+  },
+  {
+    city: "Warangal", slug: "warangal", state: "Telangana", latitude: 17.9784, longitude: 79.6,
+    altNames: ["Hanamkonda"],
+    localities: ["Hanamkonda", "Kazipet", "Subedari", "Hunter Road", "Balasamudram", "Nakkalagutta"],
+    nearby: ["hyderabad", "secunderabad"],
+  },
+  {
+    city: "Visakhapatnam", slug: "visakhapatnam", state: "Andhra Pradesh", latitude: 17.6868, longitude: 83.2185,
+    altNames: ["Vizag", "Vishakhapatnam", "Vishakapatnam"],
+    searchAlias: "Vizag",
+    localities: ["Kakani Nagar", "MVP Colony", "Madhurawada", "Gajuwaka", "Seethammadhara", "Beach Road", "PM Palem", "Siripuram"],
+    nearby: ["rajahmundry"],
+  },
+  {
+    city: "Rajahmundry", slug: "rajahmundry", state: "Andhra Pradesh", latitude: 17.0005, longitude: 81.804,
+    altNames: ["Rajamahendravaram"],
+    localities: ["Danavaipeta", "Tilak Road", "Prakash Nagar", "Morampudi", "Lalacheruvu", "Innespeta"],
+    nearby: ["visakhapatnam", "vijayawada"],
+  },
+  {
+    city: "Vijayawada", slug: "vijayawada", state: "Andhra Pradesh", latitude: 16.5062, longitude: 80.648,
+    altNames: ["Bezawada"],
+    localities: ["Benz Circle", "Tadepalli (Tadepalle)", "Labbipet", "Patamata", "Gunadala", "Bhavanipuram", "Kanuru"],
+    nearby: ["guntur", "rajahmundry"],
+  },
+  {
+    city: "Guntur", slug: "guntur", state: "Andhra Pradesh", latitude: 16.3067, longitude: 80.4365,
+    localities: ["Brodipet", "Arundelpet", "Lakshmipuram", "Kothapet", "Mangalagiri", "Amaravati Road"],
+    nearby: ["vijayawada"],
+  },
+  {
+    city: "Tirupati", slug: "tirupati", state: "Andhra Pradesh", latitude: 13.6288, longitude: 79.4192,
+    localities: ["Alipiri", "Tiruchanur", "Renigunta Road", "Balaji Colony", "KT Road", "Air Bypass Road"],
+    nearby: ["anantapur"],
+  },
+  {
+    city: "Anantapur", slug: "anantapur", state: "Andhra Pradesh", latitude: 14.6819, longitude: 77.6006,
+    altNames: ["Anantapuramu"],
+    localities: ["Clock Tower", "Saptagiri Circle", "Ram Nagar", "Kamalanagar", "JNTU Road", "Rudrampeta"],
+    nearby: ["tirupati"],
+  },
+];
 
-export type Service = (typeof SERVICES)[number];
-export type Location = (typeof LOCATIONS)[number];
-export type FAQ = (typeof FAQ_DATA)[number];
+export const getLocation = (slug: string) => LOCATIONS.find((l) => l.slug === slug);
+
+export const LOCATIONS_BY_STATE = {
+  Telangana: LOCATIONS.filter((l) => l.state === "Telangana"),
+  "Andhra Pradesh": LOCATIONS.filter((l) => l.state === "Andhra Pradesh"),
+} as const;

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Phone, ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { PHONES, whatsappLink } from "@/config/business";
 
 export function CTASection() {
   return (
@@ -35,9 +36,9 @@ export function CTASection() {
               className="w-full border-white/30 bg-white/10 text-white hover:bg-white/20 sm:w-auto"
               asChild
             >
-              <a href="tel:+917339306098" data-track="call" className="flex items-center gap-2">
+              <a href={`tel:${PHONES.primary.e164}`} data-track="call" className="flex items-center gap-2">
                 <Phone className="h-5 w-5" />
-                Call: +91 73393 06098
+                Call: {PHONES.primary.display}
               </a>
             </Button>
 
@@ -47,7 +48,7 @@ export function CTASection() {
               asChild
             >
               <a
-                href="https://wa.me/917339306098"
+                href={whatsappLink()}
                 data-track="whatsapp"
                 target="_blank"
                 rel="noopener noreferrer"

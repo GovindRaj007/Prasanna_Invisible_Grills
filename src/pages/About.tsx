@@ -3,15 +3,20 @@ import { SEOHead } from "@/components/common/SEOHead";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Award, Users, Clock, Target, CheckCircle2 } from "lucide-react";
 import { CTASection } from "@/components/home/CTASection";
-import { SITE_CONFIG } from "@/config/seo.constants";
+import { LOCATIONS } from "@/config/seo.constants";
+import { BUSINESS, ORGANIZATION_ID } from "@/config/business";
+import { BranchList } from "@/components/common/BranchList";
+import { graph, webPageNode } from "@/lib/schema";
 
-import heroAbout from "@/assets/hero-about.jpg";
+const YEARS = new Date().getFullYear() - Number(BUSINESS.foundingYear);
+
+import heroAbout from "@/assets/hero-about.webp";
 
 const stats = [
-  { icon: Users, value: "6,000+", label: "Happy Customers" },
-  { icon: Clock, value: "8+", label: "Years Experience" },
+  { icon: Users, value: `${BUSINESS.installations}`, label: "Installations Completed" },
+  { icon: Clock, value: `${YEARS}+`, label: "Years Experience" },
   { icon: Award, value: "100%", label: "Satisfaction Rate" },
-  { icon: Target, value: "9", label: "Cities Covered" },
+  { icon: Target, value: `${LOCATIONS.length}`, label: "Cities & Areas Served" },
 ];
 
 const values = [
@@ -33,15 +38,19 @@ const values = [
   },
 ];
 
+const ABOUT_DESCRIPTION = `Prasanna Invisible Grills has installed invisible grills and ceiling cloth hangers since ${BUSINESS.foundingYear}, with branches in Hyderabad, Visakhapatnam and Vijayawada.`;
+
 export default function About() {
   return (
     <Layout>
       <SEOHead
-        title="About Prasanna Invisible Grills | Expert Installation"
-        description="Prasanna Invisible Grills: 8+ years serving 6000+ customers across Andhra & Telangana. Expert installation, quality materials, 10-year warranty. Trusted safety partner."
-        keywords={`${SITE_CONFIG.keywords.primary}, ${SITE_CONFIG.keywords.secondary}`}
+        title="About Us – Invisible Grills Experts Since 2015"
+        description={ABOUT_DESCRIPTION}
         canonicalUrl="/about"
-        ogImage="/og-images/prasanna-invisible-grills-og.jpg"
+        structuredData={graph({
+          ...webPageNode({ path: "/about", title: "About Prasanna Invisible Grills", description: ABOUT_DESCRIPTION, type: "AboutPage" }),
+          mainEntity: { "@id": ORGANIZATION_ID },
+        })}
       />
 
       {/* Hero with Background Image */}
@@ -50,7 +59,10 @@ export default function About() {
         <div className="absolute inset-0">
           <img 
             src={heroAbout} 
-            alt="Prasanna Invisible Grills Office" 
+            alt="Invisible grills installed on an apartment balcony by Prasanna Invisible Grills"
+            width={1600}
+            height={900}
+            {...{ fetchpriority: "high" }}
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(222,47%,8%,0.95)] via-[hsl(222,47%,10%,0.88)] to-[hsl(222,47%,10%,0.75)]" />
@@ -62,8 +74,9 @@ export default function About() {
             About Prasanna Invisible Grills
           </h1>
           <p className="mt-4 max-w-3xl text-lg text-white/80">
-            For over 8 years, we've been dedicated to protecting families across 
-            Andhra Pradesh with premium invisible grills and home utility solutions.
+            For over {YEARS} years, we've been protecting families across Telangana and
+            Andhra Pradesh with invisible grills and home utility solutions – from our branches in
+            Hyderabad, Visakhapatnam and Vijayawada.
           </p>
         </div>
       </section>
@@ -96,14 +109,15 @@ export default function About() {
               <p>
                 Prasanna Invisible Grills was founded in 2015 with a simple mission: 
                 to provide families with the highest quality safety solutions without compromising 
-                on aesthetics. What started as a small operation in Visakhapatnam has grown into a 
-                trusted name serving thousands of customers across Andhra Pradesh.
+                on aesthetics. What started as a small operation in Visakhapatnam has grown into a
+                trusted name with branches in Hyderabad (Kollur and Gachibowli – Kondapur Road),
+                Visakhapatnam and Vijayawada, serving customers across Telangana and Andhra Pradesh.
               </p>
               <p>
                 Our founder, driven by a personal experience of seeing the need for better 
                 balcony safety solutions in high-rise apartments, set out to bring international 
                 standards of invisible grill technology to Indian homes. Today, we're proud to 
-                have installed over 10,000 safety systems, each one custom-designed and 
+                have completed over 3,500 installations, each one custom-designed and 
                 professionally installed by our trained technicians.
               </p>
               <p>
@@ -174,6 +188,17 @@ export default function About() {
               </ul>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Branches */}
+      <section className="section-bg-5 relative py-16 md:py-20">
+        <div className="absolute inset-0 grid-pattern opacity-30" />
+        <div className="container relative z-10">
+          <h2 className="mb-8 text-center font-heading text-3xl font-bold text-foreground md:text-4xl">
+            Our Branches
+          </h2>
+          <BranchList />
         </div>
       </section>
 
